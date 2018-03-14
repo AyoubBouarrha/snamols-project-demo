@@ -1,0 +1,37 @@
+<!-- <h3>Listes des Enseignant:</h3>
+<br>
+<div ng-repeat="enseignant in enseignants">
+    <p>{{enseignant.nom}}</p>
+</div> -->
+
+
+<table ng-table="tableParams" class="table table-condensed table-bordered" show-filter="true">
+    <tr ng-repeat="enseignant in $data">
+        <td data-title="'Nom'" filter="{ nom: 'text'}" sortable="'nom'">
+            {{enseignant.nom}}</td>
+        <td data-title="'Prènom'" filter="{ prenom: 'text'}" sortable="'prenom'">
+            {{enseignant.prenom}}</td>
+
+        <td class="cell-button">
+            <button ng-click="showDeleteBox(enseignant)" title="Supprimer" data-toggle="modal" data-target="#delete-modal" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </td>
+
+        <td class="cell-button">
+            <button ng-click="showUpdateBox(enseignant)" title="Modifier" class="btn btn-success">
+                <i class="fas fa-pencil-alt"></i>
+            </button>
+        </td>
+
+        <td class="cell-button">
+            <a  href="#!enseignant-detail/{{enseignant.noEnseignant}}" title="Plus d'info"  class="btn btn-primary" role="button">
+                <i class="fas fa-info-circle"></i>
+            </a>
+            <!-- ng-click="showInfo(enseignant)" -->
+        </td>
+    </tr>
+</table>
+
+
+

@@ -1,0 +1,66 @@
+<!-- The Modal -->
+<div class="modal fade" id="detail-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+    
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Détail {{sujet}}</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+    
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <br>
+                    <h4 class="detail-title">
+                        {{selectedEnseignant.nom}} {{selectedEnseignant.prenom}}
+                    </h4>
+                    <br>
+                    <p>
+                        <strong>Adresse : </strong> {{selectedEnseignant.adresse}}
+                    </p>
+                    <p>
+                        <strong>Code Postal : </strong> {{selectedEnseignant.codePostal}}
+                    </p>
+                    <p>
+                        <strong>Email Personnelle : </strong> {{selectedEnseignant.emailPerso}}
+                    </p>
+                    <p>
+                        <strong>Email UBO : </strong> {{selectedEnseignant.emailUbo}}
+                    </p>
+                    <p>
+                        <strong>Mobile : </strong> {{selectedEnseignant.mobile}}
+                    </p>
+                    <p>
+                        <strong>Sexe : </strong> {{selectedEnseignant.sexe}}
+                    </p>
+                    <p>
+                        <strong>Telephone : </strong> {{selectedEnseignant.telephone}}
+                    </p>
+                    <p>
+                        <strong>Type : </strong> {{selectedEnseignant.type}}
+                    </p>
+                    <p>
+                        <strong>Ville : </strong> {{selectedEnseignant.ville}}
+                    </p>
+    
+                    <br>
+                    <div class="detail-button">
+                        <a href="" class="btn btn-success">
+                            Modifier <i class="fas fa-pencil-alt"></i>
+                        </a>
+                        <a href="" class="btn btn-danger">
+                           Supprimer <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+    
+                </div>
+    
+                <!-- Modal footer -->
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer Détail   <i class="fas fa-info-circle"></i></button>
+                </div> -->
+    
+            </div>
+        </div>
+    </div>

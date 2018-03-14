@@ -1,0 +1,119 @@
+<br>
+<div id="form-collapse" class="collapse hide">
+    <form ng-submit="editSubmit()" name="formenseignant" class="form-container container">
+        <br>
+        <div class="form-groupe-1">
+            <div class="form-group">
+                <label for="nom">Nom :</label>
+                <span ng-show="formenseignant.nom.$dirty && formenseignant.nom.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                <input type="text" required ng-model="editEnseignant.nom" class="form-control" id="nom" name="nom">
+            </div>
+            <div class="form-group">
+                <label for="prenom">Prènom :</label>
+                <span ng-show="formenseignant.prenom.$dirty && formenseignant.prenom.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                <input type="text" required ng-model="editEnseignant.prenom" class="form-control" id="prenom" name="prenom">
+            </div>
+
+            <div class="form-group">
+                <label>Sexe :</label>
+                <span ng-show="formenseignant.sexe.$dirty && formenseignant.sexe.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                <select required class="form-control" ng-model="editEnseignant.sexe" name="sexe">
+                    <option value="H">Homme</option>
+                    <option value="F">Femme</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="adresse">Adresse :</label>
+                <span ng-show="formenseignant.adresse.$dirty && formenseignant.adresse.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                <input required type="text" ng-model="editEnseignant.adresse" class="form-control" id="adresse" name="adresse">
+            </div>
+            <div class="form-group">
+                <label for="codePostal">Code Postal :</label>
+                <span ng-show="formenseignant.codePostal.$dirty && formenseignant.codePostal.$error.required" class="badge badge-danger"
+                    name="adresse">Champ obligatoire</span>
+                <input required type="text" ng-model="editEnseignant.codePostal" class="form-control" id="codePostal" name="codePostal">
+            </div>
+            <div class="form-group">
+                <label for="emailPerso">Email Personnelle :</label>
+                <span ng-show="formenseignant.emailPerso.$dirty && formenseignant.emailPerso.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                <span ng-show="formenseignant.emailPerso.$dirty && formenseignant.emailPerso.$error.email" class="badge badge-danger">Email invalide</span>
+                <input required type="email" ng-model="editEnseignant.emailPerso" class="form-control" id="emailPerso" name="emailPerso">
+            </div>
+
+        </div>
+        <div class="form-groupe-2">
+            <div class="form-group">
+                <label for="emailUbo">Email UBO :</label>
+                <span ng-show="formenseignant.emailUbo.$dirty && formenseignant.emailUbo.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                <span ng-show="formenseignant.emailUbo.$dirty && formenseignant.emailUbo.$error.email" class="badge badge-danger">Email invalide</span>
+                <input required type="email" ng-model="editEnseignant.emailUbo" class="form-control" id="emailUbo" name="emailUbo">
+            </div>
+
+            <div class="form-group">
+                <label for="mobile">Mobile :</label>
+                <i>
+                    <small>(exemple : 06.12.34.56.78)</small>
+                </i>
+                <span ng-show="formenseignant.mobile.$dirty && formenseignant.mobile.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                <span ng-show="formenseignant.mobile.$dirty && formenseignant.mobile.$error.pattern" class="badge badge-danger">Mobile invalide</span>
+                <input required type="text" pattern="[0-9]{2}.[0-9]{2}.[0-9]{2}.[0-9]{2}.[0-9]{2}" ng-model="editEnseignant.mobile" class="form-control"
+                    id="mobile" name="mobile">
+            </div>
+
+            <div class="form-group">
+                <label for="telephone">Telephone :</label>
+                <i>
+                    <small>(exemple : 06.12.34.56.78)</small>
+                </i>
+                <span ng-show="formenseignant.telephone.$dirty && formenseignant.telephone.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                <span ng-show="formenseignant.telephone.$dirty && formenseignant.telephone.$error.pattern" class="badge badge-danger">Telephone invalide</span>
+                <input required type="text" pattern="[0-9]{2}.[0-9]{2}.[0-9]{2}.[0-9]{2}.[0-9]{2}" ng-model="editEnseignant.telephone" class="form-control"
+                    id="telephone" name="telephone">
+            </div>
+
+
+            <div class="form-group">
+                <label>Type :</label>
+                <span ng-show="formenseignant.type.$dirty && formenseignant.type.$error.required" class="badge badge-danger">Champ obligatoire</span>
+
+                <select required class="form-control" ng-model="editEnseignant.type" name="type">
+                    <option value="MCF">MCF</option>
+                    <option value="PRAST">PRAST</option>
+                    <option value="INT">INT</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label>Pays :</label>
+                <span ng-show="formenseignant.pays.$dirty && formenseignant.pays.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                <select required class="form-control" ng-model="editEnseignant.pays" name="pays">
+                    <option value="FR">France</option>
+                    <option value="MA">Maroc</option>
+                    <option value="ES">Espagne</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="ville">Ville :</label>
+                <span ng-show="formenseignant.ville.$dirty && formenseignant.ville.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                <input required type="text" class="form-control" ng-model="editEnseignant.ville" id="ville" name="ville">
+            </div>
+        </div>
+
+        <div ng-show="formenseignant.$dirty && !formenseignant.$valid"  class="alert alert-danger">
+            <strong>Validation!</strong> Veuillez verifier que vous avez bien rempli tous les champs.
+        </div>
+
+        <button type="submit" class="btn-validate btn btn-success ">Valider {{editoption}}</button>
+
+        <button type="reset" class="btn-cancel btn btn-danger" ng-click="cancelEditing()"  >Annuler</button>
+
+        <!-- data-toggle="collapse" data-target="#demo" -->
+    </form>
+
+</div>
+
+<br>
+<br>

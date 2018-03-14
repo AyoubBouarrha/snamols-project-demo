@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="spiApp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SM</title>
+    
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="./node_modules/ng-table/bundles/ng-table.css">
+    <link rel="stylesheet" href="./node_modules/animate.css/animate.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/responsive.css">
+
+</head>
+
+<body>
+
+    <navbar></navbar>
+
+    <div class="container">
+        <div ng-view></div>
+    </div>
+
+
+
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/angular/angular.js"></script>
+    <script src="./node_modules/angular-route/angular-route.js"></script>
+    <script src="./node_modules/ng-table/bundles/ng-table.js"></script>
+    <script src="./node_modules/popper.js/dist/umd/popper.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script src="./scripts/app.js"></script>
+    <script src="./scripts/directives.js"></script>    
+    
+    <script src="./scripts/controllers/home.js"></script>
+
+    <script src="./scripts/services/enseignantService.js"></script>
+    <script src="./scripts/controllers/enseignant.js"></script>    
+    <script src="./scripts/controllers/enseignant-add.js"></script>
+    <script src="./scripts/controllers/enseignant-detail.js"></script>
+
+    <script src="./scripts/services/formationService.js"></script>
+    <script src="./scripts/controllers/formation.js"></script>
+    <script src="./scripts/controllers/formation-add.js"></script>
+    <script src="./scripts/controllers/formation-detail.js"></script>
+
+
+    <script src="./scripts/services/candidatService.js"></script>
+    <script src="./scripts/services/promotionService.js"></script>
+    <script src="./scripts/services/elementConstitutifService.js"></script>
+
+
+
+
+
+
+
+</body>
+
+</html>

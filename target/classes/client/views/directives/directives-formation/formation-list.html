@@ -1,0 +1,27 @@
+<table ng-table="tableParams" class="table table-condensed table-bordered" show-filter="true">
+    <tr ng-repeat="formation in $data">
+        <td data-title="'Nom de formation'" filter="{ nomFormation: 'text'}" sortable="'nomFormation'">
+            {{formation.nomFormation}}</td>
+        <td data-title="'N°Annee'" filter="{ n0Annee: 'text'}" sortable="'n0Annee'">
+            {{formation.n0Annee}}</td>
+
+        <td class="cell-button">
+            <button ng-click="showDeleteBox(formation)" title="Supprimer" data-toggle="modal" data-target="#delete-modal" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </td>
+
+        <td class="cell-button">
+            <button ng-click="showUpdateBox(formation)" title="Modifier" class="btn btn-success">
+                <i class="fas fa-pencil-alt"></i>
+            </button>
+        </td>
+
+        <td class="cell-button">
+            <a  href="#!formation-detail/{{formation.codeFormation}}" title="Plus d'info"  class="btn btn-primary" role="button">
+                <i class="fas fa-info-circle"></i>
+            </a>
+            <!-- ng-click="showInfo(formation)" -->
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,81 @@
+<br>
+<div id="form-collapse" class="collapse hide">
+    <form ng-submit="editSubmit()" name="formformation" class="form-container container">
+        <br>
+        <div class="form-groupe-1">
+            <div class="form-group">
+                <label for="codeFormation">Code Formation :</label>
+                <span ng-show="formformation.codeFormation.$dirty && formformation.codeFormation.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                <input type="text" required ng-model="editFormation.codeFormation" class="form-control" id="codeFormation" name="codeFormation">
+            </div>
+
+            <div class="form-group">
+                <label for="nomFormation">Nom de formation :</label>
+                <span ng-show="formformation.nomFormation.$dirty && formformation.nomFormation.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                <span ng-show="formformation.nomFormation.$dirty && formformation.nomFormation.$error.email" class="badge badge-danger">Email invalide</span>
+                <input required type="texte" ng-model="editFormation.nomFormation" class="form-control" id="nomFormation" name="nomFormation">
+            </div>
+
+            <div class="form-group">
+                <label for="debutAccreditation">Debut Accreditation :</label>
+                <span ng-show="formformation.debutAccreditation.$dirty && formformation.debutAccreditation.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                <input type="date" required ng-model="editFormation.debutAccreditation" class="form-control" id="debutAccreditation" name="debutAccreditation">
+            </div>
+
+            <div class="form-group">
+                <label for="finAccreditation">Fin Accreditation :</label>
+                <span ng-show="formformation.finAccreditation.$dirty && formformation.finAccreditation.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                <input required type="date" ng-model="editFormation.finAccreditation" class="form-control" id="finAccreditation" name="finAccreditation">
+            </div>
+
+
+
+
+
+        </div>
+        <div class="form-groupe-2">
+            <div class="form-group">
+                <label>Diplome :</label>
+                <span ng-show="formformation.diplome.$dirty && formformation.diplome.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                <select required class="form-control" ng-model="editFormation.diplome" name="diplome">
+                    <option value="M">Master</option>
+                    <option value="L">License</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Double diplomation :</label>
+                <span ng-show="formformation.doubleDiplome.$dirty && formformation.doubleDiplome.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                <select required class="form-control" ng-model="editFormation.doubleDiplome" name="doubleDiplome">
+                    <option value="O">Oui</option>
+                    <option value="N">Non</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="codePostal">N°Annee :</label>
+                <span ng-show="formformation.n0Annee.$dirty && formformation.n0Annee.$error.required" class="badge badge-danger" name="n0Annee">Champ obligatoire</span>
+                <input required type="number" min="1" max="3" ng-model="editFormation.n0Annee" class="form-control" id="n0Annee" name="n0Annee">
+            </div>
+        </div>
+
+        <div ng-show="formformation.$dirty && !formformation.$valid" class="alert alert-danger">
+            <strong>Validation!</strong> Veuillez verifier que vous avez bien rempli tous les champs.
+        </div>
+
+        <div ng-show="cannotAdd" class="alert alert-danger">
+            <strong>Erreur d'ajout!</strong> Veuillez verifier le code formation n'est pas redondant.
+        </div>
+
+        <button type="submit" class="btn-validate btn btn-success ">Valider {{editoption}}</button>
+
+        <button type="reset" class="btn-cancel btn btn-danger" ng-click="cancelEditing()">Annuler</button>
+
+        <!-- data-toggle="collapse" data-target="#demo" -->
+    </form>
+
+</div>
+
+<br>
+<br>

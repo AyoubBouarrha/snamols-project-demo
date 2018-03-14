@@ -1,0 +1,20 @@
+{
+  "name": "front-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ayoub BOUARRHA",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.6.9",
+    "angular-route": "^1.6.9",
+    "animate.css": "^3.6.1",
+    "bootstrap": "^4.0.0-beta",
+    "jquery": "^3.3.1",
+    "ng-table": "^3.0.1",
+    "popper.js": "^1.11.0"
+  }
+}

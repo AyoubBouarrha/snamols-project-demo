@@ -26,7 +26,7 @@ public class Rubrique implements Serializable {
 
 	private BigDecimal ordre;
 
-	@Column(name="\"TYPE\"")
+	@Column(name="TYPE")
 	private String type;
 
 	//bi-directional many-to-one association to Enseignant

@@ -2,6 +2,9 @@ package fr.univbrest.dosi.spi.bean;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -23,7 +26,7 @@ public class Question implements Serializable {
 
 	private String intitule;
 
-	@Column(name="\"TYPE\"")
+	@Column(name="TYPE")
 	private String type;
 
 	//bi-directional many-to-one association to Enseignant
@@ -33,10 +36,12 @@ public class Question implements Serializable {
 
 	//bi-directional many-to-one association to QuestionEvaluation
 	@OneToMany(mappedBy="question")
+	@JsonIgnore
 	private List<QuestionEvaluation> questionEvaluations;
 
 	//bi-directional many-to-one association to RubriqueQuestion
 	@OneToMany(mappedBy="question")
+	@JsonIgnore
 	private List<RubriqueQuestion> rubriqueQuestions;
 
 	public Question() {

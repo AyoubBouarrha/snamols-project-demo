@@ -15,6 +15,10 @@ public class Qualificatif implements Serializable {
 
 	@Id
 	@Column(name="ID_QUALIFICATIF")
+	// --Une Sequence doit être obligatoirement crée pour génerer un noEnseignant
+	// (script de la sequence : "create sequence cq_seq start with 100 increment by 1 nomaxvalue;")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen-cq")
+	@SequenceGenerator(name = "gen-cq", sequenceName = "cq_seq")
 	private long idQualificatif;
 
 	private String maximal;

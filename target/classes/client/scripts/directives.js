@@ -50,3 +50,21 @@ angular.module('spiApp')
             templateUrl: 'views/directives/directives-formation/formation-delete.html'
         };
     })
+
+    
+    //questions-directives
+    .directive("questionlist", function () {
+        return {
+            templateUrl: 'views/directives/directives-question/question-list.html'
+        };
+    })
+    .directive("questionform", function () {
+        return {
+            templateUrl: 'views/directives/directives-question/question-form.html'
+        };
+    })
+    .directive("questiondelete", function () {
+        return {
+            templateUrl: 'views/directives/directives-question/question-delete.html'
+        };
+    })

@@ -41,6 +41,11 @@ angular
         controller: 'formationDetailCtrl',
         controllerAs: 'formationDetail'
       })
+      .when('/questions', {
+        templateUrl: 'views/questions.html',
+        controller: 'questionCtrl',
+        controllerAs: 'question'
+      })
       .otherwise({
         redirectTo: '/'
       });

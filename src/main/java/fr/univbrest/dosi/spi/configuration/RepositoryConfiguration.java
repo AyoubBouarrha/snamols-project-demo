@@ -6,6 +6,9 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapt
 
 import fr.univbrest.dosi.spi.bean.Enseignant;
 import fr.univbrest.dosi.spi.bean.Formation;
+import fr.univbrest.dosi.spi.bean.Qualificatif;
+import fr.univbrest.dosi.spi.bean.Question;
+import fr.univbrest.dosi.spi.bean.Rubrique;
 
 @Configuration
 public class RepositoryConfiguration extends RepositoryRestConfigurerAdapter {
@@ -13,5 +16,8 @@ public class RepositoryConfiguration extends RepositoryRestConfigurerAdapter {
 	public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
         config.exposeIdsFor(Enseignant.class);
         config.exposeIdsFor(Formation.class);
+        config.exposeIdsFor(Rubrique.class);
+        config.exposeIdsFor(Question.class);
+        config.exposeIdsFor(Qualificatif.class);
     }
 }

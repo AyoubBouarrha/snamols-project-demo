@@ -1,9 +1,8 @@
-node_modules
 dist
 .tmp
 .sass-cache
 src/main/resources/client/bower_components/
-
+src/main/resources/client/node_modules/
 .DS_Store
 npm-debug.log
 /preview/preview.zip

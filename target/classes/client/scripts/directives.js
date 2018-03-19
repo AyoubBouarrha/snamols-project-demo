@@ -7,6 +7,12 @@ angular.module('spiApp')
         };
     })
 
+    .directive("loginform", function () {
+        return {
+            templateUrl: 'views/directives/directives-login/login-form.html'
+        };
+    })
+
     //enseignant-directives
     .directive("enseignantlist", function () {
         return {
@@ -51,7 +57,7 @@ angular.module('spiApp')
         };
     })
 
-    
+
     //questions-directives
     .directive("questionlist", function () {
         return {
@@ -66,5 +72,42 @@ angular.module('spiApp')
     .directive("questiondelete", function () {
         return {
             templateUrl: 'views/directives/directives-question/question-delete.html'
+        };
+    })
+
+    //rubrique-directives
+    .directive("rubriquelist", function () {
+        return {
+            templateUrl: 'views/directives/directives-rubrique/rubrique-list.html'
+        };
+    })
+    .directive("rubriqueform", function () {
+        return {
+            templateUrl: 'views/directives/directives-rubrique/rubrique-form.html'
+        };
+    })
+
+    .directive("rubriquedelete", function () {
+        return {
+            templateUrl: 'views/directives/directives-rubrique/rubrique-delete.html'
+        };
+    })
+
+
+     //cq-directives
+     .directive("cqform", function () {
+        return {
+            templateUrl: 'views/directives/directives-cq/cq-form.html'
+        };
+    })
+
+    .directive("cqlist", function () {
+        return {
+            templateUrl: 'views/directives/directives-cq/cq-list.html'
+        };
+    })
+    .directive("cqdelete", function () {
+        return {
+            templateUrl: 'views/directives/directives-cq/cq-delete.html'
         };
     })

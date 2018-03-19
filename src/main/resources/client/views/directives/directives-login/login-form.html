@@ -1,0 +1,24 @@
+<video autoplay muted loop id="myVideo">
+    <source src="../../../images/backgroundvideo.mp4" type="video/mp4">
+</video>
+<div class="login-container">
+    <form ng-submit="loginSubmit()" name="formlogin" class="container">
+
+        <div class="form-group">
+            <label for="username">Nom d'utilisateur :</label>
+            <!-- <span ng-show="formlogin.username.$dirty && formlogin.username.$error.required" class="badge badge-danger">Champ obligatoire</span> -->
+            <input type="text" required ng-model="editLogin.username" class="form-control login-input" id="username" name="username">
+        </div>
+
+        <div class="form-group">
+            <label for="pwd">Mot de passe:</label>
+            <!-- <span ng-show="formlogin.pwd.$dirty && formlogin.pwd.$error.required" class="badge badge-danger">Champ obligatoire</span> -->
+            <input type="password" required ng-model="editLogin.pwd" class="form-control login-input" id="pwd" name="pwd">
+        </div>
+
+        <div ng-show="!statusAuthentification" class="alert alert-danger">
+                <strong>Erreur!</strong> Login ou mot de passe incorrect
+        </div>
+        <button type="submit" class="btn-validate btn btn-success btn-block">Se Connecter</button>
+    </form>
+</div>

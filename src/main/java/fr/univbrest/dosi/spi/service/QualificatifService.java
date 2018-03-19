@@ -58,8 +58,8 @@ public class QualificatifService {
 
 	/**
 	 *
-	 * @param noEnseignant
-	 *            l'id de l'enseignant
+	 * @param noqualificatif
+	 *            l'id de l'qualificatif
 	 * @return test de existe
 	 */
 	public final Boolean existQualificatif(final long IdQualificatif)throws Exception {
@@ -76,8 +76,8 @@ public class QualificatifService {
 	/**
 	 *
 	 * @param id
-	 *            l'id de l'enseignant
-	 * @return l'enseignant
+	 *            l'id de l'qualificatif
+	 * @return l'qualificatif
 	 */
 	public final Qualificatif getQualificatif(final long idQualificatif) {
 		return qualificatifRepository.findOne(idQualificatif);
@@ -103,17 +103,17 @@ public class QualificatifService {
 	 *
 	 * @return liste des qualificatifs
 	 */
-	public final Iterable<Qualificatif> listens() {
+	public final Iterable<Qualificatif> listqual() {
 		final Iterable<Qualificatif> qualificatifs = qualificatifRepository.findAll();
 		return qualificatifs;
 	}
 
 	/**
 	 *
-	 * @param enseignantRepository
+	 * @param qualificatifRepository
 	 *            setter
 	 */
-	public final void setEnseignantRepository(final QualificatifRepository qualificatifRepository) {
+	public final void setQualificatifRepository(final QualificatifRepository qualificatifRepository) {
 		this.qualificatifRepository = qualificatifRepository;
 	}
 

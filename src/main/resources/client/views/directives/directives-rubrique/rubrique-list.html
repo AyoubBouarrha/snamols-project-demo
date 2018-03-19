@@ -1,0 +1,34 @@
+<!-- <h3>Listes des Rubriques:</h3>
+<br>
+<div ng-repeat="rubrique in rubriques">
+    <p>{{rubrique.nom}}</p>
+</div> -->
+
+
+<table ng-table="tableParams" class="table table-condensed table-bordered" show-filter="true">
+    <tr ng-repeat="rubrique in $data">
+        <td data-title="'TYPE'" filter="{ type: 'text'}" sortable="'type'">
+            {{rubrique.type}}</td>
+        <td data-title="'Designation'" filter="{ designation: 'text'}" sortable="'designation'">
+            {{rubrique.designation}}</td>
+            <td data-title="'Ordre'" filter="{ ordre: 'text'}" sortable="'ordre'">
+                {{rubrique.ordre}}</td>
+
+        <td class="cell-button">
+            <button ng-click="showDeleteBox(rubrique)" title="Supprimer" data-toggle="modal" data-target="#delete-modal" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </td>
+
+        <td class="cell-button">
+            <button ng-click="showUpdateBox(rubrique)" title="Modifier" class="btn btn-success">
+                <i class="fas fa-pencil-alt"></i>
+            </button>
+        </td>
+
+     
+    </tr>
+</table>
+
+
+

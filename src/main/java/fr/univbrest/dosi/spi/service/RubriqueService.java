@@ -68,7 +68,7 @@ public class RubriqueService {
 	 *
 	 * @return liste des rubriques
 	 */
-	public final Iterable<Rubrique> listens() {
+	public final Iterable<Rubrique> listRubriques() {
 		final Iterable<Rubrique> rubriques = rubriqueRepository.findAll();
 		return rubriques;
 	}

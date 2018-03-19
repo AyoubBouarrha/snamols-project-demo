@@ -11,6 +11,11 @@ angular
         controller: 'homeCtrl',
         controllerAs: 'home'
       })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'loginCtrl',
+        controllerAs: 'login'
+      })
       .when('/enseignants', {
         templateUrl: 'views/enseignants.html',
         controller: 'enseignantCtrl',
@@ -45,6 +50,16 @@ angular
         templateUrl: 'views/questions.html',
         controller: 'questionCtrl',
         controllerAs: 'question'
+      })
+      .when('/rubriques', {
+        templateUrl: 'views/rubriques.html',
+        controller: 'rubriqueCtrl',
+        controllerAs: 'rubrique'
+      })
+      .when('/couple-qualificatif/', {
+        templateUrl: 'views/couple-qualificatif.html',
+        controller: 'cqCtrl',
+        controllerAs: 'cq'
       })
       .otherwise({
         redirectTo: '/'

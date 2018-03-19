@@ -30,13 +30,13 @@ public class QuestionController {
 		return buisness.getAllQuestions() ;
 	}
 	
-	@RequestMapping(method = RequestMethod.GET , value="{id}/id")
+	@RequestMapping(method = RequestMethod.GET , value="/{id}")
 	public Question getSingleQuestion(@PathVariable("id") String id)
 	{
 		return buisness.getSingleQuestion(Long.parseLong(id, 10));
 	}
 	
-	@RequestMapping(method = RequestMethod.DELETE , value="{id}/id")
+	@RequestMapping(method = RequestMethod.DELETE , value="/{id}")
 	public void deleteQuestion(@PathVariable("id") String id)
 	{
 		 buisness.deleteQuestion(Long.parseLong(id, 10));

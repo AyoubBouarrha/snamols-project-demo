@@ -1,0 +1,34 @@
+<br>
+<div id="form-collapse" class="collapse hide">
+    <form ng-submit="editSubmit()" name="formcq" class="form-container container">
+        <br>
+        <div class="form-groupe-1">
+            <div class="form-group">
+                <label for="minimal">Valeur Minimale :</label>
+                <span ng-show="formcq.minimal.$dirty && formcq.minimal.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                <input type="text" required ng-model="editcq.minimal" class="form-control" id="minimal" name="minimal">
+            </div>
+        </div>
+
+        <div class="form-groupe-2">
+            <div class="form-group">
+                <label for="maximal">Valeur Maximale :</label>
+                <span ng-show="formcq.maximal.$dirty && formcq.maximal.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                <input type="text" required ng-model="editcq.maximal" class="form-control" id="maximal" name="maximal">
+            </div>
+        </div>
+
+        <div ng-show="formcq.$dirty && !formcq.$valid"  class="alert alert-danger">
+            <strong>Validation!</strong> Veuillez verifier que vous avez bien rempli tous les champs.
+        </div>
+
+        <button type="submit" class="btn-validate btn btn-success ">Valider {{editoption}}</button>
+
+        <button type="reset" class="btn-cancel btn btn-danger" ng-click="cancelEditing()"  >Annuler</button>
+
+    </form>
+
+</div>
+
+<br>
+<br>

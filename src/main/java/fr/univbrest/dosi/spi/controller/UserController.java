@@ -20,16 +20,16 @@ public class UserController {
 	UserService userService;
 
 	@RequestMapping(value = "/auth", method = RequestMethod.POST, headers = "Accept=application/json")
-	public void authentifier(final HttpServletRequest request, @RequestBody final User user) {
+	public boolean authentifier(final HttpServletRequest request, @RequestBody final User user) {
 		final User users = userService.authentifier(user.getUsername(), user.getPwd());
 
 		if (users != null) {
 			request.getSession().setAttribute("user", users);
+			return true;
 		} else {
 			request.getSession().removeAttribute("user");
-			throw new SPIException("impossible de s'authentifier");
+			return false;
 		}
-
 	}
 
 	@RequestMapping(value = "/user")
@@ -42,6 +42,6 @@ public class UserController {
 	@RequestMapping(value = "/deconnexion", method = RequestMethod.GET)
 	public void authentifier(final HttpServletRequest request) {
 		request.getSession().removeAttribute("user");
-	}
+	}	
 
 }

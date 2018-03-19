@@ -1,5 +1,5 @@
 angular.module('spiApp')
-.controller('questionCtrl', ['$scope', 'questionSvc', 'NgTableParams', function ($scope, questionSvc, NgTableParams) {
+.controller('questionCtrl', ['$scope', 'questionSvc', 'cqSvc', 'NgTableParams', function ($scope, questionSvc, cqSvc, NgTableParams) {
 
   $scope.sujet = "une question";
   $scope.editoption = "la modification";
@@ -16,7 +16,7 @@ angular.module('spiApp')
      
       $scope.questions = data;
       data.forEach(question => {
-        questionSvc.getQualificatifById(question.idQualificatif,function (data) {
+        cqSvc.getQualificatifById(question.idQualificatif,function (data) {
           question.quaminimal=data.minimal;
           question.quamaximal=data.maximal;
         });
@@ -73,7 +73,7 @@ angular.module('spiApp')
 
   $scope.getQualificatifById= function(idQualificatif){
     //var valeur = "";
-    questionSvc.getQualificatifById(idQualificatif,function (data) {
+    cqSvc.getQualificatifById(idQualificatif,function (data) {
       console.log(data.minimal +" -- "+data.maximal);
       return data.minimal +" -- "+data.maximal;
     });

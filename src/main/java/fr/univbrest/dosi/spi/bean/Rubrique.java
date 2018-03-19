@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * The persistent class for the RUBRIQUE database table.
- * 
+ *
  */
 @Entity
 @NamedQuery(name="Rubrique.findAll", query="SELECT r FROM Rubrique r")
@@ -20,6 +20,10 @@ public class Rubrique implements Serializable {
 
 	@Id
 	@Column(name="ID_RUBRIQUE")
+    // --Une Sequence doit être obligatoirement crée pour génerer un noEnseignant
+    // (script de la sequence : "create sequence rub_seq start with 100 increment by 1 nomaxvalue;")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen-cq")
+    @SequenceGenerator(name = "gen-cq", sequenceName = "rub_seq")
 	private long idRubrique;
 
 	private String designation;

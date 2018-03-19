@@ -40,6 +40,8 @@ angular.module('spiApp')
         callback(response.data);
       });
     }
+
+
     return factory;
   
   }])

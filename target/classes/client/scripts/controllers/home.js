@@ -31,10 +31,10 @@ angular.module('spiApp')
 
         
 
-        getEnseignantsCount();
+        /*getEnseignantsCount();
         getFormationsCount();
         getCandidatsCount();
-        getPromotionsCount();
+        getPromotionsCount();*/
 
 
 

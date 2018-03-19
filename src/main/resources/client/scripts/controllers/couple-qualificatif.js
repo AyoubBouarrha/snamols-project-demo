@@ -41,7 +41,8 @@ angular.module('spiApp')
       else{
         console.log($scope.editcq);
         cqSvc.saveCq($scope.editcq, function (data) {
-          getCq();
+          getCq();          
+          $('#form-collapse').collapse('hide');
         });
       }
      

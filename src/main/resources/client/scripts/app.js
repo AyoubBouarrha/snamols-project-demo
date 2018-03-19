@@ -13,8 +13,8 @@ angular
       })
       .when('/login', {
         templateUrl: 'views/login.html',
-        controller: 'loginCtrl',
-        controllerAs: 'login'
+        controller: 'userCtrl',
+        controllerAs: 'user'
       })
       .when('/enseignants', {
         templateUrl: 'views/enseignants.html',

@@ -15,47 +15,53 @@ import fr.univbrest.dosi.spi.service.QuestionService;
 @RestController
 @RequestMapping("/questions")
 public class QuestionController {
-	
-	private QuestionService buisness ; 
-	
+
+	private QuestionService buisness ;
+
 	@Autowired
 	public  QuestionController (QuestionService  buisness)
 	{
-		this.buisness = buisness ; 
+		this.buisness = buisness ;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Question> getAllQuestions()
 	{
 		return buisness.getAllQuestions() ;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET , value="/{id}")
 	public Question getSingleQuestion(@PathVariable("id") String id)
 	{
 		return buisness.getSingleQuestion(Long.parseLong(id, 10));
 	}
-	
+
 	@RequestMapping(method = RequestMethod.DELETE , value="/{id}")
-	public void deleteQuestion(@PathVariable("id") String id)
+	public boolean deleteQuestion(@PathVariable("id") String id)
 	{
-		 buisness.deleteQuestion(Long.parseLong(id, 10));
+	    try {
+            buisness.deleteQuestion(Long.parseLong(id, 10));
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST)
 	public Question  addQuestion(@RequestBody Question question)
 	{
 		return buisness.addQuestion(question);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.PUT)
 	public Question  updateQuestion(@RequestBody Question question)
 	{
 		return buisness.updateQuestion(question);
 	}
-	
-	
+
+
 }
-	
-	
-	
+
+
+

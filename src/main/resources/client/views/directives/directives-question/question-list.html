@@ -4,14 +4,14 @@
     <p>{{enseignant.nom}}</p>
 </div> -->
 
-
+<br><br>
 <table ng-table="tableParams" class="table table-condensed table-bordered" show-filter="true">
     <tr ng-repeat="question in $data">
         <td data-title="'Intitulé'" filter="{ intitule: 'text'}" sortable="'intitule'">
             {{question.intitule}}</td>
         <td data-title="'Qualificatif'" filter="{ qualificatif: 'text'}" sortable="'qualificatif'" style="text-align: center;">
             <!-- {{getQualificatifById(question.idQualificatif)}} -->
-            {{question.quaminimal}} ↨    ↨ {{question.quamaximal}} 
+            {{question.quaminimal}} <i class="fas fa-long-arrow-alt-up" style="color: red;"></i>   <i class="fas fa-long-arrow-alt-down" style="color:green;"></i> </i> {{question.quamaximal}} 
         </td>
 
         <td class="cell-button">

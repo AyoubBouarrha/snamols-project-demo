@@ -1,0 +1,35 @@
+<br>
+<div id="form-collapse" class="collapse hide">
+    <form  ng-submit="editSubmit()" name="formQuestion" class="form-container" >
+        <br>
+        <div class="form-groupe-1">
+            <div class="form-group">
+                <label for="question"> intitule question :</label>
+                <input type="text" required ng-model="addQuestion.intitule" class="form-control" id="codeFormation" name="codeFormation">
+            </div>
+
+           
+        </div>
+        <div class="form-groupe-2">
+            <div class="form-group">
+              <label for="inputState">qualificatif</label>
+              <span ng-show="formQuestion.inputState.$error.required">Select service</span>
+              <select id="inputState" class="form-control" ng-model="addQuestion.idQualificatif" ng-options="Qualificatif.idQualificatif as ( Qualificatif.maximal+'--'+Qualificatif.minimal) for Qualificatif in Qualificatifs | orderBy:'maximal'"  required>
+                 <!-- <option>lssldsldk</option>
+                    <option ng-repeat="Qualificatif in Qualificatifs" value="{{Qualificatif.idQualificatif}}">{{Qualificatif.maximal}{{Qualificatif.minimal}}</option>
+                 --> 
+                 <option value=""></option>
+                </select>
+            </div>
+        </div>
+
+
+        <button  type="submit" class="btn-validate-question btn btn-success "  >Valider {{editoption}}</button>
+
+        <button type="reset" class="btn-cancel-question btn btn-danger" ng-click="cancelEditing()">Annuler</button>
+
+        <!-- data-toggle="collapse" data-target="#demo" -->
+    </form>
+
+</div>
+<br><br>

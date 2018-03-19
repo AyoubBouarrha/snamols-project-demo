@@ -1,26 +1,32 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <!-- Brand/logo -->
-    <a style="text-align: center" class="navbar-brand" href="#">
-        <i class="fas fa-home"></i>  School Management</a>
+<div ng-app="spiApp" ng-controller="userCtrl">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <!-- Brand/logo -->
+        <a style="text-align: center" class="navbar-brand" href="#">
+            <i class="fas fa-home"></i>  School Management</a>
 
-    </a>
+        </a>
 
-    <!-- Links -->
-    <ul style="width: 100%" class="navbar-nav">
-        <li style="text-align: center" class="nav-item">
-            <a class="nav-link" href="#!enseignants">Enseignants</a>
-        </li>
-        <li style="text-align: center" class="nav-item">
-            <a class="nav-link" href="#!formations">Formations</a>
-        </li>
-        <li style="text-align: center" class="nav-item">
-            <a class="nav-link" href="#!couple-qualificatif">Couple Qualificatif</a>
-        </li>
-        <li style="text-align: center" class="nav-item">
-            <a class="nav-link" href="#!rubriques">Rubriques</a>
-        </li>
-        <li style="text-align: center" class="nav-item">
-            <a class="nav-link" href="#!questions">Questions</a>
-        </li>
-    </ul>
-</nav>
+        <!-- Links -->
+        <ul style="width: 100%" class="navbar-nav">
+            <li style="text-align: center" class="nav-item">
+                <a class="nav-link" href="#!enseignants">Enseignants</a>
+            </li>
+            <li style="text-align: center" class="nav-item">
+                <a class="nav-link" href="#!formations">Formations</a>
+            </li>
+            <li style="text-align: center" class="nav-item">
+                <a class="nav-link" href="#!couple-qualificatif">Couple Qualificatif</a>
+            </li>
+            <li style="text-align: center" class="nav-item">
+                <a class="nav-link" href="#!rubriques">Rubriques</a>
+            </li>
+            <li style="text-align: center" class="nav-item">
+                <a class="nav-link" href="#!questions">Questions</a>
+            </li>
+        </ul>
+
+        <a href="" ng-click="disconnect()" class="btn btn-danger">
+            <i class="fas fa-logout"></i> Se Déconnecter
+        </a>
+    </nav>
+</div>

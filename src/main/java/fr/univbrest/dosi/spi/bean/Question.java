@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * The persistent class for the QUESTION database table.
- * 
+ *
  */
 @Entity
 @NamedQuery(name="Question.findAll", query="SELECT q FROM Question q")
@@ -19,6 +19,10 @@ public class Question implements Serializable {
 
 	@Id
 	@Column(name="ID_QUESTION")
+    // --Une Sequence doit être obligatoirement crée pour génerer un idQuestion
+    // (script de la sequence : "create sequence qes_seq start with 100 increment by 1 nomaxvalue;")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen-cq")
+    @SequenceGenerator(name = "gen-cq", sequenceName = "qes_seq")
 	private long idQuestion;
 
 	@Column(name="ID_QUALIFICATIF")

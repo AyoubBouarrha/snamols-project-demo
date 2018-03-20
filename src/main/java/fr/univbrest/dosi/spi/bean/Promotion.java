@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * The persistent class for the PROMOTION database table.
- * 
+ *
  */
 @Entity
 @NamedQuery(name="Promotion.findAll", query="SELECT p FROM Promotion p")
@@ -66,11 +66,13 @@ public class Promotion implements Serializable {
 	//bi-directional many-to-one association to Enseignant
 	@ManyToOne
 	@JoinColumn(name="NO_ENSEIGNANT",insertable=false, updatable=false)
+    @JsonIgnore
 	private Enseignant enseignant;
 
 	//bi-directional many-to-one association to Formation
 	@ManyToOne
 	@JoinColumn(name="CODE_FORMATION",insertable=false, updatable=false)
+    @JsonIgnore
 	private Formation formation;
 
 	public Promotion() {

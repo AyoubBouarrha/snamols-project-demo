@@ -22,11 +22,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ComponentScan
 @EnableAutoConfiguration
 @Configuration
-// @PropertySource("classpath:/data/jdbc-dev.properties")
 @EnableJpaRepositories
 @EnableTransactionManagement
 @EnableSwagger2
-@Import(RepositoryRestMvcConfiguration.class)
+//@Import(RepositoryRestMvcConfiguration.class)
 public class Application extends WebMvcConfigurerAdapter {
 	/**
 	 *
@@ -38,21 +37,21 @@ public class Application extends WebMvcConfigurerAdapter {
 	}
 
 	@Override
-	public final void addResourceHandlers(final ResourceHandlerRegistry registry) {		
+	public final void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("swagger-ui.html")
         .addResourceLocations("classpath:/META-INF/resources/");
-		
+
 		registry.addResourceHandler("/webjars/**")
         .addResourceLocations("classpath:/META-INF/resources/webjars/");
-		
+
 		registry.addResourceHandler("/**").addResourceLocations("classpath:/client/").addResourceLocations("classpath:/.tmp/");
 	}
-	
+
 	 @Override
 	    public void addCorsMappings(CorsRegistry registry) {
 	        registry.addMapping("/**").allowCredentials(false).allowedOrigins("*").allowedMethods("GET", "POST","PUT", "DELETE");
 	    }
-	 
-	 
+
+
 
 }

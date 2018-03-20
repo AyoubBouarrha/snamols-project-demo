@@ -1,0 +1,31 @@
+/*Evaluation*/
+{
+  "debutReponse": "2018-03-20T00:20:55.747Z",
+  "designation": "aaaa",
+  "etat": "CLO",
+  "finReponse": "2018-03-20T00:20:55.747Z",
+  "noEvaluation": 1,
+  "periode": "",
+  "elementConstitutif": {
+    "id": {
+      "codeEc": "ERP",
+      "codeFormation": "M2DOSI",
+      "codeUe": "PCO"
+    }
+  },
+  "enseignant": {
+    "noEnseignant": 6
+  },  
+  "promotion": {
+    "id": {
+      "anneeUniversitaire": "2014-2015",
+      "codeFormation": "M2DOSI"
+    }
+  },
+  "uniteEnseignement": {
+    "id": {
+      "codeFormation": "M2DOSI",
+      "codeUe": "PCO"
+    }
+  }
+}

@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * The persistent class for the ELEMENT_CONSTITUTIF database table.
- * 
+ *
  */
 @Entity
 @Table(name="ELEMENT_CONSTITUTIF")
@@ -38,6 +38,7 @@ public class ElementConstitutif implements Serializable {
 	//bi-directional many-to-one association to Enseignant
 	@ManyToOne
 	@JoinColumn(name="NO_ENSEIGNANT")
+    @JsonIgnore
 	private Enseignant enseignant;
 
 	//bi-directional many-to-one association to UniteEnseignement
@@ -46,6 +47,7 @@ public class ElementConstitutif implements Serializable {
 		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION",insertable=false, updatable=false),
 		@JoinColumn(name="CODE_UE", referencedColumnName="CODE_UE",insertable=false, updatable=false)
 		})
+    @JsonIgnore
 	private UniteEnseignement uniteEnseignement;
 
 	//bi-directional many-to-one association to Evaluation

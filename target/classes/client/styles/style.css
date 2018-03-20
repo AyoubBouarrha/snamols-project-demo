@@ -157,3 +157,11 @@ a:hover{
     min-width: 100%; 
     min-height: 100%;
 }
+
+.user-info{
+    margin: auto;
+    color: #f1f1f1;
+    font: 1.1em;
+    width: 180px;
+    margin-top: 10px;
+}

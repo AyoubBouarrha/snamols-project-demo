@@ -20,8 +20,8 @@ public class UserController {
 	UserService userService;
 
 	@RequestMapping(value = "/auth", method = RequestMethod.POST, headers = "Accept=application/json")
-	public boolean authentifier(final HttpServletRequest request, @RequestBody final User user) {
-		final User users = userService.authentifier(user.getUsername(), user.getPwd());
+	public boolean authentifier( HttpServletRequest request, @RequestBody  User user) {
+		User users = userService.authentifier(user.getUsername(), user.getPwd());
 
 		if (users != null) {
 			request.getSession().setAttribute("user", users);
@@ -33,15 +33,15 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user")
-	public User users(final HttpServletRequest request, final HttpServletResponse response) {
-		final User user = (User) request.getSession().getAttribute("user");
+	public User users( HttpServletRequest request,  HttpServletResponse response) {
+		User user = (User) request.getSession().getAttribute("user");
 		return user;
 
 	}
-	
+
 	@RequestMapping(value = "/deconnexion", method = RequestMethod.GET)
-	public void authentifier(final HttpServletRequest request) {
+	public void authentifier(HttpServletRequest request) {
 		request.getSession().removeAttribute("user");
-	}	
+	}
 
 }

@@ -13,6 +13,7 @@ angular.module('spiApp')
         factory.getUserSession = function (callback) {
             var endPoint = "http://localhost:8090/user"
             $http.get(endPoint).then(function (response) {
+                console.log(response);
                 callback(response.data);
             });
         }

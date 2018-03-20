@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * The persistent class for the UNITE_ENSEIGNEMENT database table.
- * 
+ *
  */
 @Entity
 @Table(name="UNITE_ENSEIGNEMENT")
@@ -50,11 +50,13 @@ public class UniteEnseignement implements Serializable {
 	//bi-directional many-to-one association to Enseignant
 	@ManyToOne
 	@JoinColumn(name="NO_ENSEIGNANT",insertable=false, updatable=false)
+    @JsonIgnore
 	private Enseignant enseignant;
 
 	//bi-directional many-to-one association to Formation
 	@ManyToOne
 	@JoinColumn(name="CODE_FORMATION",insertable=false, updatable=false)
+    @JsonIgnore
 	private Formation formation;
 
 	public UniteEnseignement() {

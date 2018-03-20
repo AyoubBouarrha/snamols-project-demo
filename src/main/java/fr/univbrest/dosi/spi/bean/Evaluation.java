@@ -3,6 +3,11 @@ package fr.univbrest.dosi.spi.bean;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.hibernate.annotations.JoinColumnOrFormula;
+import org.hibernate.annotations.JoinColumnsOrFormulas;
+import org.hibernate.annotations.JoinFormula;
+import org.springframework.data.rest.core.annotation.RestResource;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
@@ -12,233 +17,257 @@ import java.util.List;
 
 /**
  * The persistent class for the EVALUATION database table.
- * 
  */
 @Entity
-@NamedQuery(name="Evaluation.findAll", query="SELECT e FROM Evaluation e")
+@RestResource(exported = false)
+@NamedQuery(name = "Evaluation.findAll", query = "SELECT e FROM Evaluation e")
 public class Evaluation implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name="ID_EVALUATION")
-	private long idEvaluation;
+    @Id
+    @Column(name = "ID_EVALUATION")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen-eva")
+    @SequenceGenerator(name = "gen-eva", sequenceName = "eva_seq")
+    private long idEvaluation;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="DEBUT_REPONSE")
-	private Date debutReponse;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "DEBUT_REPONSE")
+    private Date debutReponse;
 
-	private String designation;
+    private String designation;
 
-	private String etat;
+    private String etat;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="FIN_REPONSE")
-	private Date finReponse;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "FIN_REPONSE")
+    private Date finReponse;
 
-	@Column(name="NO_EVALUATION")
-	private BigDecimal noEvaluation;
+    @Column(name = "NO_EVALUATION")
+    private BigDecimal noEvaluation;
 
-	private String periode;
+    private String periode;
 
-	//bi-directional many-to-one association to Droit
-	@OneToMany(mappedBy="evaluation")
-	@JsonIgnore
-	private List<Droit> droits;
+    //bi-directional many-to-one association to Droit
+    @OneToMany(mappedBy = "evaluation")
+    @JsonIgnore
+    private List<Droit> droits;
 
-	//bi-directional many-to-one association to ElementConstitutif
-	@ManyToOne
-	@JoinColumns({
-		@JoinColumn(name="CODE_EC", referencedColumnName="CODE_EC",insertable=false, updatable=false),
-		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION",insertable=false, updatable=false),
-		@JoinColumn(name="CODE_UE", referencedColumnName="CODE_UE",insertable=false, updatable=false)
-		})
-	private ElementConstitutif elementConstitutif;
+    //bi-directional many-to-one association to ElementConstitutif
 
-	//bi-directional many-to-one association to Enseignant
-	@ManyToOne
-	@JoinColumn(name="NO_ENSEIGNANT")
-	private Enseignant enseignant;
 
-	//bi-directional many-to-one association to Promotion
-	@ManyToOne
-	@JoinColumns({
-		@JoinColumn(name="ANNEE_UNIVERSITAIRE", referencedColumnName="ANNEE_UNIVERSITAIRE",insertable=false, updatable=false),
-		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION",insertable=false, updatable=false)
-		})
-	private Promotion promotion;
+    @ManyToOne
+    @JoinColumns({
+        @JoinColumn(name = "CODE_EC", referencedColumnName = "CODE_EC", insertable = true, updatable = true),
+        @JoinColumn(name = "CODE_FORMATION", referencedColumnName = "CODE_FORMATION", insertable = true, updatable = true),
+        @JoinColumn(name = "CODE_UE", referencedColumnName = "CODE_UE", insertable = true, updatable = true)
+    })
+    private ElementConstitutif elementConstitutif;
 
-	//bi-directional many-to-one association to UniteEnseignement
-	@ManyToOne
-	@JoinColumns({
-		@JoinColumn(name="CODE_FORMATION", referencedColumnName="CODE_FORMATION",insertable=false, updatable=false),
-		@JoinColumn(name="CODE_UE", referencedColumnName="CODE_UE",insertable=false, updatable=false)
-		})
-	private UniteEnseignement uniteEnseignement;
+    //bi-directional many-to-one association to Enseignant
+    @ManyToOne
+    @JoinColumn(name = "NO_ENSEIGNANT", referencedColumnName = "NO_ENSEIGNANT", insertable = true, updatable = true)
+    private Enseignant enseignant;
 
-	//bi-directional many-to-one association to ReponseEvaluation
-	@OneToMany(mappedBy="evaluation")
-	@JsonIgnore
-	private List<ReponseEvaluation> reponseEvaluations;
+    //bi-directional many-to-one association to Promotion
+    @ManyToOne
+    @JoinColumns({
+        @JoinColumn(name = "ANNEE_UNIVERSITAIRE", referencedColumnName = "ANNEE_UNIVERSITAIRE", insertable = true, updatable = true),
+        @JoinColumn(name = "CODE_FORMATION", referencedColumnName = "CODE_FORMATION", insertable = true, updatable = true)
+    })
+    /*@JoinColumnsOrFormulas(value = {
+        @JoinColumnOrFormula(formula = @JoinFormula(value = "CODE_FORMATION", referencedColumnName = "CODE_FORMATION")),
+        @JoinColumnOrFormula(column = @JoinColumn(name = "ANNEE_UNIVERSITAIRE", referencedColumnName = "ANNEE_UNIVERSITAIRE"))
+    })*/
+    private Promotion promotion;
 
-	//bi-directional many-to-one association to RubriqueEvaluation
-	@OneToMany(mappedBy="evaluation")
-	private List<RubriqueEvaluation> rubriqueEvaluations;
+    //bi-directional many-to-one association to UniteEnseignement
+    @ManyToOne
+    @JoinColumns({
+        @JoinColumn(name = "CODE_FORMATION", referencedColumnName = "CODE_FORMATION", insertable = false, updatable = false),
+        @JoinColumn(name = "CODE_UE", referencedColumnName = "CODE_UE", insertable = false, updatable = false)
+    })
+    /*@JoinColumnsOrFormulas(value = {
+        @JoinColumnOrFormula(formula = @JoinFormula(value = "CODE_FORMATION", referencedColumnName = "CODE_FORMATION")),
+        @JoinColumnOrFormula(column = @JoinColumn(name = "CODE_UE", referencedColumnName = "CODE_UE"))
+    })*/
+    @JsonIgnore
+    private UniteEnseignement uniteEnseignement;
 
-	public Evaluation() {
-	}
+    //bi-directional many-to-one association to ReponseEvaluation
+    @OneToMany(mappedBy = "evaluation")
+    @JsonIgnore
+    private List<ReponseEvaluation> reponseEvaluations;
 
-	public long getIdEvaluation() {
-		return this.idEvaluation;
-	}
+    //bi-directional many-to-one association to RubriqueEvaluation
+    @OneToMany(mappedBy = "evaluation")
+    @JsonIgnore
+    private List<RubriqueEvaluation> rubriqueEvaluations;
 
-	public void setIdEvaluation(long idEvaluation) {
-		this.idEvaluation = idEvaluation;
-	}
+    public Evaluation() {
+    }
 
-	public Date getDebutReponse() {
-		return this.debutReponse;
-	}
+    public long getIdEvaluation() {
+        return this.idEvaluation;
+    }
 
-	public void setDebutReponse(Date debutReponse) {
-		this.debutReponse = debutReponse;
-	}
+    public void setIdEvaluation(long idEvaluation) {
+        this.idEvaluation = idEvaluation;
+    }
 
-	public String getDesignation() {
-		return this.designation;
-	}
+    public Date getDebutReponse() {
+        return this.debutReponse;
+    }
 
-	public void setDesignation(String designation) {
-		this.designation = designation;
-	}
+    public void setDebutReponse(Date debutReponse) {
+        this.debutReponse = debutReponse;
+    }
 
-	public String getEtat() {
-		return this.etat;
-	}
+    public String getDesignation() {
+        return this.designation;
+    }
 
-	public void setEtat(String etat) {
-		this.etat = etat;
-	}
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
 
-	public Date getFinReponse() {
-		return this.finReponse;
-	}
+    public String getEtat() {
+        return this.etat;
+    }
 
-	public void setFinReponse(Date finReponse) {
-		this.finReponse = finReponse;
-	}
+    public void setEtat(String etat) {
+        this.etat = etat;
+    }
 
-	public BigDecimal getNoEvaluation() {
-		return this.noEvaluation;
-	}
+    public Date getFinReponse() {
+        return this.finReponse;
+    }
 
-	public void setNoEvaluation(BigDecimal noEvaluation) {
-		this.noEvaluation = noEvaluation;
-	}
+    public void setFinReponse(Date finReponse) {
+        this.finReponse = finReponse;
+    }
 
-	public String getPeriode() {
-		return this.periode;
-	}
+    public BigDecimal getNoEvaluation() {
+        return this.noEvaluation;
+    }
 
-	public void setPeriode(String periode) {
-		this.periode = periode;
-	}
+    public void setNoEvaluation(BigDecimal noEvaluation) {
+        this.noEvaluation = noEvaluation;
+    }
 
-	public List<Droit> getDroits() {
-		return this.droits;
-	}
+    public String getPeriode() {
+        return this.periode;
+    }
 
-	public void setDroits(List<Droit> droits) {
-		this.droits = droits;
-	}
+    public void setPeriode(String periode) {
+        this.periode = periode;
+    }
 
-	public Droit addDroit(Droit droit) {
-		getDroits().add(droit);
-		droit.setEvaluation(this);
+    public List<Droit> getDroits() {
+        return this.droits;
+    }
 
-		return droit;
-	}
+    public void setDroits(List<Droit> droits) {
+        this.droits = droits;
+    }
 
-	public Droit removeDroit(Droit droit) {
-		getDroits().remove(droit);
-		droit.setEvaluation(null);
+    public Droit addDroit(Droit droit) {
+        getDroits().add(droit);
+        droit.setEvaluation(this);
 
-		return droit;
-	}
+        return droit;
+    }
 
-	public ElementConstitutif getElementConstitutif() {
-		return this.elementConstitutif;
-	}
+    public Droit removeDroit(Droit droit) {
+        getDroits().remove(droit);
+        droit.setEvaluation(null);
 
-	public void setElementConstitutif(ElementConstitutif elementConstitutif) {
-		this.elementConstitutif = elementConstitutif;
-	}
+        return droit;
+    }
 
-	public Enseignant getEnseignant() {
-		return this.enseignant;
-	}
+    public ElementConstitutif getElementConstitutif() {
+        return this.elementConstitutif;
+    }
 
-	public void setEnseignant(Enseignant enseignant) {
-		this.enseignant = enseignant;
-	}
+    public void setElementConstitutif(ElementConstitutif elementConstitutif) {
+        this.elementConstitutif = elementConstitutif;
+    }
 
-	public Promotion getPromotion() {
-		return this.promotion;
-	}
+    public Enseignant getEnseignant() {
+        return this.enseignant;
+    }
 
-	public void setPromotion(Promotion promotion) {
-		this.promotion = promotion;
-	}
+    public void setEnseignant(Enseignant enseignant) {
+        this.enseignant = enseignant;
+    }
 
-	public UniteEnseignement getUniteEnseignement() {
-		return this.uniteEnseignement;
-	}
+    public Promotion getPromotion() {
+        return this.promotion;
+    }
 
-	public void setUniteEnseignement(UniteEnseignement uniteEnseignement) {
-		this.uniteEnseignement = uniteEnseignement;
-	}
+    public void setPromotion(Promotion promotion) {
+        this.promotion = promotion;
+    }
 
-	public List<ReponseEvaluation> getReponseEvaluations() {
-		return this.reponseEvaluations;
-	}
+    public UniteEnseignement getUniteEnseignement() {
+        return this.uniteEnseignement;
+    }
 
-	public void setReponseEvaluations(List<ReponseEvaluation> reponseEvaluations) {
-		this.reponseEvaluations = reponseEvaluations;
-	}
+    public void setUniteEnseignement(UniteEnseignement uniteEnseignement) {
+        this.uniteEnseignement = uniteEnseignement;
+    }
 
-	public ReponseEvaluation addReponseEvaluation(ReponseEvaluation reponseEvaluation) {
-		getReponseEvaluations().add(reponseEvaluation);
-		reponseEvaluation.setEvaluation(this);
+    public List<ReponseEvaluation> getReponseEvaluations() {
+        return this.reponseEvaluations;
+    }
 
-		return reponseEvaluation;
-	}
+    public void setReponseEvaluations(List<ReponseEvaluation> reponseEvaluations) {
+        this.reponseEvaluations = reponseEvaluations;
+    }
 
-	public ReponseEvaluation removeReponseEvaluation(ReponseEvaluation reponseEvaluation) {
-		getReponseEvaluations().remove(reponseEvaluation);
-		reponseEvaluation.setEvaluation(null);
+    public ReponseEvaluation addReponseEvaluation(ReponseEvaluation reponseEvaluation) {
+        getReponseEvaluations().add(reponseEvaluation);
+        reponseEvaluation.setEvaluation(this);
 
-		return reponseEvaluation;
-	}
+        return reponseEvaluation;
+    }
 
-	public List<RubriqueEvaluation> getRubriqueEvaluations() {
-		return this.rubriqueEvaluations;
-	}
+    public ReponseEvaluation removeReponseEvaluation(ReponseEvaluation reponseEvaluation) {
+        getReponseEvaluations().remove(reponseEvaluation);
+        reponseEvaluation.setEvaluation(null);
 
-	public void setRubriqueEvaluations(List<RubriqueEvaluation> rubriqueEvaluations) {
-		this.rubriqueEvaluations = rubriqueEvaluations;
-	}
+        return reponseEvaluation;
+    }
 
-	public RubriqueEvaluation addRubriqueEvaluation(RubriqueEvaluation rubriqueEvaluation) {
-		getRubriqueEvaluations().add(rubriqueEvaluation);
-		rubriqueEvaluation.setEvaluation(this);
+    public List<RubriqueEvaluation> getRubriqueEvaluations() {
+        return this.rubriqueEvaluations;
+    }
 
-		return rubriqueEvaluation;
-	}
+    public void setRubriqueEvaluations(List<RubriqueEvaluation> rubriqueEvaluations) {
+        this.rubriqueEvaluations = rubriqueEvaluations;
+    }
 
-	public RubriqueEvaluation removeRubriqueEvaluation(RubriqueEvaluation rubriqueEvaluation) {
-		getRubriqueEvaluations().remove(rubriqueEvaluation);
-		rubriqueEvaluation.setEvaluation(null);
+    public RubriqueEvaluation addRubriqueEvaluation(RubriqueEvaluation rubriqueEvaluation) {
+        getRubriqueEvaluations().add(rubriqueEvaluation);
+        rubriqueEvaluation.setEvaluation(this);
 
-		return rubriqueEvaluation;
-	}
+        return rubriqueEvaluation;
+    }
+
+    public RubriqueEvaluation removeRubriqueEvaluation(RubriqueEvaluation rubriqueEvaluation) {
+        getRubriqueEvaluations().remove(rubriqueEvaluation);
+        rubriqueEvaluation.setEvaluation(null);
+
+        return rubriqueEvaluation;
+    }
+
+    @Override
+    public String toString() {
+        return "Evaluation [idEvaluation=" + idEvaluation + ", debutReponse=" + debutReponse + ", designation="
+            + designation + ", etat=" + etat + ", finReponse=" + finReponse + ", noEvaluation=" + noEvaluation
+            + ", periode=" + periode + ", droits=" + droits + ", elementConstitutif=" + elementConstitutif
+            + ", enseignant=" + enseignant + ", promotion=" + promotion + ", uniteEnseignement=" + uniteEnseignement
+            + ", reponseEvaluations=" + reponseEvaluations + ", rubriqueEvaluations=" + rubriqueEvaluations + "]";
+    }
+
 
 }

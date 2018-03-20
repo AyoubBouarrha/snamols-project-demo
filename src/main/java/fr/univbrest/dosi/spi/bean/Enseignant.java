@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * The persistent class for the ENSEIGNANT database table.
- * 
+ *
  */
 @Entity
 @NamedQuery(name="Enseignant.findAll", query="SELECT e FROM Enseignant e")
@@ -345,4 +345,12 @@ public class Enseignant implements Serializable {
 		return uniteEnseignement;
 	}
 
+    @Override
+    public String toString() {
+        return "Enseignant{" +
+            "noEnseignant=" + noEnseignant +
+            ", nom='" + nom + '\'' +
+            ", prenom='" + prenom + '\'' +
+            '}';
+    }
 }

@@ -11,7 +11,7 @@ angular.module('spiApp')
                     $('.login-container').css('height', '280px');
                 }
                 else {
-                    $('.login-container').css('height', '330px');
+                    $('.login-container').css('height', '350px');
                 }
 
             });

@@ -2,13 +2,12 @@ package fr.univbrest.dosi.spi.controller;
 
 import java.util.List;
 
+import fr.univbrest.dosi.spi.bean.Promotion;
+import fr.univbrest.dosi.spi.bean.PromotionPK;
+import fr.univbrest.dosi.spi.service.EnseignantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import fr.univbrest.dosi.spi.bean.Enseignant;
 import fr.univbrest.dosi.spi.bean.Evaluation;
@@ -21,19 +20,17 @@ public class EvaluationController {
 	@Autowired
 	private EvaluationService evaluationService;
 
+	@Autowired
+    private EnseignantService enseignantService;
+
 	@RequestMapping(method = RequestMethod.POST)
 	public boolean addEvaluation(@RequestBody Evaluation evaluation) {
-		System.out.println("evaluation");
-		/*Enseignant ens = new Enseignant();
-        ens.setNoEnseignant(6L);
-        evaluation.setEnseignant(ens);*/
+
 		System.out.println(evaluation);
 		try {
 			evaluationService.addEvaluation(evaluation);
 			return true;
 		} catch (Exception e) {
-			System.out.println("eeeeee");
-			e.printStackTrace();
 			return false;
 		}
 		//return true;

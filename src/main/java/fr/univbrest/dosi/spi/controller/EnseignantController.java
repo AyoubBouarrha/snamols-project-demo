@@ -61,10 +61,10 @@ public class EnseignantController {
 
 	/*
 	 * public EnseignantController() { this.configure(); }
-	 * 
+	 *
 	 * private void checkDroits(final TypeDroit typeDroit) { if (!this.mapDroits.get(typeDroit).contains(this.user.getRoles())) { throw new SPIException(SpiExceptionCode.NOT_ENOUGH_RIGHT,
 	 * "L'utilisateur n'a pas les droits suffisants pour effectuer l'action demandée"); } }
-	 * 
+	 *
 	 * private void configure() { this.mapDroits.put(TypeDroit.CREATE, Arrays.asList(Role.ADMIN, Role.PROF)); this.mapDroits.put(TypeDroit.SELECT, Arrays.asList(Role.ETUDIANT, Role.ADMIN, Role.PROF));
 	 * this.mapDroits.put(TypeDroit.MODIFY, Arrays.asList(Role.ADMIN, Role.PROF)); this.mapDroits.put(TypeDroit.DELETE, Arrays.asList(Role.ADMIN)); }
 	 */
@@ -89,7 +89,7 @@ public class EnseignantController {
 	 *            l'id de l'enseignant
 	 */
 	@RequestMapping(value = "/deleteEnseignant/{noenseignant}")
-	public final void deleteEnseignant(@PathVariable(value = "noenseignant") final Integer noEnseignant) {
+	public final void deleteEnseignant(@PathVariable(value = "noenseignant") final Long noEnseignant) {
 		// this.checkDroits(TypeDroit.DELETE);
 		enseignantService.deleteEnseignant(noEnseignant);
 	}
@@ -115,7 +115,7 @@ public class EnseignantController {
 	 * @return un boolean
 	 */
 	@RequestMapping(value = "/existens/{noenseignant}")
-	public final Boolean existEnseignant(@PathVariable(value = "noenseignant") final Integer noEnseignant) {
+	public final Boolean existEnseignant(@PathVariable(value = "noenseignant") final Long noEnseignant) {
 		return enseignantService.existEnseignant(noEnseignant);
 	}
 
@@ -126,7 +126,7 @@ public class EnseignantController {
 	 * @return un enseignant
 	 */
 	@RequestMapping(value = "/getens/{noenseignant}")
-	public final Enseignant getEnseignant(@PathVariable(value = "noenseignant") final Integer noEnseignant) {
+	public final Enseignant getEnseignant(@PathVariable(value = "noenseignant") final Long noEnseignant) {
 		// this.checkDroits(TypeDroit.SELECT);
 		return enseignantService.getEnseignant(noEnseignant);
 	}

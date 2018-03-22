@@ -26,7 +26,7 @@ public class EnseignantServiceTests {
 	/**
 	 *
 	 */
-	private Integer noEnseignant;
+	private Long noEnseignant;
 	/**
 	 *
 	 */
@@ -102,7 +102,7 @@ public class EnseignantServiceTests {
 	 */
 	@Test
 	public final void deleteEnseignant() {
-		final Integer id = 8;
+		final Long id = 8L;
 		try {
 			enseignantService.deleteEnseignant(id);
 			Assert.fail();
@@ -116,7 +116,7 @@ public class EnseignantServiceTests {
 	 */
 	@Test
 	public final void deleteEnseignantNotExist() {
-		final Integer id = 9;
+		final Long id = 9L;
 		try {
 			enseignantService.deleteEnseignant(id);
 			Assert.fail();
@@ -140,7 +140,7 @@ public class EnseignantServiceTests {
 	 */
 	@Test
 	public final void getEnseignantNotExiste() {
-		final Enseignant enseignant = enseignantService.getEnseignant(9);
+		final Enseignant enseignant = enseignantService.getEnseignant(9L);
 		Assert.assertNotNull(enseignant);
 		Assert.assertEquals(this.nom, enseignant.getNom());
 		Assert.assertEquals(this.prenom, enseignant.getPrenom());
@@ -152,7 +152,7 @@ public class EnseignantServiceTests {
 	@Before
 	public final void init() {
 		// this.business = new GreetingBusinessImpl();
-		this.noEnseignant = 1;
+		this.noEnseignant = 1L;
 		this.nom = "SALIOU";
 		this.prenom = "Philippe";
 	}

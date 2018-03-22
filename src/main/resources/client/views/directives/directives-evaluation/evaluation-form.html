@@ -1,0 +1,121 @@
+<br>
+<br>
+<div id="form-collapse" class="collapse hide">
+    <form ng-submit="editSubmit()" name="formevaluation" class="form-container container">
+        <br>
+
+        <div class="form-groupe-key-eval">
+            <div class="form-groupe-1">
+
+                <div class="form-group">
+                    <label>Année universitaire (*):</label>
+                    <span ng-show="formevaluation.anneeUniv.$dirty && formevaluation.anneeUniv.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                    <select required class="form-control" ng-model="editevaluation.anneeUniv" name="anneeUniv" ng-change="onChangeAnneeUniv()"
+                        ng-options="item for item in anneeUnivs">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="formation">Nom de formation (*):</label>
+                    <span ng-show="formevaluation.formation.$dirty && formevaluation.formation.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                    <select required class="form-control" ng-model="editevaluation.formation" name="formation" id="formation" ng-change="onChangeFormation()"
+                        ng-options="item for item in formations">
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-groupe-2">
+
+                <div class="form-group">
+                    <label>Unité d'enseignement (*):</label>
+                    <span ng-show="formevaluation.ue.$dirty && formevaluation.ue.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                    <select required class="form-control" ng-model="editevaluation.uniteEnseignement" name="ue" id="ue" ng-change="onChangeUE()"
+                        ng-options="item.designation for item in ues" disabled>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Elément constitutif :</label>
+                    <span ng-show="formevaluation.designation.$dirty && formevaluation.designation.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                    <select class="form-control" ng-model="editevaluation.elementConstitutif" name="ec" id="ec" ng-options="item.description for item in editevaluation.uniteEnseignement.elementConstitutifs"
+                        disabled>
+
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form-groupe-info-eval" hidden>
+
+
+
+            <div class="form-groupe-1">
+
+                <div class="form-group">
+                    <label for="designation"> Numéro d'évaluation (*):</label>
+                    <span ng-show="formevaluation.noEvaluation.$dirty && formevaluation.noEvaluation.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                    <input type="number" ng-model="editevaluation.noEvaluation" class="form-control" id="noEvaluation" name="noEvaluation" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="designation"> Designation (*):</label>
+                    <span ng-show="formevaluation.designation.$dirty && formevaluation.designation.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                    <input type="text" ng-model="editevaluation.designation" class="form-control" id="designation" name="designation" required>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Etat (*):</label>
+                    <span ng-show="formevaluation.etat.$dirty && formevaluation.etat.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                    <select class="form-control" ng-model="editevaluation.etat" name="etat" id="etat" required>
+                        <option value="CLO">CLO</option>
+                        <option value="ELA">ELA</option>
+                    </select>
+                </div>
+
+
+
+
+            </div>
+
+            <div class="form-groupe-2">
+
+                <div class="form-group">
+                    <label for="debutReponse"> Debut Reponse (*):</label>
+                    <span ng-show="formevaluation.debutReponse.$dirty && formevaluation.debutReponse.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                    <input type="date" ng-model="editevaluation.debutReponse" class="form-control" id="debutReponse" name="debutReponse">
+                </div>
+
+                <div class="form-group">
+                    <label for="finReponse"> Fin Reponse (*):</label>
+                    <span ng-show="formevaluation.finReponse.$dirty && formevaluation.finReponse.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                    <input type="date" ng-model="editevaluation.finReponse" class="form-control" id="finReponse" name="finReponse">
+                </div>
+
+                <div class="form-group">
+                    <label for="periode"> Periode :</label>
+                    <input type="text" ng-model="editevaluation.periode" class="form-control" id="periode" name="periode">
+                </div>
+
+            </div>
+
+        </div>
+        <div ng-show="formevaluation.$dirty && !formevaluation.$valid" class="alert alert-danger">
+            <strong>Validation!</strong> Veuillez verifier que vous avez bien rempli tous les champs obligatoire.
+        </div>
+
+        <div ng-show="!noEvaluationValid" class="alert alert-danger">
+            <strong>Validation!</strong> Veuillez verifier que le numéro d'évaluation n'est pas redondant.
+        </div>
+
+        <!-- data-toggle="collapse" data-target="#demo" -->
+        <button type="submit" class="btn-validate btn btn-success " disabled id="validateBtn">Valider {{editoption}}</button>
+
+        <button type="reset" class="btn-cancel btn btn-danger" ng-click="cancelEditing()">Annuler</button>
+    </form>
+
+</div>
+
+<br>
+<br>

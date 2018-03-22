@@ -1,0 +1,33 @@
+<table ng-table="tableParams" class="table table-condensed table-bordered" show-filter="true">
+    <tr ng-repeat="evaluation in $data">
+        <td data-title="'Designation'" filter="{ designation: 'text'}" sortable="'designation'">
+            {{evaluation.designation}}
+        </td>
+
+        <td data-title="'Debut Reponse'" filter="{ debutReponse: 'text'}" sortable="'debutReponse'">
+            {{evaluation.debutReponse}}
+        </td>
+
+        <td data-title="'Fin Reponse'" filter="{ finReponse: 'text'}" sortable="'finReponse'">
+            {{evaluation.finReponse}}
+        </td>
+
+        <td data-title="'Formation'" sortable="false">
+            {{evaluation.promotion.id.codeFormation}} {{evaluation.promotion.id.anneeUniversitaire}}
+        </td>
+
+        <td class="cell-button">
+            <button ng-click="showDeleteBox(evaluation)" title="Supprimer" data-toggle="modal" data-target="#delete-modal" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </td>
+
+        <td class="cell-button">
+            <button ng-click="showUpdateBox(evaluation)" title="Modifier" class="btn btn-success">
+                <i class="fas fa-pencil-alt"></i>
+            </button>
+        </td>
+
+
+    </tr>
+</table>

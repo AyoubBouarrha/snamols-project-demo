@@ -4,6 +4,9 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.JoinColumnOrFormula;
+import org.hibernate.annotations.JoinColumnsOrFormulas;
+import org.hibernate.annotations.JoinFormula;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -52,6 +55,11 @@ public class ElementConstitutif implements Serializable {
 
 	//bi-directional many-to-one association to Evaluation
 	@OneToMany(mappedBy="elementConstitutif")
+    @JoinColumnsOrFormulas(value ={
+        @JoinColumnOrFormula(column = @JoinColumn(name = "CODE_FORMATION", referencedColumnName = "CODE_FORMATION")),
+        @JoinColumnOrFormula(column = @JoinColumn(name = "CODE_UE", referencedColumnName = "CODE_UE")),
+        @JoinColumnOrFormula(column = @JoinColumn(name = "CODE_EC", referencedColumnName = "CODE_EC"))
+    })
 	@JsonIgnore
 	private List<Evaluation> evaluations;
 

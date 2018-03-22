@@ -20,6 +20,8 @@ public class EvaluationService {
 	}
 
 
+
+
 	public final void deleteEvaluation(final long idEvaluation) throws Exception {
 		if (evaluationRepository.exists(idEvaluation)) {
 			try {
@@ -30,10 +32,10 @@ public class EvaluationService {
 		} else {
 			throw new Exception("Evaluation not found");
 		}
-		
+
 	}
 
-	
+
 	public final Boolean existEvaluation(final long idEvaluation) throws Exception {
 		final Boolean exist = evaluationRepository.exists(idEvaluation);
 		if (exist) {
@@ -43,18 +45,18 @@ public class EvaluationService {
 		}
 	}
 
-	
+
 
 	public final Evaluation getEvaluation(final long idEvaluation) {
 		return evaluationRepository.findOne(idEvaluation);
 	}
 
-	
+
 	public final List<Evaluation> getEvaluationByDesination(final String designation) {
 		return evaluationRepository.findByDesignation(designation);
 	}
-	
-	
+
+
 
 	/**
 	 *

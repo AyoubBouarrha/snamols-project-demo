@@ -3,6 +3,10 @@ package fr.univbrest.dosi.spi.bean;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.hibernate.annotations.JoinColumnOrFormula;
+import org.hibernate.annotations.JoinColumnsOrFormulas;
+import org.hibernate.annotations.JoinFormula;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
@@ -12,224 +16,227 @@ import java.util.List;
 
 /**
  * The persistent class for the PROMOTION database table.
- *
  */
 @Entity
-@NamedQuery(name="Promotion.findAll", query="SELECT p FROM Promotion p")
+@NamedQuery(name = "Promotion.findAll", query = "SELECT p FROM Promotion p")
 public class Promotion implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private PromotionPK id;
+    @EmbeddedId
+    private PromotionPK id;
 
-	private String commentaire;
+    private String commentaire;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="DATE_RENTREE")
-	private Date dateRentree;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "DATE_RENTREE")
+    private Date dateRentree;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="DATE_REPONSE_LALP")
-	private Date dateReponseLalp;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "DATE_REPONSE_LALP")
+    private Date dateReponseLalp;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="DATE_REPONSE_LP")
-	private Date dateReponseLp;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "DATE_REPONSE_LP")
+    private Date dateReponseLp;
 
-	@Column(name="LIEU_RENTREE")
-	private String lieuRentree;
+    @Column(name = "LIEU_RENTREE")
+    private String lieuRentree;
 
-	@Column(name="NB_MAX_ETUDIANT")
-	private BigDecimal nbMaxEtudiant;
+    @Column(name = "NB_MAX_ETUDIANT")
+    private BigDecimal nbMaxEtudiant;
 
-	@Column(name="PROCESSUS_STAGE")
-	private String processusStage;
+    @Column(name = "PROCESSUS_STAGE")
+    private String processusStage;
 
-	@Column(name="SIGLE_PROMOTION")
-	private String siglePromotion;
+    @Column(name = "SIGLE_PROMOTION")
+    private String siglePromotion;
 
-	//bi-directional many-to-one association to Candidat
-	@OneToMany(mappedBy="promotion")
-	@JsonIgnore
-	private List<Candidat> candidats;
-
-	//bi-directional many-to-one association to Etudiant
-	@OneToMany(mappedBy="promotion")
-	@JsonIgnore
-	private List<Etudiant> etudiants;
-
-	//bi-directional many-to-one association to Evaluation
-	@OneToMany(mappedBy="promotion")
-	@JsonIgnore
-	private List<Evaluation> evaluations;
-
-	//bi-directional many-to-one association to Enseignant
-	@ManyToOne
-	@JoinColumn(name="NO_ENSEIGNANT",insertable=false, updatable=false)
+    //bi-directional many-to-one association to Candidat
+    @OneToMany(mappedBy = "promotion")
     @JsonIgnore
-	private Enseignant enseignant;
+    private List<Candidat> candidats;
 
-	//bi-directional many-to-one association to Formation
-	@ManyToOne
-	@JoinColumn(name="CODE_FORMATION",insertable=false, updatable=false)
+    //bi-directional many-to-one association to Etudiant
+    @OneToMany(mappedBy = "promotion")
     @JsonIgnore
-	private Formation formation;
+    private List<Etudiant> etudiants;
 
-	public Promotion() {
-	}
+    //bi-directional many-to-one association to Evaluation
+    @OneToMany(mappedBy = "promotion")
+    @JoinColumnsOrFormulas({
+        @JoinColumnOrFormula(column = @JoinColumn(name = "CODE_FORMATION", referencedColumnName = "CODE_FORMATION")),
+        @JoinColumnOrFormula(column = @JoinColumn(name = "ANNEE_UNIVERSITAIRE", referencedColumnName = "ANNEE_UNIVERSITAIRE"))
+    })
+    @JsonIgnore
+    private List<Evaluation> evaluations;
 
-	public PromotionPK getId() {
-		return this.id;
-	}
+    //bi-directional many-to-one association to Enseignant
+    @ManyToOne
+    @JoinColumn(name = "NO_ENSEIGNANT", insertable = false, updatable = false)
+    @JsonIgnore
+    private Enseignant enseignant;
 
-	public void setId(PromotionPK id) {
-		this.id = id;
-	}
+    //bi-directional many-to-one association to Formation
+    @ManyToOne
+    @JoinColumn(name = "CODE_FORMATION", insertable = false, updatable = false)
+    @JsonIgnore
+    private Formation formation;
 
-	public String getCommentaire() {
-		return this.commentaire;
-	}
+    public Promotion() {
+    }
 
-	public void setCommentaire(String commentaire) {
-		this.commentaire = commentaire;
-	}
+    public PromotionPK getId() {
+        return this.id;
+    }
 
-	public Date getDateRentree() {
-		return this.dateRentree;
-	}
+    public void setId(PromotionPK id) {
+        this.id = id;
+    }
 
-	public void setDateRentree(Date dateRentree) {
-		this.dateRentree = dateRentree;
-	}
+    public String getCommentaire() {
+        return this.commentaire;
+    }
 
-	public Date getDateReponseLalp() {
-		return this.dateReponseLalp;
-	}
+    public void setCommentaire(String commentaire) {
+        this.commentaire = commentaire;
+    }
 
-	public void setDateReponseLalp(Date dateReponseLalp) {
-		this.dateReponseLalp = dateReponseLalp;
-	}
+    public Date getDateRentree() {
+        return this.dateRentree;
+    }
 
-	public Date getDateReponseLp() {
-		return this.dateReponseLp;
-	}
+    public void setDateRentree(Date dateRentree) {
+        this.dateRentree = dateRentree;
+    }
 
-	public void setDateReponseLp(Date dateReponseLp) {
-		this.dateReponseLp = dateReponseLp;
-	}
+    public Date getDateReponseLalp() {
+        return this.dateReponseLalp;
+    }
 
-	public String getLieuRentree() {
-		return this.lieuRentree;
-	}
+    public void setDateReponseLalp(Date dateReponseLalp) {
+        this.dateReponseLalp = dateReponseLalp;
+    }
 
-	public void setLieuRentree(String lieuRentree) {
-		this.lieuRentree = lieuRentree;
-	}
+    public Date getDateReponseLp() {
+        return this.dateReponseLp;
+    }
 
-	public BigDecimal getNbMaxEtudiant() {
-		return this.nbMaxEtudiant;
-	}
+    public void setDateReponseLp(Date dateReponseLp) {
+        this.dateReponseLp = dateReponseLp;
+    }
 
-	public void setNbMaxEtudiant(BigDecimal nbMaxEtudiant) {
-		this.nbMaxEtudiant = nbMaxEtudiant;
-	}
+    public String getLieuRentree() {
+        return this.lieuRentree;
+    }
 
-	public String getProcessusStage() {
-		return this.processusStage;
-	}
+    public void setLieuRentree(String lieuRentree) {
+        this.lieuRentree = lieuRentree;
+    }
 
-	public void setProcessusStage(String processusStage) {
-		this.processusStage = processusStage;
-	}
+    public BigDecimal getNbMaxEtudiant() {
+        return this.nbMaxEtudiant;
+    }
 
-	public String getSiglePromotion() {
-		return this.siglePromotion;
-	}
+    public void setNbMaxEtudiant(BigDecimal nbMaxEtudiant) {
+        this.nbMaxEtudiant = nbMaxEtudiant;
+    }
 
-	public void setSiglePromotion(String siglePromotion) {
-		this.siglePromotion = siglePromotion;
-	}
+    public String getProcessusStage() {
+        return this.processusStage;
+    }
 
-	public List<Candidat> getCandidats() {
-		return this.candidats;
-	}
+    public void setProcessusStage(String processusStage) {
+        this.processusStage = processusStage;
+    }
 
-	public void setCandidats(List<Candidat> candidats) {
-		this.candidats = candidats;
-	}
+    public String getSiglePromotion() {
+        return this.siglePromotion;
+    }
 
-	public Candidat addCandidat(Candidat candidat) {
-		getCandidats().add(candidat);
-		candidat.setPromotion(this);
+    public void setSiglePromotion(String siglePromotion) {
+        this.siglePromotion = siglePromotion;
+    }
 
-		return candidat;
-	}
+    public List<Candidat> getCandidats() {
+        return this.candidats;
+    }
 
-	public Candidat removeCandidat(Candidat candidat) {
-		getCandidats().remove(candidat);
-		candidat.setPromotion(null);
+    public void setCandidats(List<Candidat> candidats) {
+        this.candidats = candidats;
+    }
 
-		return candidat;
-	}
+    public Candidat addCandidat(Candidat candidat) {
+        getCandidats().add(candidat);
+        candidat.setPromotion(this);
 
-	public List<Etudiant> getEtudiants() {
-		return this.etudiants;
-	}
+        return candidat;
+    }
 
-	public void setEtudiants(List<Etudiant> etudiants) {
-		this.etudiants = etudiants;
-	}
+    public Candidat removeCandidat(Candidat candidat) {
+        getCandidats().remove(candidat);
+        candidat.setPromotion(null);
 
-	public Etudiant addEtudiant(Etudiant etudiant) {
-		getEtudiants().add(etudiant);
-		etudiant.setPromotion(this);
+        return candidat;
+    }
 
-		return etudiant;
-	}
+    public List<Etudiant> getEtudiants() {
+        return this.etudiants;
+    }
 
-	public Etudiant removeEtudiant(Etudiant etudiant) {
-		getEtudiants().remove(etudiant);
-		etudiant.setPromotion(null);
+    public void setEtudiants(List<Etudiant> etudiants) {
+        this.etudiants = etudiants;
+    }
 
-		return etudiant;
-	}
+    public Etudiant addEtudiant(Etudiant etudiant) {
+        getEtudiants().add(etudiant);
+        etudiant.setPromotion(this);
 
-	public List<Evaluation> getEvaluations() {
-		return this.evaluations;
-	}
+        return etudiant;
+    }
 
-	public void setEvaluations(List<Evaluation> evaluations) {
-		this.evaluations = evaluations;
-	}
+    public Etudiant removeEtudiant(Etudiant etudiant) {
+        getEtudiants().remove(etudiant);
+        etudiant.setPromotion(null);
 
-	public Evaluation addEvaluation(Evaluation evaluation) {
-		getEvaluations().add(evaluation);
-		evaluation.setPromotion(this);
+        return etudiant;
+    }
 
-		return evaluation;
-	}
+    public List<Evaluation> getEvaluations() {
+        return this.evaluations;
+    }
 
-	public Evaluation removeEvaluation(Evaluation evaluation) {
-		getEvaluations().remove(evaluation);
-		evaluation.setPromotion(null);
+    public void setEvaluations(List<Evaluation> evaluations) {
+        this.evaluations = evaluations;
+    }
 
-		return evaluation;
-	}
+    public Evaluation addEvaluation(Evaluation evaluation) {
+        getEvaluations().add(evaluation);
+        evaluation.setPromotion(this);
 
-	public Enseignant getEnseignant() {
-		return this.enseignant;
-	}
+        return evaluation;
+    }
 
-	public void setEnseignant(Enseignant enseignant) {
-		this.enseignant = enseignant;
-	}
+    public Evaluation removeEvaluation(Evaluation evaluation) {
+        getEvaluations().remove(evaluation);
+        evaluation.setPromotion(null);
 
-	public Formation getFormation() {
-		return this.formation;
-	}
+        return evaluation;
+    }
 
-	public void setFormation(Formation formation) {
-		this.formation = formation;
-	}
+    public Enseignant getEnseignant() {
+        return this.enseignant;
+    }
+
+    public void setEnseignant(Enseignant enseignant) {
+        this.enseignant = enseignant;
+    }
+
+    public Formation getFormation() {
+        return this.formation;
+    }
+
+    public void setFormation(Formation formation) {
+        this.formation = formation;
+    }
 
 }

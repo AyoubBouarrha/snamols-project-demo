@@ -45,6 +45,22 @@ body{
     grid-column: 2;
 }
 
+.form-groupe-info-eval{
+    grid-column: 1/3;
+    display:grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 1.5em;
+    margin-right: 17px;
+}
+
+.form-groupe-key-eval{
+    grid-column: 1/3;
+    display:grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 1.5em;
+    margin-right: 17px;
+}
+
 .alert{
     grid-column: 1/3;
 }
@@ -55,6 +71,10 @@ body{
 
 .btn-cancel{
     grid-column: 2/3;
+}
+
+.full-row{
+    grid-column: 1/3;
 }
 
 table{
@@ -137,9 +157,10 @@ a:hover{
     background-color: #d3d3d3;
     padding: 30px;
     border-radius: 15px;
-    width: 700px;
+    width: 500px;
     height: 280px;
     margin: auto;
+    text-align: center;
 
     position: absolute;
     top:0;
@@ -165,3 +186,41 @@ a:hover{
     width: 180px;
     margin-top: 10px;
 }
+.login-input{
+    text-align: center;
+    height: 50px;
+}
+
+
+.login-button{
+    height: 50px;
+}
+
+.input-placeholder {
+    position: relative;
+    margin: auto;
+  }
+  .input-placeholder input {
+    padding: 10px;
+    font-size: 20px;
+  }
+  .input-placeholder input:valid + .placeholder {
+    display: none;
+  }
+  
+  .placeholder {
+    position: absolute;
+    width: 100%;
+    pointer-events: none;
+    top: 0;
+    bottom: 0;
+    height: 25px;
+    font-size: 20px;
+    left: 10px;
+    margin: auto;
+    color: #ccc;
+  }
+  
+  .placeholder span {
+    color: red;
+  }

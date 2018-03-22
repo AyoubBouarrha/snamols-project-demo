@@ -15,13 +15,17 @@ import fr.univbrest.dosi.spi.bean.Enseignant;
  *
  */
 //@RepositoryRestResource(collectionResourceRel = "enseignant", path = "enseignant")
-public interface EnseignantRepository extends CrudRepository<Enseignant, Integer> {
+public interface EnseignantRepository extends CrudRepository<Enseignant, Long> {
 	/**
-	 * 
+	 *
 	 * @param nom
 	 *            de l'enseignant
 	 * @return liste des enseignant
 	 */
+
+
+
+
 	List<Enseignant> findByNom(@Param("nom") String nom);
 
 	// Enseignant findOne(Integer noEnseignant);

@@ -111,3 +111,22 @@ angular.module('spiApp')
             templateUrl: 'views/directives/directives-cq/cq-delete.html'
         };
     })
+
+
+    //evaluation-directives
+    .directive("evaluationlist", function () {
+        return {
+            templateUrl: 'views/directives/directives-evaluation/evaluation-list.html'
+        };
+    })
+    .directive("evaluationform", function () {
+        return {
+            templateUrl: 'views/directives/directives-evaluation/evaluation-form.html'
+        };
+    })
+
+    .directive("evaluationdelete", function () {
+        return {
+            templateUrl: 'views/directives/directives-evaluation/evaluation-delete.html'
+        };
+    })

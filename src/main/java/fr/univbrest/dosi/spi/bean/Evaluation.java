@@ -19,7 +19,6 @@ import java.util.List;
  * The persistent class for the EVALUATION database table.
  */
 @Entity
-@RestResource(exported = false)
 @NamedQuery(name = "Evaluation.findAll", query = "SELECT e FROM Evaluation e")
 public class Evaluation implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -56,11 +55,17 @@ public class Evaluation implements Serializable {
 
 
     @ManyToOne
-    @JoinColumns({
+    /*@JoinColumns({
         @JoinColumn(name = "CODE_EC", referencedColumnName = "CODE_EC", insertable = true, updatable = true),
         @JoinColumn(name = "CODE_FORMATION", referencedColumnName = "CODE_FORMATION", insertable = true, updatable = true),
         @JoinColumn(name = "CODE_UE", referencedColumnName = "CODE_UE", insertable = true, updatable = true)
+    })*/
+    @JoinColumnsOrFormulas(value ={
+        @JoinColumnOrFormula(formula = @JoinFormula(value = "CODE_FORMATION", referencedColumnName = "CODE_FORMATION")),
+        @JoinColumnOrFormula(formula = @JoinFormula(value = "CODE_UE", referencedColumnName = "CODE_UE")),
+        @JoinColumnOrFormula(column = @JoinColumn(name = "CODE_EC", referencedColumnName = "CODE_EC"))
     })
+
     private ElementConstitutif elementConstitutif;
 
     //bi-directional many-to-one association to Enseignant
@@ -70,27 +75,28 @@ public class Evaluation implements Serializable {
 
     //bi-directional many-to-one association to Promotion
     @ManyToOne
-    @JoinColumns({
-        @JoinColumn(name = "ANNEE_UNIVERSITAIRE", referencedColumnName = "ANNEE_UNIVERSITAIRE", insertable = true, updatable = true),
-        @JoinColumn(name = "CODE_FORMATION", referencedColumnName = "CODE_FORMATION", insertable = true, updatable = true)
-    })
-    /*@JoinColumnsOrFormulas(value = {
+    @JoinColumnsOrFormulas(value = {
         @JoinColumnOrFormula(formula = @JoinFormula(value = "CODE_FORMATION", referencedColumnName = "CODE_FORMATION")),
         @JoinColumnOrFormula(column = @JoinColumn(name = "ANNEE_UNIVERSITAIRE", referencedColumnName = "ANNEE_UNIVERSITAIRE"))
+    })
+    /*@JoinColumns({
+        @JoinColumn(name = "ANNEE_UNIVERSITAIRE", referencedColumnName = "ANNEE_UNIVERSITAIRE"),
+        @JoinColumn(name = "CODE_FORMATION", referencedColumnName = "CODE_FORMATION")
     })*/
+
     private Promotion promotion;
 
     //bi-directional many-to-one association to UniteEnseignement
-    @ManyToOne
+   /* @ManyToOne
     @JoinColumns({
         @JoinColumn(name = "CODE_FORMATION", referencedColumnName = "CODE_FORMATION", insertable = false, updatable = false),
         @JoinColumn(name = "CODE_UE", referencedColumnName = "CODE_UE", insertable = false, updatable = false)
-    })
-    /*@JoinColumnsOrFormulas(value = {
-        @JoinColumnOrFormula(formula = @JoinFormula(value = "CODE_FORMATION", referencedColumnName = "CODE_FORMATION")),
-        @JoinColumnOrFormula(column = @JoinColumn(name = "CODE_UE", referencedColumnName = "CODE_UE"))
     })*/
-    @JsonIgnore
+    @ManyToOne
+    @JoinColumns({
+        @JoinColumn(name = "CODE_FORMATION", referencedColumnName = "CODE_FORMATION"),
+        @JoinColumn(name = "CODE_UE", referencedColumnName = "CODE_UE")
+    })
     private UniteEnseignement uniteEnseignement;
 
     //bi-directional many-to-one association to ReponseEvaluation

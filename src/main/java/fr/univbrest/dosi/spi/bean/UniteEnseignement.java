@@ -4,6 +4,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.JoinColumnOrFormula;
+import org.hibernate.annotations.JoinColumnsOrFormulas;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -39,7 +41,7 @@ public class UniteEnseignement implements Serializable {
 
 	//bi-directional many-to-one association to ElementConstitutif
 	@OneToMany(mappedBy="uniteEnseignement")
-	@JsonIgnore
+	//@JsonIgnore
 	private List<ElementConstitutif> elementConstitutifs;
 
 	//bi-directional many-to-one association to Evaluation

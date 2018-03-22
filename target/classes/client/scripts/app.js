@@ -61,6 +61,11 @@ angular
         controller: 'cqCtrl',
         controllerAs: 'cq'
       })
+      .when('/evaluations', {
+        templateUrl: 'views/evaluations.html',
+        controller: 'evaluationCtrl',
+        controllerAs: 'evaluation'
+      })
       .otherwise({
         redirectTo: '/'
       });

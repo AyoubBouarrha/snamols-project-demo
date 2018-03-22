@@ -28,7 +28,7 @@ public class EnseignantService {
 	 * @return l'enseignant ajouter
 	 */
 	public final Enseignant addEnseignant(final Enseignant enseignant) {
-		if (enseignantRepository.exists((int) enseignant.getNoEnseignant())) {
+		if (enseignantRepository.exists(enseignant.getNoEnseignant())) {
 			throw new SPIException("l'enseignant que vous souhaitez ajouter exsite déja ");
 		}
 		return enseignantRepository.save(enseignant);
@@ -39,7 +39,7 @@ public class EnseignantService {
 	 * @param noEnseignant
 	 *            l'id de l'enseignant
 	 */
-	public final void deleteEnseignant(final Integer noEnseignant) {
+	public final void deleteEnseignant(final Long noEnseignant) {
 		// enseignantRepository.delete(noEnseignant);
 		// return enseignantRepository.findAll();
 		if (enseignantRepository.exists(noEnseignant)) {
@@ -59,7 +59,7 @@ public class EnseignantService {
 	 *            l'id de l'enseignant
 	 * @return test de existe
 	 */
-	public final Boolean existEnseignant(final Integer noEnseignant) {
+	public final Boolean existEnseignant(final Long noEnseignant) {
 		final Boolean exist = enseignantRepository.exists(noEnseignant);
 		if (exist) {
 			return exist;
@@ -71,16 +71,16 @@ public class EnseignantService {
 	/*
 	 * public Enseignant addEnseignant(Enseignant enseignant) { Boolean exist = enseignantRepository.exists(enseignant .getNoEnseignant()); if (exist) { throw new SPIException(
 	 * "l'enseignant que vous souhaitez ajouter exsite déja ");
-	 * 
+	 *
 	 * } else { return enseignantRepository.save(enseignant); } }
 	 */
 	/**
 	 *
-	 * @param id
+	 * @param noEnseignant
 	 *            l'id de l'enseignant
 	 * @return l'enseignant
 	 */
-	public final Enseignant getEnseignant(final Integer noEnseignant) {
+	public final Enseignant getEnseignant(final Long noEnseignant) {
 		return enseignantRepository.findOne(noEnseignant);
 	}
 
@@ -127,7 +127,7 @@ public class EnseignantService {
 	 * @return enseignat modifier
 	 */
 	public final Enseignant updateEnseignant(final Enseignant enseignant) {
-		if (enseignantRepository.exists((int) enseignant.getNoEnseignant())) {
+		if (enseignantRepository.exists(enseignant.getNoEnseignant())) {
 			return enseignantRepository.save(enseignant);
 		} else {
 			throw new SPIException("l'enseignant que vous souhaitez modifier n'exsite pas ");

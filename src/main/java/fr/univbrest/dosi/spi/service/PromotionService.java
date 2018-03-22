@@ -15,6 +15,10 @@ public class PromotionService {
 	@Autowired
 	private PromotionRepository promotionRepository;
 
+	public List<Promotion> getPromotions(){
+	    return (List<Promotion>) promotionRepository.findAll();
+    }
+
 	public final void addPromotion(final Promotion promotion) {
 		promotionRepository.save(promotion);
 	}
@@ -31,6 +35,9 @@ public class PromotionService {
 		return promotionRepository.findOne(promotionPK);
 	}
 
+	public long count(){
+	    return promotionRepository.count();
+    }
 
 
 }

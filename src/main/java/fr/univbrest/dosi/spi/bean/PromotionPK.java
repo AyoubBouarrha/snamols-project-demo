@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 /**
  * The primary key class for the PROMOTION database table.
- * 
+ *
  */
 @Embeddable
 public class PromotionPK implements Serializable {
@@ -41,7 +41,7 @@ public class PromotionPK implements Serializable {
 			return false;
 		}
 		PromotionPK castOther = (PromotionPK)other;
-		return 
+		return
 			this.anneeUniversitaire.equals(castOther.anneeUniversitaire)
 			&& this.codeFormation.equals(castOther.codeFormation);
 	}
@@ -51,7 +51,12 @@ public class PromotionPK implements Serializable {
 		int hash = 17;
 		hash = hash * prime + this.anneeUniversitaire.hashCode();
 		hash = hash * prime + this.codeFormation.hashCode();
-		
+
 		return hash;
 	}
+
+    public PromotionPK(String anneeUniversitaire, String codeFormation) {
+        this.anneeUniversitaire = anneeUniversitaire;
+        this.codeFormation = codeFormation;
+    }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * The persistent class for the FORMATION database table.
- * 
+ *
  */
 @Entity
 @NamedQuery(name="Formation.findAll", query="SELECT f FROM Formation f")
@@ -55,7 +55,11 @@ public class Formation implements Serializable {
 	public Formation() {
 	}
 
-	public String getCodeFormation() {
+    public Formation(String codeFormation) {
+        this.codeFormation = codeFormation;
+    }
+
+    public String getCodeFormation() {
 		return this.codeFormation;
 	}
 

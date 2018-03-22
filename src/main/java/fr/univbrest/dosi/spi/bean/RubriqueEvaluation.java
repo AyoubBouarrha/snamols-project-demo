@@ -21,6 +21,8 @@ public class RubriqueEvaluation implements Serializable {
 
 	@Id
 	@Column(name="ID_RUBRIQUE_EVALUATION")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen-re")
+	@SequenceGenerator(name = "gen-re", sequenceName = "re_seq")
 	private long idRubriqueEvaluation;
 
 	private String designation;
@@ -28,13 +30,13 @@ public class RubriqueEvaluation implements Serializable {
 	private BigDecimal ordre;
 
 	//bi-directional many-to-one association to QuestionEvaluation
-	@OneToMany(mappedBy="rubriqueEvaluation")
 	@JsonIgnore
+	@OneToMany(mappedBy="rubriqueEvaluation")
 	private List<QuestionEvaluation> questionEvaluations;
 
 	//bi-directional many-to-one association to Evaluation
 	@ManyToOne
-	@JoinColumn(name="ID_EVALUATION",insertable=false, updatable=false)
+	@JoinColumn(name="ID_EVALUATION",insertable=true, updatable=true)
 	private Evaluation evaluation;
 
 	//bi-directional many-to-one association to Rubrique

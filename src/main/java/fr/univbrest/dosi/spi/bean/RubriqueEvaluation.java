@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * The persistent class for the RUBRIQUE_EVALUATION database table.
- * 
+ *
  */
 @Entity
 @Table(name="RUBRIQUE_EVALUATION")
@@ -41,7 +41,7 @@ public class RubriqueEvaluation implements Serializable {
 
 	//bi-directional many-to-one association to Rubrique
 	@ManyToOne
-	@JoinColumn(name="ID_RUBRIQUE",insertable=false, updatable=false)
+	@JoinColumn(name="ID_RUBRIQUE",insertable=true, updatable=true)
 	private Rubrique rubrique;
 
 	public RubriqueEvaluation() {

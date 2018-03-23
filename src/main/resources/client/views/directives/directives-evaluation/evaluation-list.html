@@ -1,5 +1,5 @@
 <table ng-table="tableParams" class="table table-condensed table-bordered" show-filter="true">
-    <tr ng-repeat="evaluation in $data">
+    <tr id="tr{{evaluation.idEvaluation}}" ng-repeat="evaluation in $data">
         <td data-title="'Designation'" filter="{ designation: 'text'}" sortable="'designation'">
             {{evaluation.designation}}
         </td>
@@ -28,6 +28,13 @@
             </button>
         </td>
 
+        <td class="cell-button">
+            <button ng-click="showAffectationRow(evaluation)"  title= "Affectation des rubriques et des questions" class="btn btn-primary">
+                    <i class="fas fa-angle-double-down"></i>
+            </button>
+        </td>
+
 
     </tr>
 </table>
+

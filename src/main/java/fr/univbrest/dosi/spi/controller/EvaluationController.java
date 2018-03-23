@@ -24,14 +24,13 @@ public class EvaluationController {
     private EnseignantService enseignantService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public boolean addEvaluation(@RequestBody Evaluation evaluation) {
+	public Evaluation addEvaluation(@RequestBody Evaluation evaluation) {
 
 		System.out.println(evaluation);
 		try {
-			evaluationService.addEvaluation(evaluation);
-			return true;
+            return evaluationService.addEvaluation(evaluation);
 		} catch (Exception e) {
-			return false;
+			return null;
 		}
 		//return true;
 	}

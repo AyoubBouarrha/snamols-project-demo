@@ -1,0 +1,32 @@
+
+<div class="modal fade" id="delete-modal-rub-eva">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Supprimer {{sujet}}</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <br>
+
+                <h6>Voulez vous vraiment supprimer la rubrique suivante ?</h6>
+
+                <br>
+                <br>
+                <div class="detail-button">
+                    <button ng-click="validateDeleteRub()" class="btn btn-danger">
+                        Oui
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                    <button ng-click="cancelDeleteRub()" class="btn btn-success">
+                        Non
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

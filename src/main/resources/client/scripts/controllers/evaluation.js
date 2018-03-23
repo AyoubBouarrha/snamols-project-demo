@@ -1,5 +1,5 @@
 angular.module('spiApp')
-  .controller('evaluationCtrl', ['$scope', 'evaluationSvc', 'promotionSvc', 'ueSvc', 'NgTableParams', function ($scope, evaluationSvc, promotionSvc, ueSvc, NgTableParams) {
+  .controller('evaluationCtrl', ['$scope', 'evaluationSvc', 'promotionSvc', 'ueSvc', 'NgTableParams', '$compile', 'rubriqueEvalSvc', function ($scope, evaluationSvc, promotionSvc, ueSvc, NgTableParams, $compile, rubriqueEvalSvc ) {
 
     $scope.sujet = "une évaluation";
     $scope.editoption = "la modification";
@@ -10,6 +10,8 @@ angular.module('spiApp')
     $scope.cannotRemove = false;
 
     $scope.noEvaluationValid = true;
+
+    var idRowaffectationOpened = 0 ;
 
 
     getAllAnneeUniv = function () {
@@ -25,6 +27,7 @@ angular.module('spiApp')
       evaluationSvc.getEvaluations(function (data) {
         console.log(data);
         $scope.evaluations = data;
+
         $scope.tableParams = new NgTableParams({ sorting: { name: "asc" } }, { dataset: data });
         $scope.tableParams
       });
@@ -70,7 +73,8 @@ angular.module('spiApp')
         evaluationSvc.saveEvaluation($scope.editevaluation, function (data) {
 
           console.log(data);
-          if (data == true) {
+          if (data != "null") {
+            console.log(data);
             $scope.noEvaluationValid = true;
             $('#form-collapse').collapse('hide');
             $scope.formevaluation.$setPristine();
@@ -81,7 +85,7 @@ angular.module('spiApp')
             $("#ec").prop('disabled', true);
             getEvaluations();
           }
-          else{
+          else {
             $scope.noEvaluationValid = false;
           }
 
@@ -128,9 +132,9 @@ angular.module('spiApp')
       console.log(evaluation);
       $('#form-collapse').collapse('show');
       $(".form-groupe-key-eval").prop('hidden', true);
-      $(".form-groupe-info-eval").prop('hidden', false);      
+      $(".form-groupe-info-eval").prop('hidden', false);
       $("#noEvaluation").prop('disabled', true);
-      
+
       $("#validateBtn").prop('disabled', false);
     }
 
@@ -138,10 +142,11 @@ angular.module('spiApp')
       $scope.editevaluation = {};
       $scope.formevaluation.$setPristine();
       $scope.editoption = "l\'ajout";
-      $(".form-groupe-key-eval").prop('hidden', false);      
+      $(".form-groupe-key-eval").prop('hidden', false);
       $("#noEvaluation").prop('disabled', false);
+      $("#formation").prop('disabled', true);
       $('#form-collapse').collapse('show');
-      
+
       $("#validateBtn").prop('disabled', true);
       $scope.noEvaluationValid = true;
     }
@@ -179,5 +184,56 @@ angular.module('spiApp')
     }
 
 
+    $scope.showAffectationRow = function (evaluation) {
+      if(idRowaffectationOpened != 0)      
+        $('#subtr'+ idRowaffectationOpened).remove();
+      
+      $scope.selectedEvaluation = evaluation;
+      console.log("tr" + evaluation.idEvaluation);
+      var row = $(this).closest("#tr" + evaluation.idEvaluation);
+      console.log(row);
+      var el = $compile('<tr id="'+'subtr'+evaluation.idEvaluation+'" style="background:#f1f1f1;"><td  colspan="7">' +
+        '<button ng-click="closeRow(' + evaluation.idEvaluation + ')"  title= "Fermer" class="btn btn-danger" style="float:right;">' +
+        '<i class="fas fa-times-circle" ></i>' +
+        '</button>'+
+        '<div style="width:80%; margin:auto;">'+
+        '<viewrubriqueeval></viewrubriqueeval>' +
+        '</div>'+
+        '</td></tr>')($scope);
+      $("#tr" + evaluation.idEvaluation).after(el);
+      idRowaffectationOpened =  evaluation.idEvaluation;
+    }
+
+    $scope.closeRow = function (idEvaluation) {
+      console.log("subtr" + idEvaluation);
+      $('#subtr'+ idEvaluation).remove();
+      idRowaffectationOpened = 0;
+    }
+
+    $scope.validateDeleteRub = function () {
+      rubriqueEvalSvc.deleteRubriquesEvalById($scope.selectedRubriqueEval.idRubriqueEvaluation, function (data) {
+        console.log(data);
+        if (data == true) {
+          $scope.cannotRemove = false;
+          $('#delete-modal-rub-eva').modal('hide');
+          getRubriquesEvaluation();
+        }
+        else {
+          $scope.cannotRemove = true;
+        }
+      })
+    }
+
+    $scope.showDeleteBoxRub = function (rubriqueEval) {
+      $scope.selectedRubriqueEval = rubriqueEval;
+      console.log(rubriqueEval) ; 
+      //$scope.cannotRemove = false;
+    }
+  
+  
+    $scope.cancelDeleteRub = function () {
+      console.log("hide");
+      $('#delete-modal-rub-eva').modal('hide');
+    }
 
   }]);

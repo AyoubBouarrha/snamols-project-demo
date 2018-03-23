@@ -2,10 +2,10 @@ package fr.univbrest.dosi.spi.service;
 
 import java.util.List;
 
+import fr.univbrest.dosi.spi.bean.Evaluation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.univbrest.dosi.spi.bean.Question;
 import fr.univbrest.dosi.spi.bean.RubriqueEvaluation;
 import fr.univbrest.dosi.spi.dao.RubriqueEvaluationRepository;
 
@@ -45,5 +45,9 @@ public class RubriqueEvaluationService {
 	{
 		return this.repos.save(rubrique) ;
 	}
+
+	public List<RubriqueEvaluation> getRubriqueEvaluationsByIdEvluation (Evaluation evaluation){
+	    return this.repos.findByEvaluation(evaluation);
+    }
 
 }

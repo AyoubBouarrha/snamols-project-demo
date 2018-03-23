@@ -77,6 +77,12 @@ body{
     grid-column: 1/3;
 }
 
+.rubrique-evaluation-inc{
+    grid-column: 1/3;
+    width: 100%;
+    margin-left: 20px;
+}
+
 table{
     /*display: none;*/
 }
@@ -223,4 +229,13 @@ a:hover{
   
   .placeholder span {
     color: red;
+  }
+
+  .table-borderless > tbody > tr > td,
+  .table-borderless > tbody > tr > th,
+  .table-borderless > tfoot > tr > td,
+  .table-borderless > tfoot > tr > th,
+  .table-borderless > thead > tr > td,
+  .table-borderless > thead > tr > th {
+      border: none;
   }

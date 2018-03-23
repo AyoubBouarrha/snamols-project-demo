@@ -4,6 +4,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import fr.univbrest.dosi.spi.bean.*;
 
-public interface RubriqueEvaluationRepository  extends CrudRepository <RubriqueEvaluation , Long>{
+import java.util.List;
 
+public interface RubriqueEvaluationRepository  extends CrudRepository <RubriqueEvaluation , Long>{
+    List<RubriqueEvaluation> findByEvaluation (Evaluation evaluation);
 }

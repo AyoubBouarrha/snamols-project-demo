@@ -66,7 +66,18 @@ angular
         controller: 'evaluationCtrl',
         controllerAs: 'evaluation'
       })
+      .when('/rubrique-eval/', {
+        templateUrl: 'views/rubrique-eval.html',
+        controller: 'rubriqueEvalCtrl',
+        controllerAs: 'rubrique-eval'
+      })
       .otherwise({
         redirectTo: '/'
       });
+  })
+  
+  
+  .run(function ($rootScope) {    
+    //propriete publique à pour maintenir la listes des todos jusqu'à l'actualisation de la page
+    $rootScope.selectedEvaluation = {};
   });

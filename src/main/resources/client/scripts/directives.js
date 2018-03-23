@@ -130,3 +130,33 @@ angular.module('spiApp')
             templateUrl: 'views/directives/directives-evaluation/evaluation-delete.html'
         };
     })
+
+
+
+    //rub-eval-directives
+    .directive("rubriqueevallist", function (){
+        return{
+            templateUrl : 'views/directives/directive-rubrique-eval/rubrique-eval-list.html'
+        };
+    })
+
+    .directive("rubriqueevalform", function (){
+        return{
+            templateUrl : 'views/directives/directive-rubrique-eval/rubrique-eval-form.html'
+        };
+    })
+
+
+    .directive("rubriqueevaldelete", function (){
+        return{
+            templateUrl : 'views/directives/directive-rubrique-eval/rubrique-eval-delete.html'
+        };
+    })
+
+
+    .directive("viewrubriqueeval", function (){
+        return{
+            templateUrl : 'views/rubrique-eval.html'
+        };
+    })
+

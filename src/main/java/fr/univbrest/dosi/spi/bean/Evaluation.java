@@ -112,6 +112,7 @@ public class Evaluation implements Serializable {
     public Evaluation() {
     }
 
+
     public long getIdEvaluation() {
         return this.idEvaluation;
     }
@@ -274,6 +275,8 @@ public class Evaluation implements Serializable {
             + ", enseignant=" + enseignant + ", promotion=" + promotion + ", uniteEnseignement=" + uniteEnseignement
             + ", reponseEvaluations=" + reponseEvaluations + ", rubriqueEvaluations=" + rubriqueEvaluations + "]";
     }
+
+
 
 
 }

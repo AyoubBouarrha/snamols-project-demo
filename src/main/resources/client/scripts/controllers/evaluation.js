@@ -1,5 +1,5 @@
 angular.module('spiApp')
-  .controller('evaluationCtrl', ['$scope', 'evaluationSvc', 'promotionSvc', 'ueSvc', 'NgTableParams', '$compile', 'rubriqueEvalSvc', function ($scope, evaluationSvc, promotionSvc, ueSvc, NgTableParams, $compile, rubriqueEvalSvc) {
+  .controller('evaluationCtrl', ['$scope', 'evaluationSvc', 'promotionSvc', 'ueSvc', 'NgTableParams', '$compile', 'rubriqueEvalSvc', 'questionEvalSvc', function ($scope, evaluationSvc, promotionSvc, ueSvc, NgTableParams, $compile, rubriqueEvalSvc, questionEvalSvc) {
 
     $scope.sujet = "une évaluation";
     $scope.editoption = "la modification";
@@ -248,7 +248,22 @@ angular.module('spiApp')
     }
 
 
-    $scope.cancelDeleteRub = function () {
+
+    $scope.validateDeleteQst = function () {
+      questionEvalSvc.deleteQuestionEvalById($scope.selectedQuestionEval.idQuestionEvaluation, function (data) {
+        console.log(data);
+        if (data == true) {
+          $scope.cannotRemove = false;
+          $('#delete-modal-qst-eva').modal('hide');
+          getAffectedQuestionsEvaluation();
+        }
+        else {
+          $scope.cannotRemove = true;
+        }
+      })
+    }
+
+    $scope.cancelDeleteQst = function () {
       console.log("hide");
       $('#delete-modal-qst-eva').modal('hide');
     }

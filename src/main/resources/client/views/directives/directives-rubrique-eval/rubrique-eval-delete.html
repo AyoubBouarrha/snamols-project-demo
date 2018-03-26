@@ -1,4 +1,3 @@
-
 <div class="modal fade" id="delete-modal-rub-eva">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -16,6 +15,9 @@
                 <h6>Voulez vous vraiment supprimer la rubrique suivante ?</h6>
 
                 <br>
+                <div ng-show="cannotRemove" class="alert alert-danger">
+                    <strong>Erreur!</strong> Veuillez verifier la dependance de cette rubrique avant de le supprimer
+                </div>
                 <br>
                 <div class="detail-button">
                     <button ng-click="validateDeleteRub()" class="btn btn-danger">

@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface RubriqueEvaluationRepository  extends CrudRepository <RubriqueEvaluation , Long>{
     List<RubriqueEvaluation> findByEvaluation (Evaluation evaluation);
+    List<RubriqueEvaluation> findByEvaluationAndRubrique(Evaluation evaluation , Rubrique rubrique);
 }

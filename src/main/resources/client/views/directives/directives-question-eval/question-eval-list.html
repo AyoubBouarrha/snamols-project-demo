@@ -1,0 +1,30 @@
+<!-- liste des Question evaluation -->
+<style>
+    .ng-table-pager {
+        display: none;
+    }
+</style>
+<table ng-table="tableParams" class="table table-borderless qst-eva-table rubrique-eval-table" show-filter="false">
+    <tr style="background: #fff;" id="qsttr{{qst_eva.question.idQuestion}}" ng-repeat="qst_eva in $data | orderBy : 'ordre'">
+        <td data-title="''" filter="{ rub: 'text'}" sortable="false" style="text-align:left;">
+            <strong style="font-size: 0.9em;"> {{qst_eva.question.intitule}}</strong>
+        </td>
+
+        <td data-title="'Ordre'" filter="{ ordre: 'text'}" sortable="false" style="text-align:center;">
+            <span style="font-size: 0.9em;">{{qst_eva.ordre}}</span>
+        </td>
+
+        <td data-title="'Qualificatif'" filter="false" sortable="false" style="text-align: center;">
+            <span style="font-size: 0.9em;">{{qst_eva.quaminimal}} <i class="fas fa-long-arrow-alt-up" style="color: green;"></i>   <i class="fas fa-long-arrow-alt-down" style="color:red;"></i> </i> {{qst_eva.quamaximal}}</span> 
+        </td>
+
+        <td class="cell-button subtd" data-title="''">
+            <button ng-click="showDeleteBoxQst(qst_eva)" title="Supprimer" data-toggle="modal" data-target="#delete-modal-rub-eva" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </td>
+    </tr>
+
+</table>
+<br>
+<br>

@@ -1,0 +1,33 @@
+<!-- liste des rubriques -->
+<style>
+    .ng-table-pager {
+        display: none;
+    }
+</style>
+<table ng-table="tableParams" class="table table-borderless rub-eva-table rubrique-eval-table" show-filter="false">
+    <tr id="rubtr{{rub_eva.rubrique.idRubrique}}" ng-repeat="rub_eva in $data | orderBy : 'ordre'">
+        <td data-title="''" filter="{ rub: 'text'}" sortable="false" style="text-align:left;">
+            <strong> {{rub_eva.rubrique.designation}}
+                <span ng-show="rub_eva.designation.length>1"> ( {{rub_eva.designation}} )</span>
+            </strong>
+        </td>
+
+        <td data-title="'Ordre'" filter="{ ordre: 'text'}" sortable="false" style="text-align:center;">
+            {{rub_eva.ordre}}
+        </td>
+
+        <td class="cell-button subtd" data-title="''">
+            <button ng-click="showDeleteBoxRub(rub_eva)" title="Supprimer" data-toggle="modal" data-target="#delete-modal-rub-eva" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </td>
+        <td class="cell-button subtd">
+            <button ng-click="showAffectationQuestionRow(rub_eva.evaluation.idEvaluation,rub_eva.rubrique.idRubrique)" title="Affectation des questions" class="btn btn-primary">
+                <i class="fas fa-angle-double-down"></i>
+            </button>
+        </td>
+    </tr>
+
+</table>
+<br>
+<br>

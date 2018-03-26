@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * The persistent class for the QUESTION_EVALUATION database table.
- * 
+ *
  */
 @Entity
 @Table(name="QUESTION_EVALUATION")
@@ -32,12 +32,13 @@ public class QuestionEvaluation implements Serializable {
 
 	//bi-directional many-to-one association to Question
 	@ManyToOne
-	@JoinColumn(name="ID_QUESTION",insertable=false, updatable=false)
+	@JoinColumn(name="ID_QUESTION",insertable=true, updatable=true)
 	private Question question;
 
 	//bi-directional many-to-one association to RubriqueEvaluation
 	@ManyToOne
-	@JoinColumn(name="ID_RUBRIQUE_EVALUATION",insertable=false, updatable=false)
+	@JoinColumn(name="ID_RUBRIQUE_EVALUATION",insertable=true, updatable=true)
+	@JsonIgnore
 	private RubriqueEvaluation rubriqueEvaluation;
 
 	//bi-directional many-to-one association to ReponseQuestion

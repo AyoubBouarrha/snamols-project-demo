@@ -6,6 +6,7 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -134,5 +135,27 @@ public class Question implements Serializable {
 
 		return rubriqueQuestion;
 	}
+
+    @Override
+    public String toString() {
+        return "Question{" +
+            "idQuestion=" + idQuestion +
+            ", idQualificatif=" + idQualificatif +
+            ", intitule='" + intitule + '\'' +
+            ", type='" + type + '\'' +
+            ", enseignant=" + enseignant +
+            ", questionEvaluations=" + questionEvaluations +
+            ", rubriqueQuestions=" + rubriqueQuestions +
+            '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Question question = (Question) o;
+        return idQuestion == question.idQuestion;
+    }
+
 
 }

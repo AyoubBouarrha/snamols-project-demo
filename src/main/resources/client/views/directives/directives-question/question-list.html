@@ -9,9 +9,9 @@
     <tr ng-repeat="question in $data">
         <td data-title="'Intitulé'" filter="{ intitule: 'text'}" sortable="'intitule'">
             {{question.intitule}}</td>
-        <td data-title="'Qualificatif'" filter="{ qualificatif: 'text'}" sortable="'qualificatif'" style="text-align: center;">
+        <td data-title="'Qualificatif'" filter="false" sortable="false" style="text-align: center;">
             <!-- {{getQualificatifById(question.idQualificatif)}} -->
-            {{question.quaminimal}} <i class="fas fa-long-arrow-alt-up" style="color: red;"></i>   <i class="fas fa-long-arrow-alt-down" style="color:green;"></i> </i> {{question.quamaximal}} 
+            {{question.quaminimal}} <i class="fas fa-long-arrow-alt-up" style="color: green;"></i>   <i class="fas fa-long-arrow-alt-down" style="color:red;"></i> </i> {{question.quamaximal}} 
         </td>
 
         <td class="cell-button">

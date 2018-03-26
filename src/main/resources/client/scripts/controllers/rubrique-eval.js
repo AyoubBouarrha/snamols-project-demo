@@ -1,10 +1,11 @@
 angular.module('spiApp')
-  .controller('rubriqueEvalCtrl', ['$scope', 'rubriqueEvalSvc', 'rubriqueSvc', 'NgTableParams', function ($scope, rubriqueEvalSvc, rubriqueSvc, NgTableParams) {
+  .controller('rubriqueEvalCtrl', ['$scope', 'rubriqueEvalSvc', 'rubriqueSvc', 'NgTableParams' , '$compile' , function ($scope, rubriqueEvalSvc, rubriqueSvc, NgTableParams, $compile) {
 
     $scope.rubriques = [];
     $scope.sujet = "rubrique";
 
-    
+
+    var idQuestionRowaffectationOpened = 0;
 
     $scope.editSubmit = function () {
 
@@ -19,7 +20,7 @@ angular.module('spiApp')
       console.log(Rubrique_evaluation);
       rubriqueEvalSvc.saveRubrique(Rubrique_evaluation, function (data) {
         getRubriquesEvaluation();
-
+        $('#form-rub-collapse').collapse('hide');
       });
 
     }
@@ -31,7 +32,7 @@ angular.module('spiApp')
       $scope.editoption = "l\'ajout";
       $('#form-rub-collapse').collapse('show');
     }
-    
+
 
     $scope.cancelEditing = function () {
       $('#form-rub-collapse').collapse('hide');
@@ -50,7 +51,7 @@ angular.module('spiApp')
 
     getRubriquesEvaluation = function () {
       console.log($scope.selectedEvaluation.idEvaluation);
-      rubriqueEvalSvc.RubriquesEvalByIdEvaluation($scope.selectedEvaluation.idEvaluation,function (data) {
+      rubriqueEvalSvc.RubriquesEvalByIdEvaluation($scope.selectedEvaluation.idEvaluation, function (data) {
         console.log(data);
         $scope.tableParams = new NgTableParams({ sorting: { name: "asc" } }, { dataset: data });
         $scope.tableParams
@@ -61,7 +62,7 @@ angular.module('spiApp')
 
 
     $scope.newValue = function (value) {
-      if (value === "oui") {        
+      if (value === "oui") {
         $("#newDesignation").prop('disabled', false);
         console.log("oui" + value);
       }
@@ -75,7 +76,7 @@ angular.module('spiApp')
 
 
     $scope.rubriques = [];
-  
+
 
     // $scope.validateDeleteRub = function () {
     //   rubriqueEvalSvc.deleteRubriquesEvalById($scope.selectedRubriqueEval.idRubriqueEvaluation, function (data) {
@@ -90,37 +91,66 @@ angular.module('spiApp')
     //     }
     //   })
     // }
-  
-  
+
+
     // $scope.cancelDeleteRub = function () {
     //   console.log("hide");
     //   $('#delete-modal-rub-eva').modal('hide');
     // }
-  
-  
+
+
     $scope.showInfo = function (rubrique) {
       $scope.selectedRubrique = rubrique;
     }
-  
+
     // $scope.showDeleteBoxRub = function (rubriqueEval) {
     //   $scope.selectedRubriqueEval = rubriqueEval;
     //   console.log(rubriqueEval) ; 
     //   //$scope.cannotRemove = false;
     // }
 
-  
-    getRubriques = function (){
-      rubriqueSvc.getRubriques(function (data){
-  
-          $scope.rubriques = data ;
-          console.log(data);
-    
-      });   
-  }
-  
-  getRubriques() ;
-    
-  
+
+    getRubriques = function () {
+      rubriqueSvc.getRubriques(function (data) {
+
+        $scope.rubriques = data;
+        console.log(data);
+
+      });
+    }
+
+    getRubriques();
+
+
+    $scope.showAffectationQuestionRow = function (idEvaluation, idRubrique) {
+      if (idQuestionRowaffectationOpened != 0)
+        $('#subrubtr' + idQuestionRowaffectationOpened).remove();
+
+      $scope.selectedIdEvaluation = idEvaluation;
+      $scope.selectedIdRubrique = idRubrique;
+      console.log("tr" + idRubrique);
+      var row = $(this).closest("#tr" + idRubrique);
+      var el = $compile('<tr class="animated  fadeInUp " id="' + 'subrubtr' + idRubrique + '" style="background:#bbbbbb;">'+
+        '<td  class="qst-eval-container" style="background:#bbbbbb;" colspan="4">' +
+        '<button ng-click="closeQuestionRow(' + idRubrique + ')"  title= "Fermer" class="btn btn-danger" style="float:right;">' +
+        '<i class="fas fa-times-circle" ></i>' +
+        '</button>' +
+        '<div style="width:80%; margin:auto;">' +
+        /*'<h5>Test idEvaluation : {{selectedIdEvaluation}} - idRubrique : {{selectedIdRubrique}}<h5>' +*/
+        '<viewquestioneval></viewquestioneval>'+
+        '</div>' +
+        '</td></tr>')($scope);
+      $("#rubtr" + idRubrique).after(el);
+      idQuestionRowaffectationOpened = idRubrique;
+    }
+
+    $scope.closeQuestionRow = function (idRubrique) {
+      console.log("subrubtr" + idRubrique);
+      $('#subrubtr' + idRubrique).remove();
+      idQuestionRowaffectationOpened = 0;
+    }
+
+
   }]);
 
 

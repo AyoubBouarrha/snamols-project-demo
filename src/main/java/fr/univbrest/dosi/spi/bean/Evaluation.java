@@ -71,6 +71,7 @@ public class Evaluation implements Serializable {
     //bi-directional many-to-one association to Enseignant
     @ManyToOne
     @JoinColumn(name = "NO_ENSEIGNANT", referencedColumnName = "NO_ENSEIGNANT", insertable = true, updatable = true)
+    @JsonIgnore
     private Enseignant enseignant;
 
     //bi-directional many-to-one association to Promotion
@@ -111,6 +112,8 @@ public class Evaluation implements Serializable {
 
     public Evaluation() {
     }
+
+
 
 
     public long getIdEvaluation() {

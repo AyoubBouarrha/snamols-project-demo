@@ -237,5 +237,40 @@ a:hover{
   .table-borderless > tfoot > tr > th,
   .table-borderless > thead > tr > td,
   .table-borderless > thead > tr > th {
-      border: none;
+      /* border: none; */
   }
+
+ 
+  
+   .rub-eva-table > tbody > tr > td,
+   .rub-eva-table > tbody > tr > th,
+   .rub-eva-table > tfoot > tr > td,
+   .rub-eva-table > tfoot > tr > th,
+   .rub-eva-table > thead > tr > td,
+   .rub-eva-table > thead > tr > th {
+    background: #f1f1f1;
+  }
+
+  .qst-eva-table > tbody > tr > td,
+  .qst-eva-table > tbody > tr > th,
+  .qst-eva-table > tfoot > tr > td,
+  .qst-eva-table > tfoot > tr > th,
+  .qst-eva-table > thead > tr > td,
+  .qst-eva-table > thead > tr > th {
+   background: #bbbbbb;
+ }
+ 
+
+ .qst-eval-container{
+     border:  #333 2px solid;
+ }
+
+  .showen-td-on-phone{
+      display: none;
+  }
+
+  .evaluation-table th:nth-child(8) {
+    display: none;
+}
+
+/* .ng-table-pager  { display: none;} */

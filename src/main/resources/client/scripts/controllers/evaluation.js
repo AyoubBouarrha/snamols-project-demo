@@ -1,5 +1,5 @@
 angular.module('spiApp')
-  .controller('evaluationCtrl', ['$scope', 'evaluationSvc', 'promotionSvc', 'ueSvc', 'NgTableParams', '$compile', 'rubriqueEvalSvc', function ($scope, evaluationSvc, promotionSvc, ueSvc, NgTableParams, $compile, rubriqueEvalSvc ) {
+  .controller('evaluationCtrl', ['$scope', 'evaluationSvc', 'promotionSvc', 'ueSvc', 'NgTableParams', '$compile', 'rubriqueEvalSvc', function ($scope, evaluationSvc, promotionSvc, ueSvc, NgTableParams, $compile, rubriqueEvalSvc) {
 
     $scope.sujet = "une évaluation";
     $scope.editoption = "la modification";
@@ -11,7 +11,7 @@ angular.module('spiApp')
 
     $scope.noEvaluationValid = true;
 
-    var idRowaffectationOpened = 0 ;
+    var idRowaffectationOpened = 0;
 
 
     getAllAnneeUniv = function () {
@@ -28,6 +28,11 @@ angular.module('spiApp')
         console.log(data);
         $scope.evaluations = data;
 
+        data.forEach(evaluation => {
+          evaluation.debutReponse = new Date(evaluation.debutReponse);
+          evaluation.finReponse = new Date(evaluation.finReponse);
+        });
+
         $scope.tableParams = new NgTableParams({ sorting: { name: "asc" } }, { dataset: data });
         $scope.tableParams
       });
@@ -39,7 +44,6 @@ angular.module('spiApp')
       $('#form-collapse').collapse('hide');
       $scope.formevaluation.$setPristine();
       $scope.editevaluation = {};
-      getEvaluations();
       $(".form-groupe-info-eval").prop('hidden', true);
       $("#formation").prop('disabled', true);
       $("#ue").prop('disabled', true);
@@ -184,29 +188,29 @@ angular.module('spiApp')
     }
 
 
-    $scope.showAffectationRow = function (evaluation) {
-      if(idRowaffectationOpened != 0)      
-        $('#subtr'+ idRowaffectationOpened).remove();
-      
+    $scope.showAffectationRubriqueRow = function (evaluation) {
+      if (idRowaffectationOpened != 0)
+        $('#subtr' + idRowaffectationOpened).remove();
+
       $scope.selectedEvaluation = evaluation;
       console.log("tr" + evaluation.idEvaluation);
-      var row = $(this).closest("#tr" + evaluation.idEvaluation);
-      console.log(row);
-      var el = $compile('<tr id="'+'subtr'+evaluation.idEvaluation+'" style="background:#f1f1f1;"><td  colspan="7">' +
+     // var row = $(this).closest("#tr" + evaluation.idEvaluation);
+      //console.log(row);
+      var el = $compile('<tr  class="animated  fadeInUp " id="' + 'subtr' + evaluation.idEvaluation + '" style="background:#f1f1f1;"><td  colspan="7" >' +
         '<button ng-click="closeRow(' + evaluation.idEvaluation + ')"  title= "Fermer" class="btn btn-danger" style="float:right;">' +
         '<i class="fas fa-times-circle" ></i>' +
-        '</button>'+
-        '<div style="width:80%; margin:auto;">'+
+        '</button>' +
+        '<div style="width:80%; margin:auto;">' +
         '<viewrubriqueeval></viewrubriqueeval>' +
-        '</div>'+
+        '</div>' +
         '</td></tr>')($scope);
-      $("#tr" + evaluation.idEvaluation).after(el);
-      idRowaffectationOpened =  evaluation.idEvaluation;
+      $("#tr" + evaluation.idEvaluation).after(el).slideDown('slow');;
+      idRowaffectationOpened = evaluation.idEvaluation;
     }
 
     $scope.closeRow = function (idEvaluation) {
       console.log("subtr" + idEvaluation);
-      $('#subtr'+ idEvaluation).remove();
+      $('#subtr' + idEvaluation).remove();
       idRowaffectationOpened = 0;
     }
 
@@ -226,14 +230,27 @@ angular.module('spiApp')
 
     $scope.showDeleteBoxRub = function (rubriqueEval) {
       $scope.selectedRubriqueEval = rubriqueEval;
-      console.log(rubriqueEval) ; 
+      console.log(rubriqueEval);
       //$scope.cannotRemove = false;
     }
-  
-  
+
+
     $scope.cancelDeleteRub = function () {
       console.log("hide");
       $('#delete-modal-rub-eva').modal('hide');
+    }
+
+
+    $scope.showDeleteBoxQst = function (questionEval) {
+      $scope.selectedQuestionEval = questionEval;
+      console.log(questionEval);
+      //$scope.cannotRemove = false;
+    }
+
+
+    $scope.cancelDeleteRub = function () {
+      console.log("hide");
+      $('#delete-modal-qst-eva').modal('hide');
     }
 
   }]);

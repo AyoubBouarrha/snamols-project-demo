@@ -1,40 +1,62 @@
-<table ng-table="tableParams" class="table table-condensed table-bordered" show-filter="true">
+<table ng-table="tableParams" class="table table-condensed table-bordered evaluation-table" show-filter="true">
     <tr id="tr{{evaluation.idEvaluation}}" ng-repeat="evaluation in $data">
         <td data-title="'Designation'" filter="{ designation: 'text'}" sortable="'designation'">
             {{evaluation.designation}}
         </td>
 
-        <td data-title="'Debut Reponse'" filter="{ debutReponse: 'text'}" sortable="'debutReponse'">
-            {{evaluation.debutReponse}}
+        <td data-title="'UE (EC)'" filter="{ 'uniteEnseignement.designation': 'text'}" sortable="'uniteEnseignement.designation'">
+            {{evaluation.uniteEnseignement.designation}}
         </td>
 
-        <td data-title="'Fin Reponse'" filter="{ finReponse: 'text'}" sortable="'finReponse'">
-            {{evaluation.finReponse}}
+
+
+
+        <td class="hidden-td-on-phone" data-title="'Delai'" filter="false" sortable="'false'">
+            {{evaluation.debutReponse | date}} - {{evaluation.finReponse | date}}
         </td>
 
-        <td data-title="'Formation'" sortable="false">
-            {{evaluation.promotion.id.codeFormation}} {{evaluation.promotion.id.anneeUniversitaire}}
+
+
+
+
+        <td data-title="'Formation'">
+            {{evaluation.promotion.id.codeFormation}} ({{evaluation.promotion.id.anneeUniversitaire}})
         </td>
 
-        <td class="cell-button">
+        <td class="cell-button hidden-td-on-phone">
             <button ng-click="showDeleteBox(evaluation)" title="Supprimer" data-toggle="modal" data-target="#delete-modal" class="btn btn-danger">
                 <i class="fas fa-trash-alt"></i>
             </button>
         </td>
 
-        <td class="cell-button">
+        <td class="cell-button hidden-td-on-phone">
             <button ng-click="showUpdateBox(evaluation)" title="Modifier" class="btn btn-success">
                 <i class="fas fa-pencil-alt"></i>
             </button>
         </td>
 
-        <td class="cell-button">
-            <button ng-click="showAffectationRow(evaluation)"  title= "Affectation des rubriques et des questions" class="btn btn-primary">
-                    <i class="fas fa-angle-double-down"></i>
+        <td class="cell-button hidden-td-on-phone">
+            <button ng-click="showAffectationRubriqueRow(evaluation)" title="Affectation des rubriques" class="btn btn-primary">
+                <i class="fas fa-angle-double-down"></i>
+            </button>
+        </td>
+
+        <td class="cell-button showen-td-on-phone">
+            <button ng-click="showDeleteBox(evaluation)" title="Supprimer" data-toggle="modal" data-target="#delete-modal" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+            <br>
+            <br>
+            <button ng-click="showUpdateBox(evaluation)" title="Modifier" class="btn btn-success">
+                <i class="fas fa-pencil-alt"></i>
+            </button>
+            <br>
+            <br>
+            <button ng-click="showAffectationRubriqueRow(evaluation)" title="Affectation des rubriques" class="btn btn-primary">
+                <i class="fas fa-angle-double-down"></i>
             </button>
         </td>
 
 
     </tr>
 </table>
-

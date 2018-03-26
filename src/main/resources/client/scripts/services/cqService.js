@@ -36,7 +36,6 @@ angular.module('spiApp')
     factory.getQualificatifById = function (idQualificatif, callback) {
       var endPoint = "http://localhost:8090/qualificatifs/" + idQualificatif
       $http.get(endPoint).then(function (response) {
-          console.log(response.data);
         callback(response.data);
       });
     }

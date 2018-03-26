@@ -204,7 +204,7 @@ angular.module('spiApp')
         '<viewrubriqueeval></viewrubriqueeval>' +
         '</div>' +
         '</td></tr>')($scope);
-      $("#tr" + evaluation.idEvaluation).after(el).slideDown('slow');;
+      $("#tr" + evaluation.idEvaluation).after(el);
       idRowaffectationOpened = evaluation.idEvaluation;
     }
 

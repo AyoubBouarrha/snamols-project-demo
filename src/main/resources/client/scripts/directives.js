@@ -176,6 +176,12 @@ angular.module('spiApp')
         };
     })
 
+    .directive("questionevalform", function (){
+        return{
+            templateUrl : 'views/directives/directives-question-eval/question-eval-form.html'
+        };
+    })
+
 
     .directive("viewquestioneval", function (){
         return{

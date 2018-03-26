@@ -21,6 +21,8 @@ public class QuestionEvaluation implements Serializable {
 
 	@Id
 	@Column(name="ID_QUESTION_EVALUATION")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen-qe")
+    @SequenceGenerator(name = "gen-qe", sequenceName = "qe_seq")
 	private long idQuestionEvaluation;
 
 	@Column(name="ID_QUALIFICATIF")
@@ -38,7 +40,7 @@ public class QuestionEvaluation implements Serializable {
 	//bi-directional many-to-one association to RubriqueEvaluation
 	@ManyToOne
 	@JoinColumn(name="ID_RUBRIQUE_EVALUATION",insertable=true, updatable=true)
-	@JsonIgnore
+	//@JsonIgnore
 	private RubriqueEvaluation rubriqueEvaluation;
 
 	//bi-directional many-to-one association to ReponseQuestion

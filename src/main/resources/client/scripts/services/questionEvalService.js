@@ -4,13 +4,13 @@ angular.module('spiApp')
 
   
   factory.saveQuestionEval = function (questionEval, callback) {
-    var endPoint = "http://localhost:8090/question-eval"
+    var endPoint = "http://localhost:8090/questionEvaluation"
     $http.post(endPoint, questionEval).then(function (response) {
       callback(response.data);
     });
   }
   factory.getQuestionsEval = function (callback) {
-    var endPoint = "http://localhost:8090/question-eval"
+    var endPoint = "http://localhost:8090/questionEvaluation"
     $http.get(endPoint).then(function (response) {
       callback(response.data);
     });
@@ -18,7 +18,7 @@ angular.module('spiApp')
 
 
   factory.deleteQuestionEvalById = function (idQuestionEval, callback) {
-    var endPoint = "http://localhost:8090/question-eval/" + idQuestionEval 
+    var endPoint = "http://localhost:8090/questionEvaluation/" + idQuestionEval 
     $http.delete(endPoint).then(function (response) {
       callback(response.data);
     });

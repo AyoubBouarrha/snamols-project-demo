@@ -122,12 +122,14 @@ angular.module('spiApp')
     getRubriques();
 
 
-    $scope.showAffectationQuestionRow = function (idEvaluation, idRubrique) {
+    $scope.showAffectationQuestionRow = function (idEvaluation, idRubrique , idRubriqueEvaluation) {
       if (idQuestionRowaffectationOpened != 0)
         $('#subrubtr' + idQuestionRowaffectationOpened).remove();
 
       $scope.selectedIdEvaluation = idEvaluation;
       $scope.selectedIdRubrique = idRubrique;
+      $scope.selectedIdRubriqueEvaluation = idRubriqueEvaluation;
+      //$scope.selectedIdRubriqueEvaluation = ;
       console.log("tr" + idRubrique);
       var row = $(this).closest("#tr" + idRubrique);
       var el = $compile('<tr class="animated  fadeInUp " id="' + 'subrubtr' + idRubrique + '" style="background:#bbbbbb;">'+

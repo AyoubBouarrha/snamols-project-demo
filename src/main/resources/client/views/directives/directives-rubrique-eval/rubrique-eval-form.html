@@ -3,7 +3,7 @@
 
         <div class="form-groupe-1">
             <div class="form-group">
-                <label for="inputState">Designation (*):</label>
+                <label for="inputState">Rubrique (*):</label>
                 <span ng-show="formRubrique.designation.$error.required">Select service</span>
                 <select id="designation" name="designation" class="form-control" ng-model="addRubrique.idRubrique" ng-options="rubrique.idRubrique  as ( rubrique.designation)  for rubrique in rubriques"
                     required>

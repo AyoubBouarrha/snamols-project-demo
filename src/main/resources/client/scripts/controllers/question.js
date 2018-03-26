@@ -61,7 +61,7 @@ angular.module('spiApp')
       $scope.editoption = "la modification";
       $('#form-collapse').collapse('show');
       console.log(question.intitule);
-      $scope.addQuestion= question;
+      $scope.addQuestion = question;
     }
 
     $scope.showAddBox = function () {
@@ -76,11 +76,11 @@ angular.module('spiApp')
       if ($scope.editoption == "l\'ajout") {
         $scope.addQuestion.type = "QUS";
         console.log($scope.addQuestion);
-        questionSvc.saveQuestion($scope.addQuestion, function (data) {          
+        questionSvc.saveQuestion($scope.addQuestion, function (data) {
           getQuestions();
           $('#form-collapse').collapse('hide');
           $scope.formQuestion.$setPristine();
-          $scope.addQuestion={};
+          $scope.addQuestion = {};
         });
       }
       else {
@@ -90,7 +90,7 @@ angular.module('spiApp')
           getQuestions();
           $('#form-collapse').collapse('hide');
           $scope.formQuestion.$setPristine();
-          $scope.addQuestion={};
+          $scope.addQuestion = {};
         });
       }
 
@@ -100,7 +100,7 @@ angular.module('spiApp')
       $('#form-collapse').collapse('hide');
       $scope.formQuestion.$setPristine();
       $scope.editQuestion = {};
-      $scope.addQuestion={};
+      $scope.addQuestion = {};
       getQuestions();
     }
 
@@ -114,15 +114,15 @@ angular.module('spiApp')
       //return valeur;
     }
 
-    getQualificatif = function (){
-      cqSvc.getCq(function (data){
+    getQualificatif = function () {
+      cqSvc.getCq(function (data) {
 
-          $scope.Qualificatifs = data ;
-          console.log(data) ; 
-      });   
-  }
+        $scope.Qualificatifs = data;
+        console.log(data);
+      });
+    }
 
-  getQualificatif() ;    
+    getQualificatif();
 
 
     console.log($scope.getQualificatifById(1));

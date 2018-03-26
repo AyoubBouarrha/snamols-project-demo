@@ -1,13 +1,17 @@
 <!-- liste des Question evaluation -->
-<style>
+<!-- <style>
     .ng-table-pager {
         display: none;
     }
-</style>
+</style> -->
 <table ng-table="tableParams" class="table table-borderless qst-eva-table rubrique-eval-table" show-filter="false">
-    <tr style="background: #fff;" id="qsttr{{qst_eva.question.idQuestion}}" ng-repeat="qst_eva in $data | orderBy : 'ordre'">
-        <td data-title="''" filter="{ rub: 'text'}" sortable="false" style="text-align:left;">
-            <strong style="font-size: 0.9em;"> {{qst_eva.question.intitule}}</strong>
+    <tr style="background: #fff;" ng-repeat="qst_eva in $data | orderBy : 'ordre'">
+        <td data-title="''" filter="{ 'question.intitule': 'text'}" sortable="false" style="text-align:left;">
+            <strong style="font-size: 0.9em;"> {{qst_eva.question.intitule}}
+                    <span ng-show="qst_eva.intitule.length>1"> 
+                        ({{qst_eva.intitule}})
+                    </span>
+            </strong>
         </td>
 
         <td data-title="'Ordre'" filter="{ ordre: 'text'}" sortable="false" style="text-align:center;">

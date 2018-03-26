@@ -1,7 +1,7 @@
 angular.module('spiApp')
   .controller('questionEvalCtrl', ['$scope', 'questionEvalSvc', 'questionSvc','cqSvc', 'NgTableParams' , '$compile' , function ($scope, questionEvalSvc, questionSvc, cqSvc,NgTableParams, $compile) {
 
-    $scope.questions = [];
+    $scope.questionsNotAffected = [];
     $scope.sujet = "question";
 
 
@@ -9,42 +9,77 @@ angular.module('spiApp')
 
     $scope.editSubmit = function () {
 
-      editquestion = {};
-      editquestion.evaluation = {};
-      editquestion.evaluation.idEvaluation = $scope.selectedEvaluation.idEvaluation;//1
-      editquestion.rubrique = {};
-      editquestion.rubrique.idRubrique = $scope.addRubrique.idRubrique;
-      editquestion.ordre = $scope.addRubrique.ordre;
-      editquestion.designation = $scope.addRubrique.designation;
+      editquestioneval = {};
+      editquestioneval.question = {};
+      editquestioneval.question.idQuestion = $scope.addQuestion.idQuestion;
+      editquestioneval.rubriqueEvaluation = {};
+      editquestioneval.rubriqueEvaluation.idRubriqueEvaluation = $scope.selectedIdRubriqueEvaluation;
+      editquestioneval.ordre = $scope.addQuestion.ordre;
+      editquestioneval.intitule = $scope.addQuestion.intitule;
+      editquestioneval.idQualificatif = $scope.addQuestion.idQualificatif;
 
-      console.log(editquestion);
-      questionEvalSvc.saveRubrique(editquestion, function (data) {
-        getRubriquesEvaluation();
-        $('#form-rub-collapse').collapse('hide');
+      console.log(editquestioneval);
+      questionEvalSvc.saveQuestionEval(editquestioneval, function (data) {
+        getAffectedQuestionsEvaluation();
+        $('#form-qst-collapse').collapse('hide');
       });
 
     }
 
 
+    getQualificatifs = function () {
+      cqSvc.getCq(function (data) {
+
+        $scope.qualificatifs = data;
+        console.log(data);
+      });
+    }
+
+    getQualificatifs();
+
+    var getQuestionNotAffected = function (idEvaluation,idRubrique){
+      questionEvalSvc.getNotAffectedQuestions($scope.selectedIdEvaluation,$scope.selectedIdRubrique, function (data) {
+        console.log(data);
+        $scope.questionsNotAffected = data;
+        //$scope.questionsNotAffected = data;
+      });
+    }
+
     $scope.showAddBox = function () {
-      $scope.editquestion = {};
-      //$scope.formRubrique.$setPristine();
+      console.log("opened");
+      $scope.addQuestion = {};
+      $scope.formQuestion.$setPristine();
+      getQuestionNotAffected();
       $scope.editoption = "l\'ajout";
-      $('#form-rub-collapse').collapse('show');
+      $('#form-qst-collapse').collapse('show');
+
     }
 
 
     $scope.cancelEditing = function () {
-      $('#form-rub-collapse').collapse('hide');
-      //$scope.formRubrique.$setPristine();
+      $('#form-qst-collapse').collapse('hide');
+      $scope.formQuestion.$setPristine();
       $scope.editquestion = {};
+    }
+
+
+    $scope.newValue = function (value) {
+      if (value === "oui") {
+        $("#newIntitule").prop('disabled', false);
+        console.log("oui" + value);
+      }
+      else {
+        console.log("non" + value);        
+        $scope.addQuestion.intitule = null;
+        $("#newIntitule").prop('disabled', true);
+      }
     }
 
 
 
     getAffectedQuestionsEvaluation = function () {
       questionEvalSvc.getAffectedQuestionsEval($scope.selectedIdEvaluation,$scope.selectedIdRubrique, function (data) {
-        console.log(data);
+       
         data.forEach(questionEval => {
             cqSvc.getQualificatifById(questionEval.question.idQualificatif, function (data) {
                 questionEval.quaminimal = data.minimal;
@@ -52,6 +87,7 @@ angular.module('spiApp')
             });
           });
         $scope.tableParams = new NgTableParams({ sorting: { name: "asc" } }, { dataset: data });
+        console.log(data);
       });
     }
 

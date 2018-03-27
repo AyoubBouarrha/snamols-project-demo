@@ -1,5 +1,12 @@
 <table ng-table="tableParams" class="table table-condensed table-bordered evaluation-table" show-filter="true">
     <tr id="tr{{evaluation.idEvaluation}}" ng-repeat="evaluation in $data">
+        
+        <td data-title="'Etat'" filter="false" sortable="'etat'" style="text-align: center;">
+            <i style="color: #979797" ng-show="evaluation.etat=='ELA'" title="En cours d'élaboration" class="fas fa-lock-open fa-2x"></i>
+            <i style="color: #979797" ng-show="evaluation.etat=='CLO'" title="Close"  class="fas fa-lock fa-2x"></i>
+           
+        </td>
+
         <td data-title="'Designation'" filter="{ designation: 'text'}" sortable="'designation'">
             {{evaluation.designation}}
         </td>
@@ -30,7 +37,7 @@
         </td>
 
         <td class="cell-button hidden-td-on-phone">
-            <button ng-click="showUpdateBox(evaluation)" title="Modifier" class="btn btn-success">
+            <button ng-click="showUpdateBox(evaluation)" ng-disabled="evaluation.etat=='CLO'"  title="Modifier" class="btn btn-success">
                 <i class="fas fa-pencil-alt"></i>
             </button>
         </td>
@@ -47,7 +54,7 @@
             </button>
             <br>
             <br>
-            <button ng-click="showUpdateBox(evaluation)" title="Modifier" class="btn btn-success">
+            <button ng-disabled="evaluation.etat=='CLO'" ng-click="showUpdateBox(evaluation)" title="Modifier" class="btn btn-success">
                 <i class="fas fa-pencil-alt"></i>
             </button>
             <br>

@@ -260,7 +260,13 @@ a:hover{
   .qst-eva-table > thead > tr > th {
    background: #bbbbbb;
  }
- 
+
+
+ .tdclo{
+    -webkit-column-span: 2; /* Safari & Chrome */
+ }
+
+
 
  .qst-eval-container{
      border:  #333 2px solid;
@@ -275,3 +281,7 @@ a:hover{
 }
 
 /* .ng-table-pager  { display: none;} */
+
+.table .table {
+     background-color: #f1f1f1; 
+}

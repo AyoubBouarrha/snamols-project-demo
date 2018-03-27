@@ -4,7 +4,8 @@
         display: none;
     }
 </style> -->
-<table ng-table="tableParams" class="table table-borderless rub-eva-table rubrique-eval-table" show-filter="false">
+<table ng-class="{tableclo: rub_eva.evaluation.etat == 'CLO' }" ng-table="tableParams" class="table table-borderless rub-eva-table rubrique-eval-table"
+    show-filter="false">
     <tr id="rubtr{{rub_eva.rubrique.idRubrique}}" ng-repeat="rub_eva in $data | orderBy : 'ordre'">
         <td data-title="''" filter="{ rub: 'text'}" sortable="false" style="text-align:left;">
             <strong> {{rub_eva.rubrique.designation}}
@@ -16,16 +17,25 @@
             {{rub_eva.ordre}}
         </td>
 
-        <td class="cell-button subtd" data-title="''">
-            <button ng-click="showDeleteBoxRub(rub_eva)" title="Supprimer" data-toggle="modal" data-target="#delete-modal-rub-eva" class="btn btn-danger">
-                <i class="fas fa-trash-alt"></i>
-            </button>
-        </td>
-        <td class="cell-button subtd">
-            <button ng-click="showAffectationQuestionRow(rub_eva.evaluation.idEvaluation,rub_eva.rubrique.idRubrique,rub_eva.idRubriqueEvaluation)" title="Affectation des questions" class="btn btn-primary">
+      
+        <td ng-if="rub_eva.evaluation.etat == 'CLO'" colspan="2" class="cell-button subtd">
+            <button ng-click="showAffectationQuestionRow(rub_eva.evaluation.idEvaluation,rub_eva.rubrique.idRubrique,rub_eva.idRubriqueEvaluation)"
+                title="Affectation des questions" class="btn btn-primary">
                 <i class="fas fa-angle-double-down"></i>
             </button>
         </td>
+        <td ng-if="rub_eva.evaluation.etat == 'ELA'" class="cell-button subtd">
+            <button ng-click="showAffectationQuestionRow(rub_eva.evaluation.idEvaluation,rub_eva.rubrique.idRubrique,rub_eva.idRubriqueEvaluation)"
+                title="Affectation des questions" class="btn btn-primary">
+                <i class="fas fa-angle-double-down"></i>
+            </button>
+        </td>
+
+        <td ng-show="rub_eva.evaluation.etat == 'ELA'" class="cell-button subtd" data-title="''">
+                <button ng-click="showDeleteBoxRub(rub_eva)" title="Supprimer" data-toggle="modal" data-target="#delete-modal-rub-eva" class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </td>
     </tr>
 
 </table>

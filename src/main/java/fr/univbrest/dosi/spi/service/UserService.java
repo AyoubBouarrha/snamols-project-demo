@@ -2,8 +2,13 @@ package fr.univbrest.dosi.spi.service;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import fr.univbrest.dosi.spi.bean.Authentification;
+import fr.univbrest.dosi.spi.dao.AuthentificationRepository;
+import fr.univbrest.dosi.spi.dao.RubriqueRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.univbrest.dosi.spi.bean.User;
@@ -12,6 +17,10 @@ import fr.univbrest.dosi.spi.bean.User;
 public class UserService {
 
 	private final Map<String, User> mapBouchonUser;
+
+
+	@Autowired
+    private AuthentificationRepository authentificationRepository;
 
 	public UserService() {
 		mapBouchonUser = new HashMap<String, User>();
@@ -27,7 +36,11 @@ public class UserService {
 	 */
 	public User authentifier(final String login, final String pwd) {
 		final User user = mapBouchonUser.get(login);
-		if (user != null && user.getPwd().equals(pwd)) {
+		if(user==null){
+            List<Authentification> listAuth =  authentificationRepository.findByLoginConnectionAndMotPasse(login,pwd);
+
+        }
+		else if (user != null && user.getPwd().equals(pwd)) {
 			return user;
 		}
 		return null;

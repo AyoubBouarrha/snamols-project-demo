@@ -8,9 +8,9 @@
     <tr style="background: #fff;" ng-repeat="qst_eva in $data | orderBy : 'ordre'">
         <td data-title="''" filter="{ 'question.intitule': 'text'}" sortable="false" style="text-align:left;">
             <strong style="font-size: 0.9em;"> {{qst_eva.question.intitule}}
-                    <span ng-show="qst_eva.intitule.length>1"> 
-                        ({{qst_eva.intitule}})
-                    </span>
+                <span ng-show="qst_eva.intitule.length>1">
+                    ({{qst_eva.intitule}})
+                </span>
             </strong>
         </td>
 
@@ -18,12 +18,27 @@
             <span style="font-size: 0.9em;">{{qst_eva.ordre}}</span>
         </td>
 
-        <td data-title="'Qualificatif'" filter="false" sortable="false" style="text-align: center;">
-            <span style="font-size: 0.9em;">{{qst_eva.quaminimal}} <i class="fas fa-long-arrow-alt-up" style="color: green;"></i>   <i class="fas fa-long-arrow-alt-down" style="color:red;"></i> </i> {{qst_eva.quamaximal}}</span> 
+        <td data-title="'Qualificatif'" ng-if="qst_eva.rubriqueEvaluation.evaluation.etat == 'CLO'" colspan="2" filter="false" sortable="false"
+            style="text-align: center;">
+            <span style="font-size: 0.9em;">{{qst_eva.quaminimal}}
+                <i class="fas fa-long-arrow-alt-up" style="color: green;"></i>
+                <i class="fas fa-long-arrow-alt-down" style="color:red;"></i>
+                </i> {{qst_eva.quamaximal}}</span>
         </td>
 
-        <td class="cell-button subtd" data-title="''">
-            <button ng-click="showDeleteBoxQst(qst_eva)" title="Supprimer" data-toggle="modal" data-target="#delete-modal-qst-eva" class="btn btn-danger">
+        <td data-title="'Qualificatif'" ng-if="qst_eva.rubriqueEvaluation.evaluation.etat == 'ELA'" filter="false" sortable="false"
+            style="text-align: center;">
+            <span style="font-size: 0.9em;">{{qst_eva.quaminimal}}
+                <i class="fas fa-long-arrow-alt-up" style="color: green;"></i>
+                <i class="fas fa-long-arrow-alt-down" style="color:red;"></i>
+                </i> {{qst_eva.quamaximal}}</span>
+        </td>
+
+    
+
+        <td ng-show="qst_eva.rubriqueEvaluation.evaluation.etat == 'ELA'" class="cell-button subtd" data-title="''">
+            <button  ng-click="showDeleteBoxQst(qst_eva)" title="Supprimer"
+                data-toggle="modal" data-target="#delete-modal-qst-eva" class="btn btn-danger">
                 <i class="fas fa-trash-alt"></i>
             </button>
         </td>

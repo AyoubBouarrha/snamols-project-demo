@@ -139,6 +139,7 @@ angular.module('spiApp')
       $(".form-groupe-info-eval").prop('hidden', false);
       $("#noEvaluation").prop('disabled', true);
 
+      $("#etat").prop('disabled', false);
       $("#validateBtn").prop('disabled', false);
     }
 
@@ -151,6 +152,8 @@ angular.module('spiApp')
       $("#formation").prop('disabled', true);
       $('#form-collapse').collapse('show');
 
+      $("#etat").prop('disabled', true);
+      $("#etat").val('ELA');
       $("#validateBtn").prop('disabled', true);
       $scope.noEvaluationValid = true;
     }
@@ -196,7 +199,7 @@ angular.module('spiApp')
       console.log("tr" + evaluation.idEvaluation);
      // var row = $(this).closest("#tr" + evaluation.idEvaluation);
       //console.log(row);
-      var el = $compile('<tr  class="animated  fadeInUp " id="' + 'subtr' + evaluation.idEvaluation + '" style="background:#f1f1f1;"><td  colspan="7" >' +
+      var el = $compile('<tr  class="animated  fadeInUp " id="' + 'subtr' + evaluation.idEvaluation + '" style="background:#f1f1f1;"><td  colspan="8" >' +
         '<button ng-click="closeRow(' + evaluation.idEvaluation + ')"  title= "Fermer" class="btn btn-danger" style="float:right;">' +
         '<i class="fas fa-times-circle" ></i>' +
         '</button>' +

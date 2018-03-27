@@ -18,7 +18,7 @@ angular.module('spiApp')
     }
 
     factory.getEnseignantById = function (idEnseignant, callback) {
-      var endPoint = "http://localhost:8090/ens/" + idEnseignant
+      var endPoint = "http://localhost:8090/getens/" + idEnseignant
       $http.get(endPoint).then(function (response) {
         callback(response.data);
       });

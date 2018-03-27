@@ -111,6 +111,9 @@ angular.module('spiApp')
 
 
     getRubriques = function () {
+       
+       //$scope.selectedEvaluation =  $rootScope.selectedEvaluation
+
       rubriqueSvc.getRubriques(function (data) {
 
         $scope.rubriques = data;
@@ -132,8 +135,8 @@ angular.module('spiApp')
       //$scope.selectedIdRubriqueEvaluation = ;
       console.log("tr" + idRubrique);
       var row = $(this).closest("#tr" + idRubrique);
-      var el = $compile('<tr class="animated  fadeInUp " id="' + 'subrubtr' + idRubrique + '" style="background:#bbbbbb;">'+
-        '<td  class="qst-eval-container" style="background:#bbbbbb;" colspan="4">' +
+      var el = $compile('<tr  id="' + 'subrubtr' + idRubrique + '" style="background:#bbbbbb;margin-left : 5px;">'+
+        '<td  class="qst-eval-container" style="background:#cccccc;" colspan="4">' +
         '<button ng-click="closeQuestionRow(' + idRubrique + ')"  title= "Fermer" class="btn btn-danger" style="float:right;">' +
         '<i class="fas fa-times-circle" ></i>' +
         '</button>' +

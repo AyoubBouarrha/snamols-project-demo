@@ -8,28 +8,30 @@
 
         <!-- Links -->
         <ul style="width: 100%" class="navbar-nav">
-            <li style="text-align: center" class="nav-item">
+            
+            <li ng-if="currentuser.role=='Admin'" style="text-align: center" class="nav-item">
                 <a class="nav-link" href="#!enseignants">Enseignants</a>
             </li>
-            <li style="text-align: center" class="nav-item">
+            <li ng-if="currentuser.role=='Admin'" style="text-align: center" class="nav-item">
                 <a class="nav-link" href="#!formations">Formations</a>
             </li>
-            <li style="text-align: center" class="nav-item">
+            <li ng-if="currentuser.role=='Admin'" style="text-align: center" class="nav-item">
                 <a class="nav-link" href="#!couple-qualificatif">Couple Qualificatif</a>
             </li>
-            <li style="text-align: center" class="nav-item">
+            <li ng-if="currentuser.role=='Admin'" style="text-align: center" class="nav-item">
                 <a class="nav-link" href="#!rubriques">Rubriques</a>
             </li>
-            <li style="text-align: center" class="nav-item">
+            <li ng-if="currentuser.role=='Admin'" style="text-align: center" class="nav-item">
                 <a class="nav-link" href="#!questions">Questions</a>
             </li>
-            <li style="text-align: center" class="nav-item">
+            <li ng-if="currentuser.role=='Prof'" style="text-align: center" class="nav-item">
                 <a class="nav-link" href="#!evaluations">Evaluations</a>
             </li>
         </ul>
 
         <i style="color : #f1f1f1" class="fas fa-user fa-1x"></i>  
-        <div class="user-info">{{currentuser.username}} , {{currentuser.roles[0]}}</div>
+        <div ng-if="currentuser.role=='Admin'" class="user-info">{{currentuser.loginConnection}} , {{currentuser.role}}</div>
+        <div style="width: 300px;" ng-if="currentuser.role=='Prof'" class="user-info">{{currentuser.enseignant.nom}} {{currentuser.enseignant.prenom}}, {{currentuser.role}}</div>
         <a href="" ng-click="disconnect()" class="btn btn-danger">
             <i class="fas fa-sign-out-alt"></i> Se Déconnecter
         </a>

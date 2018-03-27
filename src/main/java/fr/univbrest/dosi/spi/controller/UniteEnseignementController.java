@@ -21,6 +21,7 @@ public class UniteEnseignementController {
     @RequestMapping(method = RequestMethod.GET , value = "/formation/{codeFormation}")
     public List<UniteEnseignement> getAllUEByFormation(@PathVariable(value = "codeFormation") String codeFormation)
     {
+
         return uniteEnseignementService.getUniteEnseignementsByFormation(new Formation(codeFormation));
     }
 }

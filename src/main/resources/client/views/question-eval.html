@@ -3,9 +3,10 @@
         <br>
         <h3>Questions</h3>
         <br>
-        <a ng-show="selectedQuestionEvaluation.rubriqueEvaluation.evaluation.etat == 'CLO'" href="" ng-click="showAddBox()" class="btn btn-primary">
+        <a ng-show="selectedEvaluation.etat == 'ELA'" href="" ng-click="showAddBox()" class="btn btn-primary">
             <i class="fas fa-plus"></i> Ajouter une {{sujet}}
         </a>
+        <br>
         <br>
 
         <questionevalform></questionevalform>

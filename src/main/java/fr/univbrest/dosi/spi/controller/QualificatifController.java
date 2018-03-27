@@ -1,5 +1,8 @@
 package fr.univbrest.dosi.spi.controller;
 
+import fr.univbrest.dosi.spi.exception.SPIException;
+import fr.univbrest.dosi.spi.exception.SpiExceptionCode;
+import fr.univbrest.dosi.spi.util.Connection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import fr.univbrest.dosi.spi.bean.Qualificatif;
 import fr.univbrest.dosi.spi.service.QualificatifService;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/qualificatifs")
 public class QualificatifController {
@@ -19,7 +24,10 @@ public class QualificatifController {
 	private QualificatifService qualificatifService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public boolean addQualificatif(@RequestBody final Qualificatif qualificatif) {
+	public boolean addQualificatif(@RequestBody final Qualificatif qualificatif,HttpServletRequest request) {
+
+        if(Connection.currentUser(request) == null || !Connection.currentUser(request).getRole().equals("Admin"))
+            throw  new SPIException(SpiExceptionCode.NOT_ENOUGH_RIGHT,"access denied");
 		try {
 			qualificatifService.addQualificatif(qualificatif);
 			return true;
@@ -29,7 +37,10 @@ public class QualificatifController {
 	}
 
 	@RequestMapping(value = "/{idqualificatif}", method = RequestMethod.DELETE)
-	public boolean deleteQualificatif(@PathVariable(value = "idqualificatif") final long idqualificatif) {
+	public boolean deleteQualificatif(@PathVariable(value = "idqualificatif") final long idqualificatif,HttpServletRequest request) {
+
+        if(Connection.currentUser(request) == null || !Connection.currentUser(request).getRole().equals("Admin"))
+            throw  new SPIException(SpiExceptionCode.NOT_ENOUGH_RIGHT,"access denied");
 		try {
 			qualificatifService.deleteQualificatif(idqualificatif);
 			return true;
@@ -39,7 +50,10 @@ public class QualificatifController {
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
-	public boolean updateQualificatif(@RequestBody Qualificatif qualificatif) {
+	public boolean updateQualificatif(@RequestBody Qualificatif qualificatif,HttpServletRequest request) {
+
+        if(Connection.currentUser(request) == null || !Connection.currentUser(request).getRole().equals("Admin"))
+            throw  new SPIException(SpiExceptionCode.NOT_ENOUGH_RIGHT,"access denied");
 		try {
 			qualificatifService.updateQualificatif(qualificatif);
 			return true;
@@ -52,7 +66,7 @@ public class QualificatifController {
 	public Iterable<Qualificatif> qualificatif() {
 		return qualificatifService.listqual();
 	}
-	
+
 
 	@RequestMapping(value = "/{idqualificatif}")
 	public Qualificatif getQualificatif(@PathVariable(value = "idqualificatif") final long idQualificatif) {

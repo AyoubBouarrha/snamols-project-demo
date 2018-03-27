@@ -3,6 +3,7 @@ package fr.univbrest.dosi.spi.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.univbrest.dosi.spi.bean.Authentification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,11 +21,11 @@ public class UserController {
 	UserService userService;
 
 	@RequestMapping(value = "/auth", method = RequestMethod.POST, headers = "Accept=application/json")
-	public boolean authentifier( HttpServletRequest request, @RequestBody  User user) {
-		User users = userService.authentifier(user.getUsername(), user.getPwd());
+	public boolean authentifier( HttpServletRequest request, @RequestBody Authentification authentification) {
+        Authentification auth = userService.authentifier(authentification.getLoginConnection(), authentification.getMotPasse());
 
-		if (users != null) {
-			request.getSession().setAttribute("user", users);
+		if (auth != null) {
+			request.getSession().setAttribute("user", auth);
 			return true;
 		} else {
 			request.getSession().removeAttribute("user");
@@ -33,9 +34,9 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/user")
-	public User users( HttpServletRequest request,  HttpServletResponse response) {
-		User user = (User) request.getSession().getAttribute("user");
-		return user;
+	public Authentification users( HttpServletRequest request,  HttpServletResponse response) {
+        Authentification auth = (Authentification) request.getSession().getAttribute("user");
+		return auth;
 
 	}
 

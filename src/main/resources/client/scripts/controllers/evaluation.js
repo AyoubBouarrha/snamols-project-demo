@@ -1,11 +1,13 @@
 angular.module('spiApp')
-  .controller('evaluationCtrl', ['$scope', 'evaluationSvc', 'promotionSvc', 'ueSvc', 'NgTableParams', '$compile', 'rubriqueEvalSvc', 'questionEvalSvc', function ($scope, evaluationSvc, promotionSvc, ueSvc, NgTableParams, $compile, rubriqueEvalSvc, questionEvalSvc) {
+  .controller('evaluationCtrl', ['$scope', 'evaluationSvc', 'promotionSvc', 'ueSvc', 'NgTableParams', '$compile', 'rubriqueEvalSvc', 'questionEvalSvc', 'userSvc', function ($scope, evaluationSvc, promotionSvc, ueSvc, NgTableParams, $compile, rubriqueEvalSvc, questionEvalSvc, userSvc) {
 
     $scope.sujet = "une évaluation";
     $scope.editoption = "la modification";
 
     $scope.evaluations = [];
     $scope.editevaluation = {};
+
+    var selectedNoEnseignant = 0;
 
     $scope.cannotRemove = false;
 
@@ -14,17 +16,9 @@ angular.module('spiApp')
     var idRowaffectationOpened = 0;
 
 
-    getAllAnneeUniv = function () {
-      promotionSvc.getAllAnneeUniv(function (data) {
-        $scope.anneeUnivs = data;
-      });
-    }
-
-    getAllAnneeUniv();
-
     //Recuperation des evaluations
-    getEvaluations = function () {
-      evaluationSvc.getEvaluations(function (data) {
+    getEvaluationsByEnseignant = function () {
+      evaluationSvc.getEvaluationsByEnseignant(selectedNoEnseignant, function (data) {
         console.log(data);
         $scope.evaluations = data;
 
@@ -37,7 +31,28 @@ angular.module('spiApp')
         $scope.tableParams
       });
     }
-    getEvaluations();
+
+    getCurrentEnseignant = function () {
+      userSvc.getUserSession(function (data) {
+        if (data.role == "Prof") {
+          selectedNoEnseignant = data.noEnseignant;
+
+          getEvaluationsByEnseignant();
+        }
+      })
+    }
+
+    getCurrentEnseignant();
+
+    getAllAnneeUniv = function () {
+      promotionSvc.getAllAnneeUniv(function (data) {
+        $scope.anneeUnivs = data;
+      });
+    }
+
+    getAllAnneeUniv();
+
+
 
 
     $scope.cancelEditing = function () {
@@ -58,16 +73,20 @@ angular.module('spiApp')
           $('#form-collapse').collapse('hide');
           $scope.formevaluation.$setPristine();
           $scope.editEvaluation = {};
+          //$scope.editEvaluation.etat = "ELA"
           $(".form-groupe-info-eval").prop('hidden', true);
           $("#formation").prop('disabled', true);
           $("#ue").prop('disabled', true);
           $("#ec").prop('disabled', true);
-          getEvaluations();
+          getEvaluationsByEnseignant();
         });
       }
       else {
         $scope.editevaluation.enseignant = {};
-        $scope.editevaluation.enseignant.noEnseignant = 1;
+        $scope.editevaluation.enseignant.noEnseignant = selectedNoEnseignant;
+        
+        console.log($scope.editevaluation);
+        $scope.editevaluation.etat = "ELA";
         //$scope.editevaluation.noEvaluation = 1;
         $scope.editevaluation.promotion = {};
         $scope.editevaluation.promotion.id = {};
@@ -77,7 +96,7 @@ angular.module('spiApp')
         evaluationSvc.saveEvaluation($scope.editevaluation, function (data) {
 
           console.log(data);
-          if (data != "null") {
+          if (data != "") {
             console.log(data);
             $scope.noEvaluationValid = true;
             $('#form-collapse').collapse('hide');
@@ -87,7 +106,7 @@ angular.module('spiApp')
             $("#formation").prop('disabled', true);
             $("#ue").prop('disabled', true);
             $("#ec").prop('disabled', true);
-            getEvaluations();
+            getEvaluationsByEnseignant();
           }
           else {
             $scope.noEvaluationValid = false;
@@ -104,7 +123,7 @@ angular.module('spiApp')
         if (data == true) {
           $scope.cannotRemove = false;
           $('#delete-modal').modal('hide');
-          getEvaluations();
+          getEvaluationsByEnseignant();
         }
         else {
           $scope.cannotRemove = true;
@@ -139,7 +158,7 @@ angular.module('spiApp')
       $(".form-groupe-info-eval").prop('hidden', false);
       $("#noEvaluation").prop('disabled', true);
 
-      $("#etat").prop('disabled', false);
+      //$("#etat").prop('disabled', false);
       $("#validateBtn").prop('disabled', false);
     }
 
@@ -152,7 +171,7 @@ angular.module('spiApp')
       $("#formation").prop('disabled', true);
       $('#form-collapse').collapse('show');
 
-      $("#etat").prop('disabled', true);
+      //$("#etat").prop('disabled', true);
       $("#etat").val('ELA');
       $("#validateBtn").prop('disabled', true);
       $scope.noEvaluationValid = true;
@@ -197,7 +216,7 @@ angular.module('spiApp')
 
       $scope.selectedEvaluation = evaluation;
       console.log("tr" + evaluation.idEvaluation);
-     // var row = $(this).closest("#tr" + evaluation.idEvaluation);
+      // var row = $(this).closest("#tr" + evaluation.idEvaluation);
       //console.log(row);
       var el = $compile('<tr  class="animated  fadeInUp " id="' + 'subtr' + evaluation.idEvaluation + '" style="background:#f1f1f1;"><td  colspan="8" >' +
         '<button ng-click="closeRow(' + evaluation.idEvaluation + ')"  title= "Fermer" class="btn btn-danger" style="float:right;">' +

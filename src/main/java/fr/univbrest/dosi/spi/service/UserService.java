@@ -34,16 +34,21 @@ public class UserService {
 	 * @param pwd
 	 * @return
 	 */
-	public User authentifier(final String login, final String pwd) {
-		final User user = mapBouchonUser.get(login);
-		if(user==null){
+	public Authentification authentifier(final String login, final String pwd) {
+		//final User user = mapBouchonUser.get(login);
+		//if(user==null){
             List<Authentification> listAuth =  authentificationRepository.findByLoginConnectionAndMotPasse(login,pwd);
+            if(listAuth.isEmpty())
+                return null;
+            else
+                return listAuth.get(0);
 
-        }
-		else if (user != null && user.getPwd().equals(pwd)) {
+
+        //}
+		/*else if (user != null && user.getPwd().equals(pwd)) {
 			return user;
-		}
-		return null;
+		}*/
+		//return null;
 	}
 
 }

@@ -2,6 +2,7 @@ package fr.univbrest.dosi.spi.service;
 
 import java.util.List;
 
+import fr.univbrest.dosi.spi.bean.Enseignant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -91,5 +92,10 @@ public class EvaluationService {
 			throw new Exception("l'evaluation que vous souhaitez modifier n'exsite pas ");
 		}
 	}
+
+    public List<Evaluation> findByEnseignant (Enseignant enseignant) {
+	    return evaluationRepository.findByEnseignant(enseignant);
+
+    }
 
 }

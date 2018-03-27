@@ -87,7 +87,11 @@ public class Enseignant implements Serializable {
 	public Enseignant() {
 	}
 
-	public long getNoEnseignant() {
+    public Enseignant(long noEnseignant) {
+        this.noEnseignant = noEnseignant;
+    }
+
+    public long getNoEnseignant() {
 		return this.noEnseignant;
 	}
 

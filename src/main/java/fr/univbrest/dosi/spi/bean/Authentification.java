@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 /**
  * The persistent class for the AUTHENTIFICATION database table.
- * 
+ *
  */
 @Entity
 @NamedQuery(name="Authentification.findAll", query="SELECT a FROM Authentification a")
@@ -33,7 +33,7 @@ public class Authentification implements Serializable {
 	@Column(name="PSEUDO_CONNECTION")
 	private String pseudoConnection;
 
-	@Column(name="\"ROLE\"")
+	@Column(name="ROLE")
 	private String role;
 
 	public Authentification() {

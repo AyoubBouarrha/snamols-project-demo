@@ -26,10 +26,10 @@
 
         <fieldset class="form-group full-row ">
             <div class="form-group ">
-                <label for="qualificatif">Qualificatif (*):</label>
+                <label for="qualificatif">Nouveau Qualificatif (si vous voulez changer le qualificatif par défaut):</label>
                 <span ng-show="formQuestion.qualificatif.$dirty && formQuestion.qualificatif.$error.required" class="badge badge-danger">Champ obligatoire</span>
                 <select id="qualificatif" name="qualificatif" class="form-control" ng-model="addQuestion.idQualificatif" ng-options="Qualificatif.idQualificatif as ( Qualificatif.maximal+'--'+Qualificatif.minimal) for Qualificatif in qualificatifs | orderBy:'maximal'"
-                    required>
+                    >
                     <option value=""></option>
                 </select>
             </div>

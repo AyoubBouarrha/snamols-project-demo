@@ -1,5 +1,8 @@
 package fr.univbrest.dosi.spi.controller;
 
+import fr.univbrest.dosi.spi.exception.SPIException;
+import fr.univbrest.dosi.spi.exception.SpiExceptionCode;
+import fr.univbrest.dosi.spi.util.Connection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.univbrest.dosi.spi.bean.Formation;
 import fr.univbrest.dosi.spi.service.FormationService;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author DOSI
@@ -30,7 +35,10 @@ public class FormationController {
 	 * @return une formation
 	 */
 	@RequestMapping(value = "/formation/ajouterformation", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public final Formation ajouterFormation(@RequestBody final Formation formation) {
+	public final Formation ajouterFormation(@RequestBody final Formation formation,HttpServletRequest request) {
+
+        if(Connection.currentUser(request) == null || !Connection.currentUser(request).getRole().equals("Admin"))
+            throw  new SPIException(SpiExceptionCode.NOT_ENOUGH_RIGHT,"access denied");
 		return formationService.addFormation(formation);
 	}
 
@@ -41,7 +49,10 @@ public class FormationController {
 	 * @return une formation
 	 */
 	@RequestMapping(value = "/formation/update", method = RequestMethod.POST, headers = "Accept=application/json")
-	public final Formation editFormation(@RequestBody final Formation formation) {
+	public final Formation editFormation(@RequestBody final Formation formation,HttpServletRequest request) {
+
+        if(Connection.currentUser(request) == null || !Connection.currentUser(request).getRole().equals("Admin"))
+            throw  new SPIException(SpiExceptionCode.NOT_ENOUGH_RIGHT,"access denied");
 		return formationService.updateFormation(formation);
 	}
 
@@ -86,7 +97,10 @@ public class FormationController {
 	 *            l'id de formation
 	 */
 	@RequestMapping(value = "/formation/delete/{codeformation}", headers = "Accept=application/json")
-	public final void removeFormation(@PathVariable("codeformation") final String codeFormation) {
+	public final void removeFormation(@PathVariable("codeformation") final String codeFormation,HttpServletRequest request) {
+
+        if(Connection.currentUser(request) == null || !Connection.currentUser(request).getRole().equals("Admin"))
+            throw  new SPIException(SpiExceptionCode.NOT_ENOUGH_RIGHT,"access denied");
 		formationService.deleteFormation(codeFormation);
 	}
 }

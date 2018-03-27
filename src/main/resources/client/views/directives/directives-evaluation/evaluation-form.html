@@ -1,4 +1,5 @@
 <br>
+
 <br>
 <div id="form-collapse" class="collapse hide">
 
@@ -29,13 +30,12 @@
                     <label>Unité d'enseignement (*):</label>
                     <span ng-show="formevaluation.ue.$dirty && formevaluation.ue.$error.required" class="badge badge-danger">Champ obligatoire</span>
                     <select required class="form-control" ng-model="editevaluation.uniteEnseignement" name="ue" id="ue" ng-change="onChangeUE()"
-                        ng-options="item.designation for item in ues" disabled>
+                        ng-options="item.designation for item in ues" disabled> 
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label>Elément constitutif :</label>
-                    <span ng-show="formevaluation.designation.$dirty && formevaluation.designation.$error.required" class="badge badge-danger">Champ obligatoire</span>
                     <select class="form-control" ng-model="editevaluation.elementConstitutif" name="ec" id="ec" ng-options="item.description for item in editevaluation.uniteEnseignement.elementConstitutifs"
                         disabled>
 
@@ -64,14 +64,23 @@
                 </div>
 
 
-                <div class="form-group">
-                    <label>Etat (*):</label>
+                <div ng-if="editoption!='la modification'"class="form-group">
+                    <label>Etat : ELA</label>
                     <span ng-show="formevaluation.etat.$dirty && formevaluation.etat.$error.required" class="badge badge-danger">Champ obligatoire</span>
-                    <select class="form-control" ng-model="editevaluation.etat" name="etat" id="etat" required>
-                        <option value="CLO">CLO</option>
-                        <option value="ELA">ELA</option>
+                    <select class="form-control" ng-model="editevaluation.etat" name="etat" id="etat" disabled>
+                        <option ng-if="editoption=='la modification'" value="CLO">CLO</option>
+                        <option  value="ELA">ELA</option>
                     </select>
                 </div>
+
+                <div ng-if="editoption=='la modification'"class="form-group">
+                        <label>Etat (*):</label>
+                        <span ng-show="formevaluation.etat.$dirty && formevaluation.etat.$error.required" class="badge badge-danger">Champ obligatoire</span>
+                        <select class="form-control" ng-model="editevaluation.etat" name="etat" id="etat" required>
+                            <option ng-if="editoption=='la modification'" value="CLO">CLO</option>
+                            <option  value="ELA">ELA</option>
+                        </select>
+                    </div>
 
 
 
@@ -83,13 +92,13 @@
                 <div class="form-group">
                     <label for="debutReponse"> Debut Reponse (*):</label>
                     <span ng-show="formevaluation.debutReponse.$dirty && formevaluation.debutReponse.$error.required" class="badge badge-danger">Champ obligatoire</span>
-                    <input type="date" ng-model="editevaluation.debutReponse" class="form-control" id="debutReponse" name="debutReponse">
+                    <input type="date" ng-model="editevaluation.debutReponse" class="form-control" id="debutReponse" name="debutReponse" required>
                 </div>
 
                 <div class="form-group">
                     <label for="finReponse"> Fin Reponse (*):</label>
                     <span ng-show="formevaluation.finReponse.$dirty && formevaluation.finReponse.$error.required" class="badge badge-danger">Champ obligatoire</span>
-                    <input type="date" ng-model="editevaluation.finReponse" class="form-control" id="finReponse" name="finReponse">
+                    <input type="date" ng-model="editevaluation.finReponse" class="form-control" id="finReponse" name="finReponse" required>
                 </div>
 
                 <div class="form-group">
@@ -108,7 +117,7 @@
             <strong>Validation!</strong> Veuillez verifier que le numéro d'évaluation n'est pas redondant.
         </div>
 
-       
+
         <!-- data-toggle="collapse" data-target="#demo" -->
         <button type="submit" class="btn-validate btn btn-success " disabled id="validateBtn">Valider {{editoption}}</button>
 

@@ -10,6 +10,13 @@ angular.module('spiApp')
     });
   }
 
+  factory.getEvaluationsByEnseignant = function (noEnseignant,callback) {
+    var endPoint = "http://localhost:8090/evaluations/getEvaByEnseignant/"+noEnseignant   
+    $http.get(endPoint).then(function (response) {
+      callback(response.data);
+    });
+  }
+
 
   factory.saveEvaluation = function (evaluation, callback) {
     var endPoint = "http://localhost:8090/evaluations"

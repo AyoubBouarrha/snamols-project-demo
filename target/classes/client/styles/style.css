@@ -177,6 +177,26 @@ a:hover{
 
 }
 
+.title-container{
+    
+    opacity: .9;
+    /* background-color: #d3d3d3; */
+    color: #f1f1f1;
+    padding: 30px;
+    border-radius: 15px;
+    width: 500px;
+    height: 150px;
+    margin: auto;
+    
+    text-align: center;
+
+    position: absolute;
+    top:0;
+    bottom: 230;
+    left: 0;
+    right: 0;
+
+}
 
 #myVideo{
     position: fixed;
@@ -258,9 +278,15 @@ a:hover{
   .qst-eva-table > tfoot > tr > th,
   .qst-eva-table > thead > tr > td,
   .qst-eva-table > thead > tr > th {
-   background: #bbbbbb;
+   background: #f1f1f1;
  }
- 
+
+
+ .tdclo{
+    -webkit-column-span: 2; /* Safari & Chrome */
+ }
+
+
 
  .qst-eval-container{
      border:  #333 2px solid;
@@ -275,3 +301,8 @@ a:hover{
 }
 
 /* .ng-table-pager  { display: none;} */
+
+.table .table {
+     background-color: #f1f1f1; 
+}
+

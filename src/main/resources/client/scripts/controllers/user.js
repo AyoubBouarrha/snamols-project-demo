@@ -1,5 +1,5 @@
 angular.module('spiApp')
-    .controller('userCtrl', ['$scope', 'userSvc', '$location', function ($scope, userSvc, $location) {
+    .controller('userCtrl', ['$scope', 'userSvc', 'enseignantSvc', '$location', function ($scope, userSvc, enseignantSvc, $location) {
         $scope.statusAuthentification = true;
 
         $scope.loginSubmit = function () {
@@ -17,34 +17,44 @@ angular.module('spiApp')
             });
         }
 
-        $scope.disconnect = function (){
-            userSvc.disconnect(function (data){                
+        $scope.disconnect = function () {
+            userSvc.disconnect(function (data) {
                 $location.path('login');
             })
         }
 
-        $scope.getCurrentUser = function (){       
-            userSvc.getUserSession(function (data){       
+        $scope.getCurrentUser = function () {
+            userSvc.getUserSession(function (data) {
                 console.log(data);
-                if(data==""){           
-                    //$location.path('login'); 
+                if (data == "") {
+                    $location.path('login');
                 }
                 else {
-                    $scope.currentuser = data;       
-                }                    
+                    $scope.currentuser = data;
+                    if ($scope.currentuser.role == "Prof") {
+                        $scope.currentuser.enseignant = {};
+                        enseignantSvc.getEnseignantById(data.noEnseignant, function (data) {
+                            $scope.currentuser.enseignant = data;
+                            $location.path('evaluations');
+                        });
+
+                        console.log($scope.currentuser);
+                    }
+
+                }
             })
         }
-        
+
         $scope.getCurrentUser();
 
 
 
-        /*function initScope() {
-           console.log("changed");
-           $scope.getCurrentUser();
+        function initScope() {
+            console.log("changed");
+            $scope.getCurrentUser();
         }
-    
+
         initScope();
-        $scope.$on('$routeChangeSuccess', initScope);*/
+        $scope.$on('$routeChangeSuccess', initScope);
 
     }]);

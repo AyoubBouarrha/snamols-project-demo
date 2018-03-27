@@ -1,5 +1,5 @@
 angular.module('spiApp')
-  .controller('questionEvalCtrl', ['$scope', 'questionEvalSvc', 'questionSvc','cqSvc', 'NgTableParams' , '$compile' , function ($scope, questionEvalSvc, questionSvc, cqSvc,NgTableParams, $compile) {
+  .controller('questionEvalCtrl', ['$scope', 'questionEvalSvc', 'questionSvc', 'cqSvc', 'NgTableParams', '$compile', function ($scope, questionEvalSvc, questionSvc, cqSvc, NgTableParams, $compile) {
 
     $scope.questionsNotAffected = [];
     $scope.sujet = "question";
@@ -37,8 +37,8 @@ angular.module('spiApp')
 
     getQualificatifs();
 
-    var getQuestionNotAffected = function (idEvaluation,idRubrique){
-      questionEvalSvc.getNotAffectedQuestions($scope.selectedIdEvaluation,$scope.selectedIdRubrique, function (data) {
+    var getQuestionNotAffected = function (idEvaluation, idRubrique) {
+      questionEvalSvc.getNotAffectedQuestions($scope.selectedIdEvaluation, $scope.selectedIdRubrique, function (data) {
         console.log(data);
         $scope.questionsNotAffected = data;
         //$scope.questionsNotAffected = data;
@@ -69,7 +69,7 @@ angular.module('spiApp')
         console.log("oui" + value);
       }
       else {
-        console.log("non" + value);        
+        console.log("non" + value);
         $scope.addQuestion.intitule = null;
         $("#newIntitule").prop('disabled', true);
       }
@@ -78,14 +78,22 @@ angular.module('spiApp')
 
 
     getAffectedQuestionsEvaluation = function () {
-      questionEvalSvc.getAffectedQuestionsEval($scope.selectedIdEvaluation,$scope.selectedIdRubrique, function (data) {
-       
+      questionEvalSvc.getAffectedQuestionsEval($scope.selectedIdEvaluation, $scope.selectedIdRubrique, function (data) {
+
         data.forEach(questionEval => {
-            cqSvc.getQualificatifById(questionEval.question.idQualificatif, function (data) {
-                questionEval.quaminimal = data.minimal;
-                questionEval.quamaximal = data.maximal;
-            });
+          var idQual = 0;
+          if (questionEval.idQualificatif != undefined) {
+            idQual = questionEval.idQualificatif;
+          }
+          else {
+             idQual = questionEval.question.idQualificatif;
+          }
+          console.log("idQual"+idQual);
+          cqSvc.getQualificatifById(idQual, function (data) {
+            questionEval.quaminimal = data.minimal;
+            questionEval.quamaximal = data.maximal;
           });
+        });
         $scope.tableParams = new NgTableParams({ sorting: { name: "asc" } }, { dataset: data });
         console.log(data);
       });

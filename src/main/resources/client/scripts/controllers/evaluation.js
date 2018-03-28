@@ -253,20 +253,21 @@ angular.module('spiApp')
     $scope.showDeleteBoxRub = function (rubriqueEval) {
       $scope.selectedRubriqueEval = rubriqueEval;
       console.log(rubriqueEval);
-      //$scope.cannotRemove = false;
+      $scope.cannotRemove = false;
     }
 
 
     $scope.cancelDeleteRub = function () {
       console.log("hide");
-      $('#delete-modal-rub-eva').modal('hide');
+      $('#delete-modal-rub-eva').modal('hide');      
+      $scope.cannotRemove = false;
     }
 
 
     $scope.showDeleteBoxQst = function (questionEval) {
       $scope.selectedQuestionEval = questionEval;
       console.log(questionEval);
-      //$scope.cannotRemove = false;
+      $scope.cannotRemove = false;
     }
 
 
@@ -287,7 +288,8 @@ angular.module('spiApp')
 
     $scope.cancelDeleteQst = function () {
       console.log("hide");
-      $('#delete-modal-qst-eva').modal('hide');
+      $('#delete-modal-qst-eva').modal('hide');      
+      $scope.cannotRemove = false;
     }
 
   }]);

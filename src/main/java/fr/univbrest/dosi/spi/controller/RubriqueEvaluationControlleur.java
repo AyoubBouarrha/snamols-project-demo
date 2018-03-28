@@ -3,6 +3,7 @@ package fr.univbrest.dosi.spi.controller;
 import java.util.List;
 
 import fr.univbrest.dosi.spi.bean.Evaluation;
+import fr.univbrest.dosi.spi.bean.Rubrique;
 import fr.univbrest.dosi.spi.exception.SPIException;
 import fr.univbrest.dosi.spi.exception.SpiExceptionCode;
 import fr.univbrest.dosi.spi.service.EvaluationService;
@@ -93,6 +94,14 @@ public class RubriqueEvaluationControlleur {
         System.out.println(buisnessEva.getEvaluation(idEvaluation));
         return buisness.getRubriqueEvaluationsByIdEvluation(buisnessEva.getEvaluation(idEvaluation));
     }
+
+    @RequestMapping(value = "notAffectedRubrique/evaluation/{idEvaluation}")
+    public List<Rubrique> getQuestionsNotAffected(@PathVariable(value = "idEvaluation") int idEvaluation, HttpServletRequest request) {
+        if(Connection.currentUser(request) == null || !Connection.currentUser(request).getRole().equals("Prof"))
+            throw  new SPIException(SpiExceptionCode.NOT_ENOUGH_RIGHT,"access denied");
+        return buisness.getRubriquesNotAffectedByEvaluation(buisnessEva.getEvaluation(idEvaluation));
+    }
+
 
 
 

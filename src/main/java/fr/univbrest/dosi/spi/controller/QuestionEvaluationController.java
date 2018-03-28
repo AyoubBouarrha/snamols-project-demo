@@ -96,12 +96,7 @@ public class QuestionEvaluationController {
             throw  new SPIException(SpiExceptionCode.NOT_ENOUGH_RIGHT,"access denied");
 
         return  questionEvaluationService.getQuestionEvaluationByRubriqueEvaluation(rubriqueEvaluationService.findByEvaluationAndRubrique(evaluationService.getEvaluation(idEvaluation), rubriqueService.getRubrique(idRubrique)).get(0));
-        /*List<Question> questionList = new ArrayList<Question>();
-        System.out.println("####################---------------------------------------\n\n\n\n");
-        for (QuestionEvaluation questionEvaluation : list) {
-            questionList.add(questionEvaluation.getQuestion());
-        }
-        return questionList;*/
+
     }
 
 

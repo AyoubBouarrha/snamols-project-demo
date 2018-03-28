@@ -19,6 +19,8 @@ public class Enseignant implements Serializable {
 
 	@Id
 	@Column(name="NO_ENSEIGNANT")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gen-ens")
+    @SequenceGenerator(name = "gen-ens", sequenceName = "ens_seq")
 	private long noEnseignant;
 
 	private String adresse;

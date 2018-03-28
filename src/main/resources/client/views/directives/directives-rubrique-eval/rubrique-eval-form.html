@@ -6,8 +6,8 @@
         <div class="form-groupe-1">
             <div class="form-group">
                 <label for="inputState">Rubrique (*):</label>
-                <span ng-show="formRubrique.designation.$error.required">Select service</span>
-                <select id="designation" name="designation" class="form-control" ng-model="addRubrique.idRubrique" ng-options="rubrique.idRubrique  as ( rubrique.designation)  for rubrique in rubriques"
+                <span ng-show="formRubrique.designation.$error.required">Veuillez selectionner une rubrique</span>
+                <select id="designation" name="designation" class="form-control" ng-model="addRubrique.idRubrique" ng-options="rubrique.idRubrique  as ( rubrique.designation)  for rubrique in rubriquesNotAffected"
                     required>
 
                     <option value=""></option>
@@ -33,12 +33,12 @@
                 <br>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" ng-model="choice" name="gridRadios" value="oui" ng-change="newValue(choice)"> OUI
+                        <input class="form-check-input" type="radio" ng-model="choice" name="radiochoix" value="oui" ng-change="newValue(choice)"> OUI
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" ng-model="choice" name="gridRadios" value="non" ng-change="newValue(choice)"> NON
+                        <input class="form-check-input" type="radio" ng-model="choice" name="radiochoix" value="non" ng-change="newValue(choice)"> NON
                     </label>
                 </div>
 

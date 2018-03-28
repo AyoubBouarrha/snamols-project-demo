@@ -26,17 +26,26 @@ angular.module('spiApp')
     $scope.cancelEditing = function () {
       $('#form-collapse').collapse('hide');
       $scope.formenseignant.$setPristine();
-      $scope.editEnseignant={};
+      $scope.editEnseignant = {};
       getEnseignants();
     }
 
     $scope.editSubmit = function () {
       console.log($scope.editoption);
-      enseignantSvc.updateEnseignant($scope.editEnseignant, function (data) {
-        $('#form-collapse').collapse('hide');
-        $scope.formenseignant.$setPristine();
-        getEnseignants();
-      });
+      if ($scope.editoption == "la modification") {
+
+        enseignantSvc.updateEnseignant($scope.editEnseignant, function (data) {
+          $('#form-collapse').collapse('hide');
+          $scope.formenseignant.$setPristine();
+          getEnseignants();
+        });
+      }
+      else {
+        enseignantSvc.saveEnseignant($scope.editEnseignant, function (data) {
+          $location.path('enseignants');
+          getEnseignants();
+        });
+      }
     }
 
 

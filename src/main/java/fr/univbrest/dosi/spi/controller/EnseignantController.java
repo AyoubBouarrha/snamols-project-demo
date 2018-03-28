@@ -82,13 +82,20 @@ public class EnseignantController {
 	 */
 	// @RequestMapping(value="/ajouterEnseignant" , headers="Accept=application/json", method=RequestMethod.POST)
 	@RequestMapping(value = "/ajouterEnseignant", method = RequestMethod.POST, consumes = { "application/json;charset=UTF-8" }, produces = { "application/json;charset=UTF-8" })
-	public final String addEnseignant(@RequestBody final Enseignant enseignant,HttpServletRequest request) {
+	public final boolean addEnseignant(@RequestBody final Enseignant enseignant,HttpServletRequest request) {
 		// this.checkDroits(TypeDroit.CREATE);
 
         if(Connection.currentUser(request) == null || !Connection.currentUser(request).getRole().equals("Admin"))
             throw  new SPIException(SpiExceptionCode.NOT_ENOUGH_RIGHT,"access denied");
-		enseignantService.addEnseignant(enseignant);
-		return "l'enseignant " + enseignant.getNom() + " " + enseignant.getPrenom() + " est ajouter";
+        try {
+            enseignantService.addEnseignant(enseignant);
+
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+
 	}
 
 	/**
@@ -97,12 +104,20 @@ public class EnseignantController {
 	 *            l'id de l'enseignant
 	 */
 	@RequestMapping(value = "/deleteEnseignant/{noenseignant}")
-	public final void deleteEnseignant(@PathVariable(value = "noenseignant") final Long noEnseignant,HttpServletRequest request) {
+	public final boolean deleteEnseignant(@PathVariable(value = "noenseignant") final Long noEnseignant,HttpServletRequest request) {
 		// this.checkDroits(TypeDroit.DELETE);
 
         if(Connection.currentUser(request) == null || !Connection.currentUser(request).getRole().equals("Admin"))
             throw  new SPIException(SpiExceptionCode.NOT_ENOUGH_RIGHT,"access denied");
-		enseignantService.deleteEnseignant(noEnseignant);
+        try {
+            enseignantService.deleteEnseignant(noEnseignant);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+
+        }
+
 	}
 
 	/**
@@ -190,13 +205,18 @@ public class EnseignantController {
 	 * @return message de modification
 	 */
 	// @RequestMapping(value="/ajouterEnseignant" , headers="Accept=application/json", method=RequestMethod.POST)
-	@RequestMapping(value = "/updateEnseignant", method = RequestMethod.POST, consumes = { "application/json;charset=UTF-8" }, produces = { "application/json;charset=UTF-8" })
-	public final String updateEnseignant(@RequestBody final Enseignant enseignant,HttpServletRequest request) {
+	@RequestMapping(value = "/updateEnseignant", method = RequestMethod.PUT, consumes = { "application/json;charset=UTF-8" }, produces = { "application/json;charset=UTF-8" })
+	public final boolean updateEnseignant(@RequestBody final Enseignant enseignant,HttpServletRequest request) {
 
         if(Connection.currentUser(request) == null || !Connection.currentUser(request).getRole().equals("Admin"))
             throw  new SPIException(SpiExceptionCode.NOT_ENOUGH_RIGHT,"access denied");
 		// this.checkDroits(TypeDroit.MODIFY);
-		enseignantService.updateEnseignant(enseignant);
-		return "l'enseignant " + enseignant.getNom() + " " + enseignant.getPrenom() + " est modifier";
+        try {
+            enseignantService.updateEnseignant(enseignant);
+            return true;
+
+        }catch (Exception e){
+            return false;
+        }
 	}
 }

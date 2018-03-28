@@ -1,21 +1,23 @@
 <table ng-table="tableParams" class="table table-condensed table-bordered" show-filter="true">
     <tr ng-repeat="cq in $data">
-        <td data-title="'Valeur Minimale'" filter="{ minimal: 'text'}" sortable="'minimal   '">
-            {{cq.minimal}}</td>
-        <td data-title="'Valeur Maximale'" filter="{ maximal: 'text'}" sortable="'maximal'">
-            {{cq.maximal}}</td>
- 
-    <td class="cell-button">
-        <button ng-click="showDeleteBox(cq)" title="Supprimer" data-toggle="modal" data-target="#delete-modal" class="btn btn-danger">
-            <i class="fas fa-trash-alt"></i>
-        </button>
-    </td>
 
-    <td class="cell-button">
-        <button ng-click="showUpdateBox(cq)" title="Modifier" class="btn btn-success">
-            <i class="fas fa-pencil-alt"></i>
-        </button>
-    </td>
-</tr>
+        <td data-title="'Valeur Minimale'" filter="{ maximal: 'text'}" sortable="'maximal'">
+            {{cq.maximal}}</td>
+        <td data-title="'Valeur Maximale'" filter="{ minimal: 'text'}" sortable="'minimal   '">
+            {{cq.minimal}}</td>
+
+
+        <td class="cell-button">
+            <button ng-click="showDeleteBox(cq)" title="Supprimer" data-toggle="modal" data-target="#delete-modal" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </td>
+
+        <td class="cell-button">
+            <button ng-click="showUpdateBox(cq)" title="Modifier" class="btn btn-success">
+                <i class="fas fa-pencil-alt"></i>
+            </button>
+        </td>
+    </tr>
 
 </table>

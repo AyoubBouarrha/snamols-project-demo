@@ -34,6 +34,13 @@ angular.module('spiApp')
     });
   }
 
+  factory.getNotAffectedRubriques = function (idEvaluation , callback) {
+    var endPoint = "http://localhost:8090/rubrique-eval/notAffectedRubrique/evaluation/"+idEvaluation
+    $http.get(endPoint).then(function (response) {
+      callback(response.data);
+    });
+  }
+
   return factory;
 
 }])

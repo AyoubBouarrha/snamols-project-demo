@@ -8,24 +8,24 @@
 
         <!-- Links -->
         <ul style="width: 100%" class="navbar-nav">
-            
+<!--             
             <li ng-if="currentuser.role=='Admin'" style="text-align: center" class="nav-item">
-                <a class="nav-link" href="#!enseignants">Enseignants</a>
+                <a class="nav-link" href="#!enseignants"><i class="fas fa-user"></i> Enseignants</a>
             </li>
             <li ng-if="currentuser.role=='Admin'" style="text-align: center" class="nav-item">
-                <a class="nav-link" href="#!formations">Formations</a>
+                <a class="nav-link" href="#!formations"><i class="fas fa-book"></i> Formations</a>
+            </li> -->
+            <li ng-if="currentuser.role=='Admin'" style="text-align: center" class="nav-item">
+                <a class="nav-link" href="#!couple-qualificatif"><i class="fas fa-comments"></i> Couple Qualificatif</a>
+            </li>            
+            <li ng-if="currentuser.role=='Admin'" style="text-align: center" class="nav-item">
+                <a class="nav-link" href="#!questions"><i class="fas fa-question-circle"></i> Questions</a>
             </li>
             <li ng-if="currentuser.role=='Admin'" style="text-align: center" class="nav-item">
-                <a class="nav-link" href="#!couple-qualificatif">Couple Qualificatif</a>
-            </li>
-            <li ng-if="currentuser.role=='Admin'" style="text-align: center" class="nav-item">
-                <a class="nav-link" href="#!rubriques">Rubriques</a>
-            </li>
-            <li ng-if="currentuser.role=='Admin'" style="text-align: center" class="nav-item">
-                <a class="nav-link" href="#!questions">Questions</a>
+                <a class="nav-link" href="#!rubriques"><i class="fas fa-puzzle-piece"></i> Rubriques</a>
             </li>
             <li ng-if="currentuser.role=='Prof'" style="text-align: center" class="nav-item">
-                <a class="nav-link" href="#!evaluations">Evaluations</a>
+                 <a class="nav-link" href="#!evaluations"><i class="fas fa-edit"></i> Evaluations</a>
             </li>
         </ul>
 

@@ -1,14 +1,21 @@
 package fr.univbrest.dosi.spi.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import fr.univbrest.dosi.spi.bean.Evaluation;
-import fr.univbrest.dosi.spi.bean.Rubrique;
+import fr.univbrest.dosi.spi.bean.*;
+import fr.univbrest.dosi.spi.dao.RubriqueRepository;
+import fr.univbrest.dosi.spi.exception.SPIException;
+import fr.univbrest.dosi.spi.exception.SpiExceptionCode;
+import fr.univbrest.dosi.spi.util.Connection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.univbrest.dosi.spi.bean.RubriqueEvaluation;
 import fr.univbrest.dosi.spi.dao.RubriqueEvaluationRepository;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Service
 public class RubriqueEvaluationService {
@@ -16,13 +23,16 @@ public class RubriqueEvaluationService {
 
 	private RubriqueEvaluationRepository repos ;
 
-	@Autowired
-	public RubriqueEvaluationService ( RubriqueEvaluationRepository repos )
-	{
-		this.repos = repos ;
-	}
+	private RubriqueRepository rubriqueRepository;
 
-	public List<RubriqueEvaluation> getAllRubriqueEvaluation ()
+
+
+    public RubriqueEvaluationService(RubriqueEvaluationRepository repos, RubriqueRepository rubriqueRepository) {
+        this.repos = repos;
+        this.rubriqueRepository = rubriqueRepository;
+    }
+
+    public List<RubriqueEvaluation> getAllRubriqueEvaluation ()
 	{
 		return (List<RubriqueEvaluation>) this.repos.findAll() ;
 	}
@@ -48,6 +58,28 @@ public class RubriqueEvaluationService {
 	}
 
 
+    public final List<Rubrique> getRubriquesNotAffectedByEvaluation(Evaluation evaluation) {
+
+        List<Rubrique> listNotAffectedRub = new ArrayList<Rubrique>();
+        List<RubriqueEvaluation> listAffectedRubEva = repos.findByEvaluation(evaluation);
+        List<Rubrique> listAllRub = (List<Rubrique>) rubriqueRepository.findAll();
+
+        List<Rubrique> listRubriquesAffected = new ArrayList<Rubrique>();
+
+
+        for (RubriqueEvaluation rubEvaAffected : listAffectedRubEva)
+            listRubriquesAffected.add(rubEvaAffected.getRubrique());
+
+        for (Rubrique rubrique : listAllRub)
+        {
+            if(!listRubriquesAffected.contains(rubrique))
+                listNotAffectedRub.add(rubrique);
+        }
+
+        return listNotAffectedRub;
+    }
+
+
 	public List<RubriqueEvaluation> getRubriqueEvaluationsByIdEvluation (Evaluation evaluation){
 	    return this.repos.findByEvaluation(evaluation);
     }
@@ -55,6 +87,8 @@ public class RubriqueEvaluationService {
     public List<RubriqueEvaluation> findByEvaluationAndRubrique (Evaluation evaluation , Rubrique rubrique){
 	    return this.repos.findByEvaluationAndRubrique(evaluation , rubrique);
     }
+
+
 
 
 

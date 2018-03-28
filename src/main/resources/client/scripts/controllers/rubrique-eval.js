@@ -27,16 +27,18 @@ angular.module('spiApp')
 
 
     $scope.showAddBox = function () {
-      $scope.Rubrique_evaluation = {};
-      //$scope.formRubrique.$setPristine();
+      $scope.addRubrique = {};
+      $scope.formRubrique.$setPristine();
       $scope.editoption = "l\'ajout";
       $('#form-rub-collapse').collapse('show');
+      $("[name=radiochoix]").val(["non"]);
+      getQuestionNotAffected();
     }
 
 
     $scope.cancelEditing = function () {
       $('#form-rub-collapse').collapse('hide');
-      //$scope.formRubrique.$setPristine();
+      $scope.formRubrique.$setPristine();
       $scope.Rubrique_evaluation = {};
     }
 
@@ -75,7 +77,8 @@ angular.module('spiApp')
 
 
 
-    $scope.rubriques = [];
+    //$scope.rubriques = [];
+    $scope.getQuestionNotAffected = [];
 
 
     // $scope.validateDeleteRub = function () {
@@ -110,7 +113,7 @@ angular.module('spiApp')
     // }
 
 
-    getRubriques = function () {
+    /*getRubriques = function () {
        
        //$scope.selectedEvaluation =  $rootScope.selectedEvaluation
 
@@ -120,9 +123,17 @@ angular.module('spiApp')
         console.log(data);
 
       });
+    }*/
+
+    var getQuestionNotAffected = function () {
+      rubriqueEvalSvc.getNotAffectedRubriques($scope.selectedEvaluation.idEvaluation, function (data) {
+        console.log(data);
+        $scope.rubriquesNotAffected = data;
+      });
     }
 
-    getRubriques();
+    //getRubriques();
+    getQuestionNotAffected();
 
 
     $scope.showAffectationQuestionRow = function (idEvaluation, idRubrique , idRubriqueEvaluation) {

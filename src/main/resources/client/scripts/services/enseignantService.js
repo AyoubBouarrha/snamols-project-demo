@@ -11,7 +11,7 @@ angular.module('spiApp')
 
 
     factory.saveEnseignant = function (enseignant, callback) {
-      var endPoint = "http://localhost:8090/ens"
+      var endPoint = "http://localhost:8090/ajouterEnseignant"
       $http.post(endPoint, enseignant).then(function (response) {
         callback(response.data);
       });
@@ -26,14 +26,14 @@ angular.module('spiApp')
 
 
     factory.deleteEnseignantById = function (idEnseignant, callback) {
-      var endPoint = "http://localhost:8090/ens/" + idEnseignant
+      var endPoint = "http://localhost:8090/deleteEnseignant/" + idEnseignant
       $http.delete(endPoint).then(function (response) {
         callback(response.data);
       });
     }
 
     factory.updateEnseignant = function (enseignant, callback) {
-      var endPoint = "http://localhost:8090/ens/"
+      var endPoint = "http://localhost:8090/updateEnseignant/"
       $http.put(endPoint, enseignant).then(function (response) {
         callback(response.data);
       });
